@@ -1,17 +1,14 @@
 import React from 'react';
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import AppHeader from '../AppHeader/AppHeader';
-import logo from '../../../src/image/logo.svg'
+import logo from './logo.svg';
 import './App.css';
 
-export default function App() {
+function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.jsx</code> and save to reload.
+          Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -26,3 +23,4 @@ export default function App() {
   );
 }
 
+export default App;
