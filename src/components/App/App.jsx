@@ -1,27 +1,17 @@
-import React from 'react';
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
+import React, { useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
-import logo from '../../../src/image/logo.svg'
+import Main from '../Main/Main';
 import './App.css';
+import {arrayInitialization} from '../../utils/data'
 
 export default function App() {
+
+  const[array, setArray] = useState([arrayInitialization])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppHeader/>
+      <Main/>
     </div>
   );
 }
