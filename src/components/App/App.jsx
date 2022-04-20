@@ -2,16 +2,31 @@ import React, { useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import './App.css';
-import {arrayInitialization} from '../../utils/data'
+import api from '../../utils/IngredientsApi';
+
 
 export default function App() {
 
-  const[array, setArray] = useState([arrayInitialization])
+  const [ingredientsList, setIngredientsList] = useState([]);
+
+  // Эффект запроса карточек
+  useEffect(() => {
+    api.getInitialCards()
+        .then((ingredientsInfo) => {
+          setIngredientsList(ingredientsInfo.data);
+        })
+        .catch((err) => {
+          console.log(`Внимание! ${err}`);
+      }) 
+}, []);
+
 
   return (
     <div className="App">
       <AppHeader/>
-      <Main/>
+      <Main
+        arrayInitialization={ingredientsList}
+      />
     </div>
   );
 }

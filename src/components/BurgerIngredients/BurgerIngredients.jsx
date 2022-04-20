@@ -1,21 +1,25 @@
 import React, {useState} from 'react';
-import burgerIngredients from './BurgerIngredients.module.css'
+import burger_ingredients from './BurgerIngredients.module.css'
+import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients({arrayInitialization}) {
 
   const [current, setCurrent] = useState('Булки')
 
-    return (
-
-      <section className={burgerIngredients.container}>
-        <h2 className={burgerIngredients.title}>Соберите бургер</h2>
-        <div className={burgerIngredients.tab}>
-                <Tab active={current === 'Булки'} value='Булки' onClick={setCurrent}>Булки</Tab>
-                <Tab active={current === 'Соусы'} value='Соусы' onClick={setCurrent}>Соусы</Tab>
-                <Tab active={current === 'Начинки'} value='Начинки' onClick={setCurrent}>Начинки</Tab>
-            </div>
+  return (
+      <section className={burger_ingredients.container}>
+        <h2 className={burger_ingredients.title}>Соберите бургер</h2>
+        <div className={burger_ingredients.tab}>
+          <Tab active={current === 'Булки'} value='Булки' onClick={setCurrent}>Булки</Tab>
+          <Tab active={current === 'Соусы'} value='Соусы' onClick={setCurrent}>Соусы</Tab>
+          <Tab active={current === 'Начинки'} value='Начинки' onClick={setCurrent}>Начинки</Tab>
+        </div>
+        <div className={`${burger_ingredients.scrollbox} ${burger_ingredients.scrollbar}`}>
+          <IngredientsList
+                    arrayInitialization = {arrayInitialization}
+                  />
+        </div>
       </section>
-      
     );
   }

@@ -15,3 +15,12 @@
 	src: url("JetBrainsMono-Bold.woff2") format("woff2"),
 		url("JetBrainsMono-Bold.woff") format("woff");
 }
+
+@font-face {
+	font-family:'Iceland';
+	font-style:  normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("Iceland-Regular.woff2") format("woff2"),
+		url("Iceland-Regular.woff") format("woff");
+}

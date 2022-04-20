@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 600px;
+    width: 100%;
+    }
+
+    .box{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    .price{
+        font-family:  "Iceland", "Arial ", sans-serif; 
+        font-size: 48px;
+        line-height: 36px;
+        font-weight: 400;
+        text-align: center;
+        margin: 0 10px 0 0;
+    }
+
+    .item{
+        display: flex;
+        align-items: center;
+        margin-right: 40px;
+    }
+
+    .item > svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .cell{
+        display: flex;
+        align-items: center;
+    }
+
+    .cell > button {
+        width: 215px;
+        height: 64px;
+    }
