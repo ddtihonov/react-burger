@@ -1,41 +1,49 @@
-import React, {useState} from 'react';
-import styles from './ConstructorList.module.css'
+import React from 'react';
+import constructor_list from './ConstructorList.module.css'
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function ConstructorList({arrayInitialization}) {
-    
-    const loaf = arrayInitialization[0];
-    const ingredients = arrayInitialization.filter(item => item.type !== 'bun');
-    console.log(loaf)
 
+        const bun = arrayInitialization[0];
+        const ingredients = arrayInitialization.filter(item => item.type !== 'bun');
 
     return(
-    <ul className={styles.list}>
-          
-    </ul>
+        <section className={constructor_list.container}>
+            <div className={constructor_list.cell}>
+                <ConstructorElement
+                        type="top"
+                        isLocked={true}
+                        text={bun.name}
+                        price={bun.price}
+                        thumbnail={bun.image}
+                    />
+            </div>
+            <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
+                {ingredients.map((item, index) => {
+                        return <li className={constructor_list.item} key={item._id}>
+                                    <div className={constructor_list.box}>
+                                        <DragIcon type="primary" />
+                                    </div>
+                                    <ConstructorElement
+                                        text={item.name}
+                                        price={item.price}
+                                        thumbnail={item.image}
+                                        key={index}
+                                    /> 
+                                </li>
+                    })}
+            </ul>
+            <div className={constructor_list.cell}>
+                <ConstructorElement
+                    type="bottom"
+                    isLocked={true}
+                    text={bun.name}
+                    price={bun.price}
+                    thumbnail={bun.image}
+                /> 
+            </div>
+            
+        </section>
+    
     );
 }
-
-/*{ingredients.map(item => {
-    return <li></li>
-})}*/
-
-/*<li>
-<ConstructorElement
-    type="top"
-    isLocked={true}
-    text={loaf.name}
-    price={loaf.price}
-    thumbnail={loaf.image}
-/>
-</li>
-
-<li>
-<ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text={loaf.name}
-        price={loaf.price}
-        thumbnail={loaf.image}
-    /> 
-</li>*/

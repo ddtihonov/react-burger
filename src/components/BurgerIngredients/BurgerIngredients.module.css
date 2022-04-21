@@ -21,7 +21,7 @@ box-sizing: border-box;
 }
 
 .scrollbox {
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh / 100 * 70);
     min-height: 465px;
     overflow-y: scroll;
 }
