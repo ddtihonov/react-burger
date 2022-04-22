@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './IngredientsCard.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 
 
 
-export default function IngredientsCard({card}) {
+export default function IngredientsCard({card, onCardClick}) {
+
+    const cardClick = useCallback(() => {
+        onCardClick (card)
+    }, [onCardClick , card]);
+
     return (
-        <li className={styles.item}>
+        <li className={styles.item} onClick={cardClick}>
             <Counter count={0} size="default" />
             <img className={styles.image} src={card.image} alt={card.name}/>
             <div className={styles.box}>

@@ -3,7 +3,7 @@ import burger_ingredients from './BurgerIngredients.module.css'
 import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
-export default function BurgerIngredients({arrayInitialization}) {
+export default function BurgerIngredients({arrayInitialization, onCardClick }) {
 
   const [current, setCurrent] = useState('Булки')
 
@@ -18,6 +18,7 @@ export default function BurgerIngredients({arrayInitialization}) {
         <div className={`${burger_ingredients.scrollbox} ${burger_ingredients.scrollbar}`}>
           <IngredientsList
                     arrayInitialization = {arrayInitialization}
+                    onCardClick  = {onCardClick }
                   />
         </div>
       </section>
