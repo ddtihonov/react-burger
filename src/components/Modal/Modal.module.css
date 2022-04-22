@@ -12,11 +12,18 @@
     box-sizing: border-box;
 }
 
-.box > svg{
-    cursor: pointer;
+
+.close_icon{
     position: absolute;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
     top: 60px;
     right: 40px;
-    width: 18px;
-    height: 18px;
+    box-sizing: content-box;
+}
+
+.close_icon > svg{
+    pointer-events: none;
 }

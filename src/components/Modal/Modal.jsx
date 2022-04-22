@@ -10,7 +10,8 @@ export default function Modal({children, onClose, isOpen}) {
     return(
         <ModalOverlay onClose={onClose} isOpen={isOpen}>
             <div className={modal.box} >
-                <CloseIcon id='popup__close-icon' type="primary" onClick={onClose}/>
+                <button className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
+                    <CloseIcon className={modal.close_icon} id='popup__close-icon' type="primary"/></button>
                 {children}
             </div>
         </ModalOverlay>

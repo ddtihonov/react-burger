@@ -21,7 +21,7 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
                 key={index}
                 onCardClick ={onCardClick}
                 />
-            })};
+            })}
         </ul>
         <h3 className={ingredients_list.title}>Соусы</h3>
         <ul className={ingredients_list.list}>
@@ -31,7 +31,7 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
                 key={index}
                 onCardClick ={onCardClick}
                 />
-            })};
+            })}
         </ul>
         <h3 className={ingredients_list.title}>Начинки</h3>
         <ul className={ingredients_list.list}>
@@ -41,7 +41,7 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
                 key={index}
                 onCardClick ={onCardClick}
                 />
-            })};
+            })}
         </ul>
     </section>
     

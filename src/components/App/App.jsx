@@ -24,7 +24,7 @@ export default function App() {
     api.getInitialCards()
         .then((ingredientsInfo) => {
           setIngredientsList(ingredientsInfo.data);
-          setIsSubmitting(true)
+          setIsSubmitting(true);
         })
         .catch((err) => {
           console.log(`Внимание! ${err}`);
@@ -33,10 +33,10 @@ export default function App() {
 
 
 // обработчик для popup ингредиента
-const handleCardClick = (data) => {
-  setIsIngredientPopupOpen(true)
+const handleCardClick = useCallback((data) => {
+  setIsIngredientPopupOpen(true);
   setSelectedCard(data);
-}
+}, []);
 
 const handleAddOrder = useCallback(() => {
   setIsOrderPopupOpen(true)
@@ -46,21 +46,21 @@ const handleAddOrder = useCallback(() => {
 // закрытие всех popup
 const closeAllPopups = useCallback(() => {
   setIsOrderPopupOpen(false);
-  setIsIngredientPopupOpen(false)
+  setIsIngredientPopupOpen(false);
 }, []);
 
-/*// обработчики закрытия
-function handleClosePopup(evt) {
+// обработчики закрытия
+const handleClosePopup = (evt) => {
   if (
-      evt.target.classList.contains('popup')
-      || evt.target.classList.contains('popup__close-icon')
+      evt.target.classList.contains('ModalOverlay_popup__5Ankk')
+      ||  evt.target.classList.contains('Modal_close_icon__qHygK')
   ) {
       closeAllPopups();
   }
-}*/
+};
 
 useEffect(() => {
-  function handleEscClose(evt) {
+  const handleEscClose = (evt) =>{
       if (evt.keyCode === 27) closeAllPopups();
   }
 
@@ -83,14 +83,14 @@ useEffect(() => {
       }
       <OrderDetails
         isOpen={isOrderPopupOpen}
-        onClose={closeAllPopups}
+        onClose={handleClosePopup}
       />
       <IngredientDetails
         card={selectedCard}
         isOpen={isIngredientPopupOpen}
-        onClose={closeAllPopups}
+        onClose={handleClosePopup}
       />
     </div>
   );
-}
+};
 
