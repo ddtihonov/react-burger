@@ -1,6 +1,8 @@
 import React from 'react';
-import ingredients_list from './IngredientsList.module.css'
+import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
+import PropTypes from "prop-types";
+import {arrPropTypes} from '../../utils/tupes';
 
 
 export default function IngredientsList({arrayInitialization, onCardClick }) {
@@ -19,7 +21,7 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
                 key={index}
                 onCardClick ={onCardClick}
                 />
-            })}
+            })};
         </ul>
         <h3 className={ingredients_list.title}>Соусы</h3>
         <ul className={ingredients_list.list}>
@@ -29,7 +31,7 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
                 key={index}
                 onCardClick ={onCardClick}
                 />
-            })}
+            })};
         </ul>
         <h3 className={ingredients_list.title}>Начинки</h3>
         <ul className={ingredients_list.list}>
@@ -39,9 +41,15 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
                 key={index}
                 onCardClick ={onCardClick}
                 />
-            })}
+            })};
         </ul>
     </section>
     
 );
-}
+};
+
+IngredientsList.propTypes = {
+    onCardClick: PropTypes.func,
+    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired, 
+};
+

@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import styles from './IngredientsCard.module.css'
-import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from "prop-types";
 
 
 
@@ -20,5 +21,10 @@ export default function IngredientsCard({card, onCardClick}) {
             </div>
             <p className={styles.text}>{card.name}</p>
         </li>
-    )
-}
+    );
+};
+
+IngredientsCard.propTypes = {
+    onCardClick: PropTypes.func,
+    card: PropTypes.object, 
+};

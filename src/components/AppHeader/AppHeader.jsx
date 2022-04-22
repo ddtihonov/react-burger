@@ -1,6 +1,5 @@
 import React from 'react';
-import header from './header.module.css'
-
+import header from './header.module.css';
 import {BurgerIcon, ListIcon, Logo, ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -36,4 +35,4 @@ export default function AppHeader() {
         </div>
       </header>
     );
-  }
+  };

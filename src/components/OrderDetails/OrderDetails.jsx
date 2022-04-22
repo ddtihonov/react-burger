@@ -1,7 +1,8 @@
 import React from 'react';
-import order_detals from './OrderDetails.module.css'
+import order_detals from './OrderDetails.module.css';
 import Modal from '../Modal/Modal';
-import icon from '../../image/icon.svg'
+import icon from '../../image/icon.svg';
+import PropTypes from "prop-types";
 
 
 export default function OrderDetails({isOpen, onClose}) {
@@ -20,4 +21,9 @@ export default function OrderDetails({isOpen, onClose}) {
         </Modal>
     
     );
-}
+};
+
+OrderDetails.propTypes = {
+    onClose: PropTypes.func, 
+    isOpen: PropTypes.bool, 
+};

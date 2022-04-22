@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import burger_ingredients from './BurgerIngredients.module.css'
+import burger_ingredients from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from "prop-types";
+import {arrPropTypes} from '../../utils/tupes';
 
 export default function BurgerIngredients({arrayInitialization, onCardClick }) {
 
@@ -23,4 +25,9 @@ export default function BurgerIngredients({arrayInitialization, onCardClick }) {
         </div>
       </section>
     );
-  }
+  };
+
+  BurgerIngredients.propTypes = {
+    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired,
+    onCardClick: PropTypes.func,  
+};

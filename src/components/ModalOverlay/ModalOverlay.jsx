@@ -1,5 +1,6 @@
 import React from 'react';
-import modal_overlay from './ModalOverlay.module.css'
+import modal_overlay from './ModalOverlay.module.css';
+import PropTypes from "prop-types";
 
 export default function ModalOverlay({children, onClose, isOpen}) {
 
@@ -9,4 +10,10 @@ export default function ModalOverlay({children, onClose, isOpen}) {
         </section>
     
     );
-}
+};
+
+ModalOverlay.propTypes = {
+    children: PropTypes.object,
+    onClose: PropTypes.func, 
+    isOpen: PropTypes.bool, 
+};

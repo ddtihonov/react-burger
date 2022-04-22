@@ -1,6 +1,8 @@
 import React from 'react';
-import constructor_list from './ConstructorList.module.css'
+import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
+import {arrPropTypes} from '../../utils/tupes';
 
 export default function ConstructorList({arrayInitialization}) {
 
@@ -46,4 +48,8 @@ export default function ConstructorList({arrayInitialization}) {
         </section>
     
     );
-}
+};
+
+ConstructorList.propTypes = {
+    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired,
+};
