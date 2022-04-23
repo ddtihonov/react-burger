@@ -60,37 +60,28 @@ const closeAllPopups = useCallback(() => {
         onCardClick={handleCardClick}
         />
       }
+      {isOrderPopupOpen && 
+      <Modal
+      isOpen={isIngredientPopupOpen}
+      onClose={closeAllPopups}
+      >
       <OrderDetails
         isOpen={isOrderPopupOpen}
         onClose={closeAllPopups}
       />
+      </Modal>
+      }
+      {isIngredientPopupOpen && 
+      <Modal
+      isOpen={isIngredientPopupOpen}
+      onClose={closeAllPopups}
+      >
       <IngredientDetails
-        card={selectedCard}
-        isOpen={isIngredientPopupOpen}
-        onClose={closeAllPopups}
+      card={selectedCard}
+      onClose={closeAllPopups}
       />
+    </Modal>
+      }
     </div>
-    
   );
 };
-
-/*<Modal
-        isOpen={isIngredientPopupOpen}
-        onClose={closeAllPopups}
-      >
-        <IngredientDetails
-        card={selectedCard}
-        onClose={closeAllPopups}
-        />
-      </Modal>*/
-
-
-/*<OrderDetails
-        isOpen={isOrderPopupOpen}
-        onClose={closeAllPopups}
-      />
-      <IngredientDetails
-        card={selectedCard}
-        isOpen={isIngredientPopupOpen}
-        onClose={closeAllPopups}
-      />*/

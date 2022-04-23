@@ -10,12 +10,6 @@
     top: 0;
     left: 0;
     right: 0;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.2s;
-}
-
-.popup_opened{
     visibility: visible;
     opacity: 1;
     transition: 0.2s;

@@ -7,6 +7,7 @@
 }
 
 .title{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif; 
     font-size: 36px;
     line-height: 40px;
     font-weight: 700;
@@ -21,6 +22,7 @@
 }
 
 .subtitle{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif;
     font-size: 24px;
     left: 30px;
     font-weight: 700;
@@ -50,6 +52,7 @@
 }
 
 .text{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif;
     font-size: 16px;
     left: 24px;
     font-weight: 400;

@@ -14,6 +14,7 @@
 }
 
 .subtitle{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif;
     font-size: 24px;
     line-height: 30px;
     font-weight: 700;
@@ -21,6 +22,7 @@
 }
 
 .text{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif;
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;
@@ -28,6 +30,7 @@
 }
 
 .text_purple{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif;
     font-size: 16px;
     line-height: 24px;
     font-weight: 400;

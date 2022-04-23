@@ -1,13 +1,11 @@
 import React from 'react';
 import ingredient_detals from './IngredientDetails.module.css'
-import Modal from '../Modal/Modal';
 import PropTypes from "prop-types";
 
 
-export default function IngredientDetails({isOpen, onClose, card}) {
+export default function IngredientDetails({card}) {
 
     return(
-        <Modal  isOpen={isOpen} onClose={onClose}>
             <div className={ingredient_detals.box} >
                 <h2 className={ingredient_detals.title}>Детали ингредиента</h2>
                 <img className={ingredient_detals.image} src={card.image} alt={card.name}></img>
@@ -31,13 +29,9 @@ export default function IngredientDetails({isOpen, onClose, card}) {
                     </li>
                 </ul>
             </div>
-        </Modal>
-    
     );
 };
 
 IngredientDetails.propTypes = {
     card: PropTypes.object,
-    onClose: PropTypes.func, 
-    isOpen: PropTypes.bool, 
 };

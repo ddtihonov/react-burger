@@ -2,18 +2,14 @@ import React from 'react';
 import modal_overlay from './ModalOverlay.module.css';
 import PropTypes from "prop-types";
 
-export default function ModalOverlay({children, onClose, isOpen}) {
+export default function ModalOverlay({onClick}) {
 
     return(
-        <section  className={`${modal_overlay.popup} ${isOpen ? modal_overlay.popup_opened : modal_overlay.popup }`}   onClick={onClose} >
-            {children}
-        </section>
+        <section  className={modal_overlay.popup} onClick={onClick} ></section>
     
     );
 };
 
 ModalOverlay.propTypes = {
-    children: PropTypes.object,
-    onClose: PropTypes.func, 
-    isOpen: PropTypes.bool, 
+    onClick: PropTypes.func, 
 };

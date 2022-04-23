@@ -15,25 +15,15 @@ export default function Modal({children, onClose, isOpen}) {
         return () => document.removeEventListener('keydown', handleEscClose);
     }, [onClose]);
 
-// обработчики закрытия
-const handleClosePopup = (evt) => {
-  //if (
-    //  evt.target.classList.contains('ModalOverlay_popup__5Ankk')
- // ) {
-     // closeAllPopups();
-  //}
-    onClose ();
-};
-
-
     return createPortal (
-        <ModalOverlay onClose={onClose} isOpen={isOpen}>
+        <>
+        <ModalOverlay onClick={onClose} isOpen={isOpen}/>
             <div className={modal.box} >
                 <button className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
                     <CloseIcon className={modal.close_icon}  type="primary"/></button>
                 {children}
             </div>
-        </ModalOverlay>,
+        </>,
         document.querySelector("#modals")
     );
 };
