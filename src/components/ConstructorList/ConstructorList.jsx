@@ -15,14 +15,14 @@ export default function ConstructorList({arrayInitialization}) {
                 <ConstructorElement
                         type="top"
                         isLocked={true}
-                        text={bun.name}
+                        text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
                     />
             </div>
             <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
                 {ingredients.map((item, index) => {
-                        return <li className={constructor_list.item} key={item._id}>
+                        return (<li className={constructor_list.item} key={item._id}>
                                     <div className={constructor_list.box}>
                                         <DragIcon type="primary" />
                                     </div>
@@ -30,16 +30,15 @@ export default function ConstructorList({arrayInitialization}) {
                                         text={item.name}
                                         price={item.price}
                                         thumbnail={item.image}
-                                        key={index}
                                     /> 
-                                </li>
+                                </li>)
                     })}
             </ul>
             <div className={constructor_list.cell}>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text={bun.name}
+                    text={`${bun.name} (низ)`}
                     price={bun.price}
                     thumbnail={bun.image}
                 /> 

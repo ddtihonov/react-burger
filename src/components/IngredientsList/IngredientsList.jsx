@@ -15,32 +15,32 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
     <section className={ingredients_list.box}>
         <h3 className={ingredients_list.title}>Булки</h3>
         <ul className={ingredients_list.list}>
-            {buns.map((item, index) => {
-                return <IngredientsCard 
+            {buns.map(item => {
+                return (<IngredientsCard 
                 card={item} 
-                key={index}
+                key={item._id}
                 onCardClick ={onCardClick}
-                />
+                />)
             })}
         </ul>
         <h3 className={ingredients_list.title}>Соусы</h3>
         <ul className={ingredients_list.list}>
-            {sauce.map((item, index) => {
-                return <IngredientsCard 
+            {sauce.map(item => {
+                return (<IngredientsCard 
                 card={item} 
-                key={index}
+                key={item._id}
                 onCardClick ={onCardClick}
-                />
+                />)
             })}
         </ul>
         <h3 className={ingredients_list.title}>Начинки</h3>
         <ul className={ingredients_list.list}>
-            {main.map((item, index) => {
-                return <IngredientsCard 
+            {main.map(item => {
+                return (<IngredientsCard 
                 card={item} 
-                key={index}
+                key={item._id}
                 onCardClick ={onCardClick}
-                />
+                />)
             })}
         </ul>
     </section>

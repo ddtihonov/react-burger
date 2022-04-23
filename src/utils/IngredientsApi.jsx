@@ -4,7 +4,7 @@ class IngredientsApi {
         this.headers = headers;
     };
 
-    getInitialCards() {
+    getIngredients() {
         return fetch(`${this.baseUrl}/api/ingredients`, {
             headers: this.headers
         })

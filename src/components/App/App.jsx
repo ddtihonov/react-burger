@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
-import './App.css';
+import app from './App.module.css';
 import api from '../../utils/IngredientsApi';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
@@ -21,7 +21,7 @@ export default function App() {
 
   // Эффект запроса карточек
   useEffect(() => {
-    api.getInitialCards()
+    api.getIngredients()
         .then((ingredientsInfo) => {
           setIngredientsList(ingredientsInfo.data);
           setIsSubmitting(true);
@@ -61,7 +61,7 @@ const handleClosePopup = (evt) => {
 
 useEffect(() => {
   const handleEscClose = (evt) =>{
-      if (evt.keyCode === 27) closeAllPopups();
+      if (evt.key ==='Escape') closeAllPopups();
   }
 
   document.addEventListener('keydown', handleEscClose);
@@ -72,7 +72,7 @@ useEffect(() => {
 
 
   return (
-    <div className="App">
+    <div className={app.page}>
       <AppHeader/>
       {isSubmitting &&
         <Main
