@@ -1,5 +1,4 @@
 .box{
-    position: relative;
     max-width: 720px;
     width: 100%;
     display: flex;
@@ -10,6 +9,10 @@
     border-radius: 40px;
     border: 1px solid rgba(76, 76, 255, 0.2);
     box-sizing: border-box;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 

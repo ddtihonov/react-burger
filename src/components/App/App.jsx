@@ -5,6 +5,7 @@ import app from './App.module.css';
 import api from '../../utils/IngredientsApi';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../Modal/Modal';
 
 
 export default function App() {
@@ -49,28 +50,6 @@ const closeAllPopups = useCallback(() => {
   setIsIngredientPopupOpen(false);
 }, []);
 
-// обработчики закрытия
-const handleClosePopup = (evt) => {
-  if (
-      evt.target.classList.contains('ModalOverlay_popup__5Ankk')
-      ||  evt.target.classList.contains('Modal_close_icon__qHygK')
-  ) {
-      closeAllPopups();
-  }
-};
-
-useEffect(() => {
-  const handleEscClose = (evt) =>{
-      if (evt.key ==='Escape') closeAllPopups();
-  }
-
-  document.addEventListener('keydown', handleEscClose);
-
-  return () => document.removeEventListener('keydown', handleEscClose);
-}, []);
-
-
-
   return (
     <div className={app.page}>
       <AppHeader/>
@@ -83,14 +62,35 @@ useEffect(() => {
       }
       <OrderDetails
         isOpen={isOrderPopupOpen}
-        onClose={handleClosePopup}
+        onClose={closeAllPopups}
       />
       <IngredientDetails
         card={selectedCard}
         isOpen={isIngredientPopupOpen}
-        onClose={handleClosePopup}
+        onClose={closeAllPopups}
       />
     </div>
+    
   );
 };
 
+/*<Modal
+        isOpen={isIngredientPopupOpen}
+        onClose={closeAllPopups}
+      >
+        <IngredientDetails
+        card={selectedCard}
+        onClose={closeAllPopups}
+        />
+      </Modal>*/
+
+
+/*<OrderDetails
+        isOpen={isOrderPopupOpen}
+        onClose={closeAllPopups}
+      />
+      <IngredientDetails
+        card={selectedCard}
+        isOpen={isIngredientPopupOpen}
+        onClose={closeAllPopups}
+      />*/

@@ -8,7 +8,7 @@ import {arrPropTypes} from '../../utils/tupes'
 export default function Main({arrayInitialization, onAddOrder,  onCardClick}) {
 
     return (
-    <section className={main.main} >
+    <main className={main.main} >
         <BurgerIngredients
         arrayInitialization = {arrayInitialization}
         onCardClick ={onCardClick}
@@ -17,7 +17,7 @@ export default function Main({arrayInitialization, onAddOrder,  onCardClick}) {
         arrayInitialization = {arrayInitialization}
         onAddOrder={onAddOrder}
         />
-    </section>
+    </main>
     
 );
 }
