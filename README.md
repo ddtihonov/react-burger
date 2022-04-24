@@ -1,7 +1,7 @@
 ### Проект: BURGER
 ---
 
-Ссылка на проект:
+Ссылка на проект: https://ddtihonov.github.io/react-burger/
 
 ### О сайте:
 ---
