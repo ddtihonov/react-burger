@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
 import PropTypes from "prop-types";
-import {arrPropTypes} from '../../utils/tupes';
+import { BurgerContext } from '../../utils/BurgerContext';
 
 
-export default function IngredientsList({arrayInitialization, onCardClick }) {
+export default function IngredientsList({onCardClick }) {
 
-    const buns = arrayInitialization.filter(item => item.type === 'bun');
-    const sauce = arrayInitialization.filter(item => item.type === 'sauce');
-    const main = arrayInitialization.filter(item => item.type === 'main');
+    const ingredientsList  = useContext(BurgerContext);
+
+    const buns = ingredientsList.filter(item => item.type === 'bun');
+    const sauce = ingredientsList.filter(item => item.type === 'sauce');
+    const main = ingredientsList.filter(item => item.type === 'main');
 
     return (
     <section className={ingredients_list.box}>
@@ -50,6 +52,5 @@ export default function IngredientsList({arrayInitialization, onCardClick }) {
 
 IngredientsList.propTypes = {
     onCardClick: PropTypes.func,
-    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired, 
 };
 

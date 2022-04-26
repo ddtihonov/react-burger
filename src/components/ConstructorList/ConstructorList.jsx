@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import {arrPropTypes} from '../../utils/tupes';
+import { BurgerContext } from '../../utils/BurgerContext';
 
-export default function ConstructorList({arrayInitialization}) {
+export default function ConstructorList() {
 
-        const bun = arrayInitialization[0];
-        const ingredients = arrayInitialization.filter(item => item.type !== 'bun');
+        const ingredientsList  = useContext(BurgerContext);
+
+        const bun = ingredientsList[0];
+        const ingredients = ingredientsList.filter(item => item.type !== 'bun');
 
     return(
         <section className={constructor_list.container}>
@@ -47,8 +48,4 @@ export default function ConstructorList({arrayInitialization}) {
         </section>
     
     );
-};
-
-ConstructorList.propTypes = {
-    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired,
 };

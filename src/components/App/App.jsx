@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useContext } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
@@ -6,6 +6,7 @@ import api from '../../utils/IngredientsApi';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
+import { BurgerContext } from '../../utils/BurgerContext';
 
 
 export default function App() {
@@ -51,11 +52,11 @@ const closeAllPopups = useCallback(() => {
 }, []);
 
   return (
+    <BurgerContext.Provider value={ingredientsList}>
     <div className={app.page}>
       <AppHeader/>
       {isSubmitting &&
         <Main
-        arrayInitialization={ingredientsList}
         onAddOrder={handleAddOrder}
         onCardClick={handleCardClick}
         />
@@ -83,5 +84,6 @@ const closeAllPopups = useCallback(() => {
     </Modal>
       }
     </div>
+    </BurgerContext.Provider>
   );
 };

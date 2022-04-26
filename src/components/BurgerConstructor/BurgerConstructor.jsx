@@ -3,15 +3,12 @@ import burger_constructor from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from "prop-types";
-import {arrPropTypes} from '../../utils/tupes';
 
-export default function BurgerConstructor({arrayInitialization, onAddOrder}) {
+export default function BurgerConstructor({onAddOrder}) {
 
     return (
       <section className={burger_constructor.container}>
-        <ConstructorList
-          arrayInitialization = {arrayInitialization}
-        />
+        <ConstructorList/>
         <div className={burger_constructor.box}>
           <p className={burger_constructor.price}>610</p>
           <div className={burger_constructor.item}>
@@ -26,6 +23,5 @@ export default function BurgerConstructor({arrayInitialization, onAddOrder}) {
   };
 
   BurgerConstructor.propTypes = {
-    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired,
     onAddOrder: PropTypes.func,  
 };

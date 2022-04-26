@@ -3,9 +3,8 @@ import burger_ingredients from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from "prop-types";
-import {arrPropTypes} from '../../utils/tupes';
 
-export default function BurgerIngredients({arrayInitialization, onCardClick }) {
+export default function BurgerIngredients({onCardClick }) {
 
   const [current, setCurrent] = useState('Булки')
 
@@ -19,7 +18,6 @@ export default function BurgerIngredients({arrayInitialization, onCardClick }) {
         </div>
         <div className={`${burger_ingredients.scrollbox} ${burger_ingredients.scrollbar}`}>
           <IngredientsList
-                    arrayInitialization = {arrayInitialization}
                     onCardClick  = {onCardClick }
                   />
         </div>
@@ -28,6 +26,5 @@ export default function BurgerIngredients({arrayInitialization, onCardClick }) {
   };
 
   BurgerIngredients.propTypes = {
-    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired,
     onCardClick: PropTypes.func,  
 };
