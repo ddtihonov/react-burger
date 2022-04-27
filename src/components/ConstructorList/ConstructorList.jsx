@@ -2,6 +2,7 @@ import React from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import {arrPropTypes} from '../../utils/tupes';
 
 export default function ConstructorList({ingredients, bun}) {
 
@@ -45,8 +46,7 @@ export default function ConstructorList({ingredients, bun}) {
     );
 };
 
-////////////////////////////
-
 ConstructorList.propTypes = {
-    
+    ingredients: PropTypes.arrayOf(arrPropTypes).isRequired,
+    bun: PropTypes.object, 
 };

@@ -26,6 +26,13 @@ export default function BurgerConstructor({onAddOrder}) {
             
         }, [bun, ingredients]);
 
+        const handleOrder = useCallback(() =>{
+
+          let iDingredients = ingredients.map(item => item._id).concat([bun._id]);
+          onAddOrder(iDingredients);
+
+        }, [onAddOrder, ingredients, bun]);
+
 
     return (
       <section className={burger_constructor.container}>
@@ -39,7 +46,7 @@ export default function BurgerConstructor({onAddOrder}) {
             <CurrencyIcon type="primary"/>
           </div>
           <div className={burger_constructor.cell}>
-            <Button size='large' onClick={onAddOrder}>Оформить заказ</Button>
+            <Button size='large' onClick={handleOrder}>Оформить заказ</Button>
           </div>
         </div>
       </section>

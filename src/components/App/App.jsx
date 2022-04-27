@@ -21,6 +21,9 @@ export default function App() {
   const [isIngredientPopupOpen, setIsIngredientPopupOpen] = useState(false);
   const [isOrderPopupOpen, setIsOrderPopupOpen] = useState(false);
 
+  //номер заказа
+  const [orderNumber, setIsOrderNumber] = useState();
+  
   // Эффект запроса карточек
   useEffect(() => {
     api.getIngredients()
@@ -40,8 +43,15 @@ const handleCardClick = useCallback((data) => {
   setSelectedCard(data);
 }, []);
 
-const handleAddOrder = useCallback(() => {
-  setIsOrderPopupOpen(true)
+const handleAddOrder = useCallback((arr) => {
+  api.useIngredients(arr)
+  .then((data) => {
+    setIsOrderNumber(data.order.number)
+    setIsOrderPopupOpen(true)
+  })
+  .catch((err) => {
+    console.log(`Внимание! ${err}`);
+}) 
 }, []);
 
 
@@ -69,6 +79,7 @@ const closeAllPopups = useCallback(() => {
       <OrderDetails
         isOpen={isOrderPopupOpen}
         onClose={closeAllPopups}
+        orderNumber={orderNumber}
       />
       </Modal>
       }
