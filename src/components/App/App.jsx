@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useContext } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
