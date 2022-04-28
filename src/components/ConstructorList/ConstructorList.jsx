@@ -4,10 +4,7 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import PropTypes from "prop-types";
 import {arrPropTypes} from '../../utils/tupes';
 
-export default function ConstructorList({arrayInitialization}) {
-
-        const bun = arrayInitialization[0];
-        const ingredients = arrayInitialization.filter(item => item.type !== 'bun');
+export default function ConstructorList({ingredients, bun}) {
 
     return(
         <section className={constructor_list.container}>
@@ -50,5 +47,6 @@ export default function ConstructorList({arrayInitialization}) {
 };
 
 ConstructorList.propTypes = {
-    arrayInitialization: PropTypes.arrayOf(arrPropTypes).isRequired,
+    ingredients: PropTypes.arrayOf(arrPropTypes).isRequired,
+    bun: PropTypes.object, 
 };

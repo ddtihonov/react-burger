@@ -11,6 +11,17 @@ class IngredientsApi {
             .then(this._checkError);
     }
 
+    useIngredients(arr) {
+        return  fetch(`${this.baseUrl}/api/orders`, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify({
+                ingredients: arr
+            }),
+        })
+            .then(this._checkError);
+    }
+
     _checkError(res) {
         if (res.ok) {
             return res.json();
@@ -25,4 +36,3 @@ headers: {'Content-Type': 'application/json'}
 });
 
 export default api
-
