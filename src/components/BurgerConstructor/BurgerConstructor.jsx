@@ -4,9 +4,13 @@ import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from "prop-types";
 import { BurgerContext } from '../../utils/BurgerContext';
+import { useDispatch } from 'react-redux';
 
 export default function BurgerConstructor({onAddOrder}) {
 
+
+        const dispatch = useDispatch();
+        
         const ingredientsList  = useContext(BurgerContext);
 
         const bun = ingredientsList[0];
