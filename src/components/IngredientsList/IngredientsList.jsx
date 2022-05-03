@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
 import PropTypes from "prop-types";
-import { BurgerContext } from '../../utils/BurgerContext';
 import { useDispatch, useSelector } from 'react-redux';
 import {getIngredients} from '../../services/actions/actions'
 
@@ -10,15 +9,12 @@ import {getIngredients} from '../../services/actions/actions'
 export default function IngredientsList({onCardClick }) {
 
 
-    const store = useSelector(state => state);
+    const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
     const dispatch = useDispatch(); 
 
-    console.log(store)
-
-    const ingredientsList  = useContext(BurgerContext);
 
     useEffect(() => {
-        dispatch(getIngredients());
+    dispatch(getIngredients());
     }, [dispatch]);
 
     const buns = ingredientsList.filter(item => item.type === 'bun');

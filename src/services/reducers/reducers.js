@@ -4,7 +4,7 @@ import {
     GET_INGREDIENTS_FAILED
 } from '../actions/actions';
 
-
+// начальное состояние
 const ingredientsInitialState = {
     ingredients: [],
     ingredientsRequest: false,
@@ -12,9 +12,9 @@ const ingredientsInitialState = {
     selectedIngredient: null,
 };
 
-//редюсер ingredientsInitialState
+//редюсер загрузки ингредиентов
 export const ingredientsReducer = (state = ingredientsInitialState, action) => {
-    switch(action.tupe) {
+    switch(action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
                 ...state,

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState} from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
@@ -6,13 +6,8 @@ import api from '../../utils/IngredientsApi';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import { BurgerContext } from '../../utils/BurgerContext';
-
 
 export default function App() {
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [ingredientsList, setIngredientsList] = useState([]);
 
 // данные для popup ингредиента
   const [selectedCard, setSelectedCard] = useState({}); 
@@ -23,18 +18,6 @@ export default function App() {
 
   //номер заказа
   const [orderNumber, setIsOrderNumber] = useState();
-  
-  // Эффект запроса карточек
-  useEffect(() => {
-    api.getIngredients()
-        .then((ingredientsInfo) => {
-          setIngredientsList(ingredientsInfo.data);
-          setIsSubmitting(true);
-        })
-        .catch((err) => {
-          console.log(`Внимание! ${err}`);
-      }) 
-}, []);
 
 
 // обработчик для popup ингредиента
@@ -63,15 +46,12 @@ const closeAllPopups = useCallback(() => {
 
 
   return (
-    <BurgerContext.Provider value={ingredientsList}>
     <div className={app.page}>
       <AppHeader/>
-      {isSubmitting &&
         <Main
         onAddOrder={handleAddOrder}
         onCardClick={handleCardClick}
         />
-      }
       {isOrderPopupOpen && 
       <Modal
       isOpen={isIngredientPopupOpen}
@@ -96,6 +76,5 @@ const closeAllPopups = useCallback(() => {
     </Modal>
       }
     </div>
-    </BurgerContext.Provider>
   );
 };

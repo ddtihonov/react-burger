@@ -12,7 +12,6 @@ export function getIngredients() {
     });
     api.getIngredients().then((res) => {
         if (res && res.success) {
-            console.log(res.data)
             dispatch({
             type: GET_INGREDIENTS_SUCCESS,
             payload: {

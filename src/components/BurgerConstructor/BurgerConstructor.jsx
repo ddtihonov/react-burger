@@ -1,19 +1,17 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useCallback} from 'react';
 import burger_constructor from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from "prop-types";
-import { BurgerContext } from '../../utils/BurgerContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export default function BurgerConstructor({onAddOrder}) {
 
-
+        const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
         const dispatch = useDispatch();
-        
-        const ingredientsList  = useContext(BurgerContext);
 
-        const bun = ingredientsList[0];
+        const bun = ingredientsList[1];
         const ingredients = ingredientsList.filter(item => item.type !== 'bun');
 
         const orderAmount = useCallback(() =>{
@@ -40,10 +38,10 @@ export default function BurgerConstructor({onAddOrder}) {
 
     return (
       <section className={burger_constructor.container}>
-        <ConstructorList
+        {bun && <ConstructorList
           bun ={bun}
           ingredients={ingredients}
-        />
+        />}
         <div className={burger_constructor.box}>
           <p className={burger_constructor.price}>{orderAmount()}</p>
           <div className={burger_constructor.item}>
