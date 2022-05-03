@@ -61,6 +61,7 @@ const closeAllPopups = useCallback(() => {
   setIsIngredientPopupOpen(false);
 }, []);
 
+
   return (
     <BurgerContext.Provider value={ingredientsList}>
     <div className={app.page}>
