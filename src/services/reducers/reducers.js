@@ -4,7 +4,10 @@ import {
     GET_INGREDIENTS_ERROR,
     GET_ORDER_NUMBER_REQUEST,
     GET_ORDER_NUMBER_SUCCESS,
-    GET_ORDER_NUMBER_ERROR
+    GET_ORDER_NUMBER_ERROR,
+    DELETE_ORDER_NUMBER,
+    SELECT_INGREDIENT,
+    DELETE_SELECTED_INGREDIENT
 } from '../actions/actions';
 
 // начальное состояние ingredients
@@ -12,7 +15,6 @@ const ingredientsInitialState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsError: false,
-    selectedIngredient: null,
 };
 
 //редюсер загрузки ингредиентов
@@ -77,7 +79,40 @@ export const orderNumberReducer = (state = orderInitialState, action) => {
                 orderNumberError: true,
             };
         }
+        case DELETE_ORDER_NUMBER: {
+            return {
+                ...state,
+                orderNumber: null,
+            }
+        }
         default:
             return state;
         }
+};
+
+// начальное состояние ingredients
+const selectedIngredientState = {
+    selectedIngredient: null,
+};
+
+//редюсер загрузки ингредиентов
+export const selectedIngredientsReducer = (state = selectedIngredientState, action) => {
+    switch(action.type) {
+        case SELECT_INGREDIENT: {
+            return {
+                ...state,
+                selectedIngredient: action.payload.ingredient,
+            };
+        }
+
+        case DELETE_SELECTED_INGREDIENT: {
+            return {
+                ...state,
+                selectedIngredient: null,
+            };
+        }
+        default: {
+            return state;
+        }
+    }
 };

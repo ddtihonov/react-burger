@@ -1,12 +1,19 @@
 import React, { useCallback, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
+import {DELETE_ORDER_NUMBER} from '../../services/actions/actions'
 
 export default function App() {
+
+  const dispatch = useDispatch();
+
+  const orderNumber = useSelector(state => state.orderState.orderNumber);
+  console.log(orderNumber)
 
 // данные для popup ингредиента
   const [selectedCard, setSelectedCard] = useState({}); 
@@ -32,6 +39,13 @@ const closeAllPopups = useCallback(() => {
   setIsIngredientPopupOpen(false);
 }, []);
 
+const handleOrderClose = useCallback(() => {
+  dispatch({
+    type: DELETE_ORDER_NUMBER,
+  });
+  closeAllPopups()
+}, [dispatch, closeAllPopups]);
+
 
   return (
     <div className={app.page}>
@@ -40,15 +54,9 @@ const closeAllPopups = useCallback(() => {
         onAddOrder={handleAddOrder}
         onCardClick={handleCardClick}
         />
-      {isOrderPopupOpen && 
-      <Modal
-      isOpen={isIngredientPopupOpen}
-      onClose={closeAllPopups}
-      >
-      <OrderDetails
-        isOpen={isOrderPopupOpen}
-        onClose={closeAllPopups}
-      />
+      {orderNumber && 
+      <Modal onClose={handleOrderClose}>
+      <OrderDetails/>
       </Modal>
       }
       {isIngredientPopupOpen && 

@@ -5,10 +5,15 @@ export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";// запрос
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";//успешный запрос
 export const GET_INGREDIENTS_ERROR = "GET_INGREDIENTS_ERROR";//неудачный запрос
 
+//типы выбранного тнгртдтента
+export const SELECT_INGREDIENT = "SELECT_INGREDIENT";
+export const DELETE_SELECTED_INGREDIENT = "DELETE_SELECTED_INGREDIENT_DATA";
+
 //типы по запросу номера заказа
 export const GET_ORDER_NUMBER_REQUEST = "GET_ORDER_NUMBER_REQUEST";
 export const GET_ORDER_NUMBER_SUCCESS = "GET_ORDER_NUMBER_SUCCESS";
 export const GET_ORDER_NUMBER_ERROR = "GET_ORDER_NUMBER_ERROR";
+export const DELETE_ORDER_NUMBER = "DELETE_ORDER_DATA";//удалить номер заказа
 
 
 
