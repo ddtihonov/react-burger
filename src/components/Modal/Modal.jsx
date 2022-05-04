@@ -5,7 +5,7 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 
-export default function Modal({children, onClose, isOpen}) {
+export default function Modal({children, onClose}) {
 
     useEffect(() => {
         const handleEscClose = (evt) =>{
@@ -17,7 +17,7 @@ export default function Modal({children, onClose, isOpen}) {
 
     return createPortal (
         <>
-        <ModalOverlay onClick={onClose} isOpen={isOpen}/>
+        <ModalOverlay onClick={onClose}/>
             <div className={modal.box} >
                 <button className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
                     <CloseIcon className={modal.close_icon}  type="primary"/></button>
@@ -31,5 +31,4 @@ export default function Modal({children, onClose, isOpen}) {
 Modal.propTypes = {
     children: PropTypes.object,
     onClose: PropTypes.func, 
-    isOpen: PropTypes.bool, 
 };

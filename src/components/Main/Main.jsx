@@ -4,22 +4,19 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import PropTypes from "prop-types";
 
-export default function Main({onAddOrder,  onCardClick}) {
+export default function Main({onCardClick}) {
 
     return (
     <main className={main.main} >
         <BurgerIngredients
         onCardClick ={onCardClick}
         />
-        <BurgerConstructor
-        onAddOrder={onAddOrder}
-        />
+        <BurgerConstructor/>
     </main>
     
 );
 }
 
 Main.propTypes = {
-    onAddOrder: PropTypes.func,
     onCardClick: PropTypes.func,   
 }

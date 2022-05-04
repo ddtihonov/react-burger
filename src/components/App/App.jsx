@@ -20,7 +20,6 @@ export default function App() {
 
   ///ссстояния popup
   const [isIngredientPopupOpen, setIsIngredientPopupOpen] = useState(false);
-  const [isOrderPopupOpen, setIsOrderPopupOpen] = useState(false);
 
 // обработчик для popup ингредиента
 const handleCardClick = useCallback((data) => {
@@ -28,14 +27,8 @@ const handleCardClick = useCallback((data) => {
   setSelectedCard(data);
 }, []);
 
-const handleAddOrder = useCallback((arr) => {
-    setIsOrderPopupOpen(true)
-}, []);
-
-
 // закрытие всех popup
 const closeAllPopups = useCallback(() => {
-  setIsOrderPopupOpen(false);
   setIsIngredientPopupOpen(false);
 }, []);
 
@@ -43,17 +36,13 @@ const handleOrderClose = useCallback(() => {
   dispatch({
     type: DELETE_ORDER_NUMBER,
   });
-  closeAllPopups()
-}, [dispatch, closeAllPopups]);
+}, [dispatch]);
 
 
   return (
     <div className={app.page}>
       <AppHeader/>
-        <Main
-        onAddOrder={handleAddOrder}
-        onCardClick={handleCardClick}
-        />
+        <Main onCardClick={handleCardClick}/>
       {orderNumber && 
       <Modal onClose={handleOrderClose}>
       <OrderDetails/>

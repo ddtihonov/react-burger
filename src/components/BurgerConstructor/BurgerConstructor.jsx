@@ -3,11 +3,10 @@ import {getOrderNumber} from '../../services/actions/actions'
 import burger_constructor from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 
 
-export default function BurgerConstructor({onAddOrder}) {
+export default function BurgerConstructor() {
 
         const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
         const dispatch = useDispatch();
@@ -33,8 +32,7 @@ export default function BurgerConstructor({onAddOrder}) {
 
           let iDingredients = ingredients.map(item => item._id).concat([bun._id]);
           dispatch(getOrderNumber(iDingredients));
-          onAddOrder();
-        }, [onAddOrder, ingredients, bun, dispatch]);
+        }, [ingredients, bun, dispatch]);
 
 
     return (
@@ -55,7 +53,3 @@ export default function BurgerConstructor({onAddOrder}) {
       </section>
     );
   };
-
-  BurgerConstructor.propTypes = {
-    onAddOrder: PropTypes.func,  
-};
