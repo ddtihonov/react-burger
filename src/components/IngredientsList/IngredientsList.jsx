@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 import {getIngredients} from '../../services/actions/actions'
 
 
-export default function IngredientsList({onCardClick }) {
+export default function IngredientsList() {
 
 
     const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
@@ -29,7 +28,6 @@ export default function IngredientsList({onCardClick }) {
                 return (<IngredientsCard 
                 card={item} 
                 key={item._id}
-                onCardClick ={onCardClick}
                 />)
             })}
         </ul>
@@ -39,7 +37,6 @@ export default function IngredientsList({onCardClick }) {
                 return (<IngredientsCard 
                 card={item} 
                 key={item._id}
-                onCardClick ={onCardClick}
                 />)
             })}
         </ul>
@@ -49,16 +46,11 @@ export default function IngredientsList({onCardClick }) {
                 return (<IngredientsCard 
                 card={item} 
                 key={item._id}
-                onCardClick ={onCardClick}
                 />)
             })}
         </ul>
     </section>
     
 );
-};
-
-IngredientsList.propTypes = {
-    onCardClick: PropTypes.func,
 };
 

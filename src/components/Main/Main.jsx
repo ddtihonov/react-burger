@@ -2,21 +2,14 @@ import React from 'react';
 import main from './main.module.css'
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import PropTypes from "prop-types";
 
-export default function Main({onCardClick}) {
+export default function Main() {
 
     return (
     <main className={main.main} >
-        <BurgerIngredients
-        onCardClick ={onCardClick}
-        />
+        <BurgerIngredients/>
         <BurgerConstructor/>
     </main>
     
 );
-}
-
-Main.propTypes = {
-    onCardClick: PropTypes.func,   
 }

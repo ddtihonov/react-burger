@@ -1,4 +1,4 @@
-import React, { useCallback, useState} from 'react';
+import React, { useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
@@ -6,31 +6,14 @@ import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import {DELETE_ORDER_NUMBER} from '../../services/actions/actions'
+import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT} from '../../services/actions/actions'
 
 export default function App() {
 
   const dispatch = useDispatch();
 
   const orderNumber = useSelector(state => state.orderState.orderNumber);
-  console.log(orderNumber)
-
-// данные для popup ингредиента
-  const [selectedCard, setSelectedCard] = useState({}); 
-
-  ///ссстояния popup
-  const [isIngredientPopupOpen, setIsIngredientPopupOpen] = useState(false);
-
-// обработчик для popup ингредиента
-const handleCardClick = useCallback((data) => {
-  setIsIngredientPopupOpen(true);
-  setSelectedCard(data);
-}, []);
-
-// закрытие всех popup
-const closeAllPopups = useCallback(() => {
-  setIsIngredientPopupOpen(false);
-}, []);
+  const ingredient = useSelector(state => state.ingredientState.selectedIngredient);
 
 const handleOrderClose = useCallback(() => {
   dispatch({
@@ -39,24 +22,25 @@ const handleOrderClose = useCallback(() => {
 }, [dispatch]);
 
 
+const handleIngredientClose = useCallback(() => {
+  dispatch({
+    type: DELETE_SELECTED_INGREDIENT,
+  });
+}, [dispatch]);
+
+
   return (
     <div className={app.page}>
       <AppHeader/>
-        <Main onCardClick={handleCardClick}/>
+        <Main/>
       {orderNumber && 
       <Modal onClose={handleOrderClose}>
       <OrderDetails/>
       </Modal>
       }
-      {isIngredientPopupOpen && 
-      <Modal
-      isOpen={isIngredientPopupOpen}
-      onClose={closeAllPopups}
-      >
-      <IngredientDetails
-      card={selectedCard}
-      onClose={closeAllPopups}
-      />
+      {ingredient && 
+      <Modal onClose={handleIngredientClose}>
+      <IngredientDetails/>
     </Modal>
       }
     </div>

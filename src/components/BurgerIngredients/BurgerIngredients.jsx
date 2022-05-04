@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import burger_ingredients from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from "prop-types";
 
-export default function BurgerIngredients({onCardClick }) {
+export default function BurgerIngredients() {
 
   const [current, setCurrent] = useState('Булки')
 
@@ -17,14 +16,8 @@ export default function BurgerIngredients({onCardClick }) {
           <Tab active={current === 'Начинки'} value='Начинки' onClick={setCurrent}>Начинки</Tab>
         </div>
         <div className={`${burger_ingredients.scrollbox} ${burger_ingredients.scrollbar}`}>
-          <IngredientsList
-                    onCardClick  = {onCardClick }
-                  />
+          <IngredientsList/>
         </div>
       </section>
     );
   };
-
-  BurgerIngredients.propTypes = {
-    onCardClick: PropTypes.func,  
-};
