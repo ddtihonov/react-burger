@@ -1,4 +1,5 @@
 import React, { useCallback} from 'react';
+import {getOrderNumber} from '../../services/actions/actions'
 import burger_constructor from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -31,9 +32,10 @@ export default function BurgerConstructor({onAddOrder}) {
         const handleOrder = useCallback(() =>{
 
           let iDingredients = ingredients.map(item => item._id).concat([bun._id]);
-          onAddOrder(iDingredients);
+          dispatch(getOrderNumber(iDingredients));
+          onAddOrder(iDingredients);////
 
-        }, [onAddOrder, ingredients, bun]);
+        }, [onAddOrder, ingredients, bun, dispatch]);
 
 
     return (

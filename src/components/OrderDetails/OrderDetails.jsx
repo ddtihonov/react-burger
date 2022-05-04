@@ -2,9 +2,12 @@ import React from 'react';
 import order_detals from './OrderDetails.module.css';
 import icon from '../../image/icon.svg';
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function OrderDetails({orderNumber}) {
-
+    
+    const order = useSelector(state => state.orderState.orderNumber);
+    console.log(order)
 
     return(
             <div className={order_detals.box} >
