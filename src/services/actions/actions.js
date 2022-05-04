@@ -44,7 +44,7 @@ export function getOrderNumber(ingredientIds) {
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,
                     payload: {
-                    order: res.order,
+                    order: res.order.number,
                     },
         });
         } else {

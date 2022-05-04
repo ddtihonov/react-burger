@@ -33,8 +33,7 @@ export default function BurgerConstructor({onAddOrder}) {
 
           let iDingredients = ingredients.map(item => item._id).concat([bun._id]);
           dispatch(getOrderNumber(iDingredients));
-          onAddOrder(iDingredients);////
-
+          onAddOrder();
         }, [onAddOrder, ingredients, bun, dispatch]);
 
 

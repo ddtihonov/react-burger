@@ -2,7 +2,6 @@ import React, { useCallback, useState} from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
-import api from '../../utils/IngredientsApi';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
@@ -16,10 +15,6 @@ export default function App() {
   const [isIngredientPopupOpen, setIsIngredientPopupOpen] = useState(false);
   const [isOrderPopupOpen, setIsOrderPopupOpen] = useState(false);
 
-  //номер заказа
-  const [orderNumber, setIsOrderNumber] = useState();
-
-
 // обработчик для popup ингредиента
 const handleCardClick = useCallback((data) => {
   setIsIngredientPopupOpen(true);
@@ -27,14 +22,7 @@ const handleCardClick = useCallback((data) => {
 }, []);
 
 const handleAddOrder = useCallback((arr) => {
-  api.useIngredients(arr)
-  .then((data) => {
-    setIsOrderNumber(data.order.number)
     setIsOrderPopupOpen(true)
-  })
-  .catch((err) => {
-    console.log(`Внимание! ${err}`);
-}) 
 }, []);
 
 
@@ -60,7 +48,6 @@ const closeAllPopups = useCallback(() => {
       <OrderDetails
         isOpen={isOrderPopupOpen}
         onClose={closeAllPopups}
-        orderNumber={orderNumber}
       />
       </Modal>
       }
