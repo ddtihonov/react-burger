@@ -2,46 +2,68 @@ import React, { useCallback} from 'react';
 import {getOrderNumber} from '../../services/actions/actions'
 import burger_constructor from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux';
+import {BURGER_INGREDIENT} from '../../services/actions/actions'
+import { useDrop } from "react-dnd";
 
 
 export default function BurgerConstructor() {
-
-        const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
+        // получаем из хранилища массив ингредиентов
+        const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
+        // получаем булку
+        const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
         const dispatch = useDispatch();
 
-        const bun = ingredientsList[1];
-        const ingredients = ingredientsList.filter(item => item.type !== 'bun');
 
+        //ловим перетаскиваемый элемент и сохраняем в хранилище
+        const [{ isHover }, dropTarget] = useDrop({
+          accept: 'ingredient',
+          collect: monitor => ({
+            isHover: monitor.isOver()
+          }),
+          drop(ingredient) {
+              dispatch({ type: BURGER_INGREDIENT, payload: { ingredient } })
+          },
+        });
+
+        const borderColor = isHover ? burger_constructor.hover : '';
+
+        // расчет стоимости заказа
         const orderAmount = useCallback(() =>{
-
           if (!bun) {
             return 0;
           }
-            
-          const amountIngredients = ingredients.reduce((sum, item) => {
+          const amountIngredients = ingredientsConstructorList.reduce((sum, item) => {
               return sum + item.price
           }, 0)
-
             return amountIngredients + bun.price * 2
-            
-        }, [bun, ingredients]);
+        }, [bun, ingredientsConstructorList]);
 
+        // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
-
-          let iDingredients = ingredients.map(item => item._id).concat([bun._id]);
+          let iDingredients = ingredientsConstructorList.map(item => item._id).concat([bun._id]);
           dispatch(getOrderNumber(iDingredients));
-        }, [ingredients, bun, dispatch]);
+        }, [ingredientsConstructorList, bun, dispatch]);
 
 
     return (
       <section className={burger_constructor.container}>
-        {bun && <ConstructorList
-          bun ={bun}
-          ingredients={ingredients}
-        />}
-        <div className={burger_constructor.box}>
+        <div className={burger_constructor.list} ref={dropTarget}>
+          { bun === null
+          ? (
+              <div className={burger_constructor.border} style={{borderColor}}>
+                <h2 className={burger_constructor.title}>ПРОГОЛОДАЛИСЬ?</h2>
+                <p className={burger_constructor.text}>Выберите вкусную булку!</p>
+              </div>
+          )
+          :   (bun && <ConstructorList
+            bun ={bun}
+            ingredients={ingredientsConstructorList}
+          />)
+          }
+        </div>
+        {(bun !== null) && (<div className={burger_constructor.box}>
           <p className={burger_constructor.price}>{orderAmount()}</p>
           <div className={burger_constructor.item}>
             <CurrencyIcon type="primary"/>
@@ -49,7 +71,7 @@ export default function BurgerConstructor() {
           <div className={burger_constructor.cell}>
             <Button size='large' onClick={handleOrder}>Оформить заказ</Button>
           </div>
-        </div>
+        </div>)}
       </section>
     );
   };

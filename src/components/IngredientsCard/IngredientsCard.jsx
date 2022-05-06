@@ -22,7 +22,7 @@ export default function IngredientsCard({card}) {
     }, [card, dispatch]);
 
     const [{ opacity }, dragRef] = useDrag({
-        type: card.type,
+        type: 'ingredient',
         item: card,
         collect: monitor => ({
             opacity: monitor.isDragging() ? .3 : 1,

@@ -7,7 +7,9 @@ import {
     GET_ORDER_NUMBER_ERROR,
     DELETE_ORDER_NUMBER,
     SELECT_INGREDIENT,
-    DELETE_SELECTED_INGREDIENT
+    DELETE_SELECTED_INGREDIENT,
+    BURGER_INGREDIENT,
+    DELETE_BURGER_INGREDIENT,
 } from '../actions/actions';
 
 // начальное состояние ingredients
@@ -111,6 +113,37 @@ export const selectedIngredientsReducer = (state = selectedIngredientState, acti
                 selectedIngredient: null,
             };
         }
+        default: {
+            return state;
+        }
+    }
+};
+
+const burgerConstructorState = {
+    burgerIngredients: [],
+    burgerBun: null,
+};
+
+export const burgerConstructorReducer = (state = burgerConstructorState, action) => {
+    switch (action.type) {
+        case BURGER_INGREDIENT: {
+            const { ingredient } = action.payload;
+            if (ingredient.type === "bun") {
+            return {
+                ...state,
+                burgerBun: ingredient,
+            };
+            } else return {
+            ...state,
+            burgerIngredients: [...state.burgerIngredients, ingredient],
+            };
+        }
+        /*case DELETE_BURGER_INGREDIENT: {
+            return {
+            ...state,
+            ),
+            };
+        }*/
         default: {
             return state;
         }

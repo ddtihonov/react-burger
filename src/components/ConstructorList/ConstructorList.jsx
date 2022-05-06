@@ -7,7 +7,7 @@ import {arrPropTypes} from '../../utils/tupes';
 export default function ConstructorList({ingredients, bun}) {
 
     return(
-        <section className={constructor_list.container}>
+        <>
             <div className={constructor_list.cell}>
                 <ConstructorElement
                         type="top"
@@ -40,8 +40,7 @@ export default function ConstructorList({ingredients, bun}) {
                     thumbnail={bun.image}
                 /> 
             </div>
-            
-        </section>
+        </>
     
     );
 };
