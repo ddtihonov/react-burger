@@ -138,14 +138,16 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
             burgerIngredients: [...state.burgerIngredients, ingredient],
             };
         }
-        /*case DELETE_BURGER_INGREDIENT: {
+        case DELETE_BURGER_INGREDIENT: {
             return {
-            ...state,
-            ),
+                ...state,
+                burgerIngredients: state.burgerIngredients.filter(
+                    (item, index) => index !== action.payload.deleteIndex
+                ),
             };
-        }*/
+        }
         default: {
             return state;
         }
     }
-};
+    };

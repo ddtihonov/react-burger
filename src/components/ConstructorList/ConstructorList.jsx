@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import {arrPropTypes} from '../../utils/tupes';
+import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
+import { useDispatch} from 'react-redux';
 
 export default function ConstructorList({ingredients, bun}) {
+
+    const dispatch = useDispatch();
+
+    const handleDeleteIngredient = useCallback((deleteIndex, ) => {
+            dispatch({ type: DELETE_BURGER_INGREDIENT, payload: { deleteIndex } });
+        }, [dispatch]
+    );
 
     return(
         <>
@@ -19,7 +28,7 @@ export default function ConstructorList({ingredients, bun}) {
             </div>
             <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
                 {ingredients.map((item, index) => {
-                        return (<li className={constructor_list.item} key={item._id}>
+                        return (<li className={constructor_list.item} key={index}>
                                     <div className={constructor_list.box}>
                                         <DragIcon type="primary" />
                                     </div>
@@ -27,6 +36,9 @@ export default function ConstructorList({ingredients, bun}) {
                                         text={item.name}
                                         price={item.price}
                                         thumbnail={item.image}
+                                        index={index}
+                                        key={index}
+                                        handleClose={() => handleDeleteIngredient(index)}
                                     /> 
                                 </li>)
                     })}

@@ -11,8 +11,9 @@ import { useDrop } from "react-dnd";
 export default function BurgerConstructor() {
         // получаем из хранилища массив ингредиентов
         const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
-       
-       console.log(ingredientsConstructorList)
+      
+      console.log(ingredientsConstructorList)
+
         // получаем булку
         const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
         const dispatch = useDispatch();
@@ -29,7 +30,9 @@ export default function BurgerConstructor() {
           },
         });
 
-        const borderColor = isHover ? burger_constructor.hover : '';
+        //подсветка контейнера при перетаскивании
+        const style = `${burger_constructor.border} ${burger_constructor.hover}`
+        const borderColor = isHover ? style : burger_constructor.border
 
         // расчет стоимости заказа
         const orderAmount = useCallback(() =>{
@@ -54,7 +57,7 @@ export default function BurgerConstructor() {
         <div className={burger_constructor.list} ref={dropTarget}>
           { bun === null
           ? (
-              <div className={burger_constructor.border} style={{borderColor}}>
+              <div className={borderColor}>
                 <h2 className={burger_constructor.title}>ПРОГОЛОДАЛИСЬ?</h2>
                 <p className={burger_constructor.text}>Выберите вкусную булку!</p>
               </div>
