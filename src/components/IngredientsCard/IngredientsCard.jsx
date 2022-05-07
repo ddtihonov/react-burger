@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import styles from './IngredientsCard.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,6 +9,11 @@ import {SELECT_INGREDIENT} from '../../services/actions/actions'
 
 
 export default function IngredientsCard({card}) {
+
+    const  ingredientsTotal = useSelector(state => state.burgerConstructorIngredients.burgerIngredients).concat(useSelector(state => state.burgerConstructorIngredients.burgerBun));
+
+    let counter = 0
+    ingredientsTotal.map(ingredient => ingredient.name === card.name && (ingredient.type === 'bun' ? counter += 2 : counter += 1)) 
 
     const dispatch = useDispatch();
 
@@ -35,7 +40,7 @@ export default function IngredientsCard({card}) {
             ref={dragRef}
             style={{ opacity }}
             >   
-            <Counter count={0} size="default" />
+            {counter > 0 && <Counter count={counter} size="default" />}
             <img className={styles.image} src={card.image} alt={card.name}/>
             <div className={styles.box}>
                 <p className={styles.price}>{card.price}</p>

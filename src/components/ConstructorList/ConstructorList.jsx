@@ -10,6 +10,7 @@ export default function ConstructorList({ingredients, bun}) {
 
     const dispatch = useDispatch();
 
+    // удаляем ингридиент и перезаписываем массив в хранилище
     const handleDeleteIngredient = useCallback((deleteIndex, ) => {
             dispatch({ type: DELETE_BURGER_INGREDIENT, payload: { deleteIndex } });
         }, [dispatch]

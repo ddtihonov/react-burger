@@ -12,8 +12,6 @@ export default function BurgerConstructor() {
         // получаем из хранилища массив ингредиентов
         const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
       
-      console.log(ingredientsConstructorList)
-
         // получаем булку
         const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
         const dispatch = useDispatch();
@@ -62,7 +60,7 @@ export default function BurgerConstructor() {
                 <p className={burger_constructor.text}>Выберите вкусную булку!</p>
               </div>
           )
-          :   (bun && <ConstructorList
+          : (bun && <ConstructorList
             bun ={bun}
             ingredients={ingredientsConstructorList}
           />)
