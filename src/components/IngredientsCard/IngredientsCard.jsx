@@ -10,10 +10,15 @@ import {SELECT_INGREDIENT} from '../../services/actions/actions'
 
 export default function IngredientsCard({card}) {
 
-    const  ingredientsTotal = useSelector(state => state.burgerConstructorIngredients.burgerIngredients).concat(useSelector(state => state.burgerConstructorIngredients.burgerBun));
-
     let counter = 0
-    ingredientsTotal.map(ingredient => ingredient.name === card.name && (ingredient.type === 'bun' ? counter += 2 : counter += 1)) 
+    const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
+    const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
+
+    if(bun !== null) {
+    const ingredientsTotal = ingredientsConstructorList.concat(bun);
+
+    ingredientsTotal.map(item => item.name === card.name && (item.type === 'bun' ? counter += 2 : counter += 1))
+    };
 
     const dispatch = useDispatch();
 
