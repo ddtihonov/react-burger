@@ -1,14 +1,16 @@
 import React, {useCallback} from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import {arrPropTypes} from '../../utils/tupes';
 import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { v4 as uuidv4 } from 'uuid'
 
-export default function ConstructorList({ingredients, bun}) {
+export default function ConstructorList() {
 
     const dispatch = useDispatch();
+
+    const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);///
+    const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);///
 
     // удаляем ингридиент и перезаписываем массив в хранилище
     const handleDeleteIngredient = useCallback((deleteIndex, ) => {
@@ -28,17 +30,16 @@ export default function ConstructorList({ingredients, bun}) {
                     />
             </div>
             <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
-                {ingredients.map((item, index) => {
-                        return (<li className={constructor_list.item} key={index}>
+                {ingredientsConstructorList.map((item, index) => {
+                        return (<li className={constructor_list.item} key={uuidv4()}>
                                     <div className={constructor_list.box}>
                                         <DragIcon type="primary" />
                                     </div>
                                     <ConstructorElement
                                         text={item.name}
                                         price={item.price}
-                                        thumbnail={item.image}
                                         index={index}
-                                        key={index}
+                                        thumbnail={item.image}
                                         handleClose={() => handleDeleteIngredient(index)}
                                     /> 
                                 </li>)
@@ -56,9 +57,4 @@ export default function ConstructorList({ingredients, bun}) {
         </>
     
     );
-};
-
-ConstructorList.propTypes = {
-    ingredients: PropTypes.arrayOf(arrPropTypes).isRequired,
-    bun: PropTypes.object, 
 };

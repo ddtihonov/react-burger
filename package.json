@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "https://ddtihonov.github.io/react-burger/",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
@@ -24,6 +23,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "typescript": "^4.6.3",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

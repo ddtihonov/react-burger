@@ -2,6 +2,7 @@ import React, {forwardRef} from 'react';
 import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
 import PropTypes from 'prop-types';
+import {arrPropTypes} from '../../utils/tupes'
 
 
 
@@ -23,7 +24,7 @@ const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
 });
 
 IngredientsList.propTypes = {
-    ingredients: PropTypes.array,
+    ingredients: PropTypes.arrayOf(arrPropTypes).isRequired,
     title: PropTypes.string,
 };
 

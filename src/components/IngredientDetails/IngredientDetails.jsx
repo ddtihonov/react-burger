@@ -9,7 +9,6 @@ export default function IngredientDetails() {
 
     return(
             <div className={ingredient_detals.box} >
-                <h2 className={ingredient_detals.title}>Детали ингредиента</h2>
                 <img className={ingredient_detals.image} src={ingredient.image} alt={ingredient.name}></img>
                 <h3 className={ingredient_detals.subtitle}>{ingredient.name}</h3>
                 <ul className={ingredient_detals.list} >

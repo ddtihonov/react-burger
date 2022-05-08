@@ -39,7 +39,10 @@ const handleIngredientClose = useCallback(() => {
       </Modal>
       }
       {ingredient && 
-      <Modal onClose={handleIngredientClose}>
+      <Modal 
+      onClose={handleIngredientClose}
+      title="Детали ингредиента"
+      >
       <IngredientDetails/>
     </Modal>
       }

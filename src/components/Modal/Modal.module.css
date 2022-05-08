@@ -33,3 +33,12 @@
 .close_icon > svg{
     pointer-events: none;
 }
+
+.title{
+    font-family:  "JetBrainsMono", "Arial ", sans-serif; 
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 700;
+    margin: 40px auto auto 40px;
+    text-align: left;
+}

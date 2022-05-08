@@ -18,7 +18,7 @@ export const DELETE_ORDER_NUMBER = 'DELETE_ORDER_DATA';//удалить номе
 //типы при создании бургера
 export const BURGER_INGREDIENT = 'BURGER_INGREDIENT';
 export const DELETE_BURGER_INGREDIENT = 'DELETE_BURGER_INGREDIENT'
-
+export const DELETE_ORDER_INGREDIENTS = 'DELETE_BURGER_INGREDIENT'
 
 export function getIngredients() {
     return (dispatch) => {
