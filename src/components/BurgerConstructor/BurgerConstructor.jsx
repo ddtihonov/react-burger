@@ -4,8 +4,8 @@ import burger_constructor from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux';
-import {BURGER_INGREDIENT, DELETE_ORDER_INGREDIENTS} from '../../services/actions/actions'
-import { useDrop, useDrag } from "react-dnd";
+import {BURGER_INGREDIENT} from '../../services/actions/actions'
+import { useDrop } from "react-dnd";
 
 
 export default function BurgerConstructor() {
@@ -32,7 +32,7 @@ export default function BurgerConstructor() {
         const borderColor = isHover ? style : burger_constructor.border
 
         // расчет стоимости заказа
-        const orderAmount = () =>{
+        const orderAmount = useMemo(() =>{
           if (!bun) {
             return 0;
           }
@@ -40,13 +40,12 @@ export default function BurgerConstructor() {
               return sum + item.price
           }, 0)
             return amountIngredients + bun.price * 2
-        };
+        }, [ingredientsConstructorList, bun]);
 
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
           const iDingredients = ingredientsConstructorList.map(item => item._id).concat([bun._id]);
           dispatch(getOrderNumber(iDingredients));
-          //dispatch({type: DELETE_ORDER_INGREDIENTS});//////////////////
         }, [ingredientsConstructorList, bun, dispatch]);
 
     return (
@@ -63,7 +62,7 @@ export default function BurgerConstructor() {
           }
         </div>
         {(bun !== null) && (<div className={burger_constructor.box}>
-          <p className={burger_constructor.price}>{orderAmount()}</p>
+          <p className={burger_constructor.price}>{orderAmount}</p>
           <div className={burger_constructor.item}>
             <CurrencyIcon type="primary"/>
           </div>

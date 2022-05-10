@@ -114,6 +114,7 @@ export const selectedIngredientsReducer = (state = selectedIngredientState, acti
                 selectedIngredient: null,
             };
         }
+
         default: {
             return state;
         }
@@ -145,11 +146,11 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
             return {
                 ...state,
                 burgerIngredients: state.burgerIngredients.filter(
-                    (item, index) => index !== action.payload.deleteIndex
+                    (item, index) => index !== action.Index
                 ),
             };
         }
-        
+
         case DELETE_ORDER: {
             return {
                 ...state,
