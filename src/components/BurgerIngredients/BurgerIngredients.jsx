@@ -26,15 +26,34 @@ export default function BurgerIngredients() {
 
   const [current, setCurrent] = useState('bun')
 
+
+// скролл при клике
   const handleBunClick = useCallback(() => {
+    bunRef.current.scrollIntoView({behavior: 'smooth'});
     setCurrent('bun')
   },[setCurrent]);
 
   const handleSauceClick = useCallback(() => {
+    sauceRef.current.scrollIntoView({behavior: 'smooth'});
     setCurrent("sauce")
   },[setCurrent]);
 
   const handleMainClick = useCallback(() => {
+    mainRef.current.scrollIntoView({behavior: 'smooth'});
+    setCurrent("main")
+  },[setCurrent]);
+
+
+//выделяем кнопку при скролле
+  const handleBunScroll = useCallback(() => {
+    setCurrent('bun')
+  },[setCurrent]);
+
+  const handleSauceScroll = useCallback(() => {
+    setCurrent("sauce")
+  },[setCurrent]);
+
+  const handleMainScroll = useCallback(() => {
     setCurrent("main")
   },[setCurrent]);
 
@@ -45,14 +64,14 @@ export default function BurgerIngredients() {
       const saucePosition = sauceRef.current.offsetTop;
       const mainPosition = mainRef.current.offsetTop;
       if (scrollPosition + 350 <= saucePosition) {
-        handleBunClick();
+        handleBunScroll();
       } else if (scrollPosition + 300 <= mainPosition) {
-        handleSauceClick();
+        handleSauceScroll();
       } else {
-        handleMainClick();
+        handleMainScroll();
       }
     },
-    [handleBunClick, handleSauceClick, handleMainClick]
+    [handleBunScroll, handleSauceScroll, handleMainScroll]
   ); 
 
   return (

@@ -18,27 +18,28 @@ export const DELETE_ORDER_NUMBER = 'DELETE_ORDER_DATA';//удалить номе
 //типы при создании бургера
 export const BURGER_INGREDIENT = 'BURGER_INGREDIENT';
 export const DELETE_BURGER_INGREDIENT = 'DELETE_BURGER_INGREDIENT'
-export const DELETE_ORDER_INGREDIENTS = 'DELETE_BURGER_INGREDIENT'
+export const DELETE_ORDER = 'DELETE_BURGER_INGREDIENT'
 
 export function getIngredients() {
     return (dispatch) => {
         dispatch({
         type: GET_INGREDIENTS_REQUEST,
     });
-    api.getIngredients().then((res) => {
-        if (res && res.success) {
+    api.getIngredients()
+    .then((res) => {
             dispatch({
             type: GET_INGREDIENTS_SUCCESS,
             payload: {
                 ingredients: res.data,
             },
-        });
-        } else {
+            });
+        })
+        .catch((err) => {
+            console.log(`Внимание! ${err}`);
             dispatch({
-            type: GET_INGREDIENTS_ERROR,
-        });
-        }
-    });
+                type: GET_INGREDIENTS_ERROR,
+            });
+        }) 
     };
 }
 
@@ -47,19 +48,20 @@ export function getOrderNumber(ingredientIds) {
         dispatch({
             type: GET_ORDER_NUMBER_REQUEST,
         });
-        api.useIngredients(ingredientIds).then((res) => {
-            if (res && res.success) {
+        api.useIngredients(ingredientIds)
+        .then((res) => {
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,
                     payload: {
                     order: res.order.number,
                     },
-        });
-        } else {
-            dispatch({
-                type: GET_ORDER_NUMBER_ERROR,
-            });
-        }
-    });
+                });
+        })
+        .catch((err) => {
+            console.log(`Внимание! ${err}`);
+                dispatch({
+                    type: GET_ORDER_NUMBER_ERROR,
+                });
+            }) 
     };
 }

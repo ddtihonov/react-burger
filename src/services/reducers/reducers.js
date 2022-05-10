@@ -10,7 +10,7 @@ import {
     DELETE_SELECTED_INGREDIENT,
     BURGER_INGREDIENT,
     DELETE_BURGER_INGREDIENT,
-    DELETE_ORDER_INGREDIENTS,
+    DELETE_ORDER,
 } from '../actions/actions';
 
 // начальное состояние ingredients
@@ -127,6 +127,7 @@ const burgerConstructorState = {
 
 export const burgerConstructorReducer = (state = burgerConstructorState, action) => {
     switch (action.type) {
+
         case BURGER_INGREDIENT: {
             const { ingredient } = action.payload;
             if (ingredient.type === 'bun') {
@@ -139,6 +140,7 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
             burgerIngredients: [...state.burgerIngredients, ingredient],
             };
         }
+
         case DELETE_BURGER_INGREDIENT: {
             return {
                 ...state,
@@ -147,13 +149,15 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
                 ),
             };
         }
-            case DELETE_ORDER_INGREDIENTS: {
-                return {
-                    ...state,
-                    //burgerIngredients: state.burgerIngredients.filter((item) => item.type === 'bun'),
-                    //burgerBun: state.burgerBun.filter(item => item.type !== 'bun'),
-                };   
+        
+        case DELETE_ORDER: {
+            return {
+                ...state,
+                burgerBun: null,
+                burgerIngredients: [],
+            };   
         }
+        
         default: {
             return state;
         }
