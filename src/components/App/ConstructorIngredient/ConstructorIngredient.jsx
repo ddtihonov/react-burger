@@ -5,6 +5,7 @@ import constructor_ingredirnt from './ConstructorIngredient.module.css';
 import { useDrop, useDrag } from "react-dnd";
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../../utils/tupes'
+import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../../services/actions/actions'
 
 export default function ConstructorIngredient({item, deleteIngridient, index, id}) {
 
@@ -14,10 +15,40 @@ export default function ConstructorIngredient({item, deleteIngridient, index, id
     const [, drop] = useDrop({
         accept: 'component',
         hover(item, monitor) {
-            
+            if (!ref.current) {
+                return;
+            }
+            const dragIndex = item.index;
+            const hoverIndex = index;
+            if (dragIndex === hoverIndex) {
+                return;
+            }
+            const hoverBoundingRect = ref.current?.getBoundingClientRect();
+            const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+            const clientOffset = monitor.getClientOffset();
+            const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+                return;
+            }
+            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+                return;
+            }
+
+            moveIngredient(dragIndex, hoverIndex);
+
+            item.index = hoverIndex;
         },
     });
 
+    const moveIngredient = (dragIndex, hoverIndex) => {
+        dispatch({
+            type: MOVE_CONSTRUCTOR_INGREDIENTS,
+            dragIndex,
+            hoverIndex
+        });
+    }
+
+    //захватываем элемент
     const [{ opacity }, drag] = useDrag({
         type: 'component',
         item: () => {

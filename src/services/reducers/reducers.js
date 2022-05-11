@@ -11,6 +11,7 @@ import {
     BURGER_INGREDIENT,
     DELETE_BURGER_INGREDIENT,
     DELETE_ORDER,
+    MOVE_CONSTRUCTOR_INGREDIENTS,
 } from '../actions/actions';
 
 // начальное состояние ingredients
@@ -148,6 +149,16 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
                 burgerIngredients: state.burgerIngredients.filter(
                     (item, index) => index !== action.Index
                 ),
+            };
+        }
+
+        case MOVE_CONSTRUCTOR_INGREDIENTS: {
+            let moveIngridients = [...state.burgerIngredients];
+            let otherIngredientsMove = moveIngridients.splice(action.dragIndex, 1);
+            moveIngridients.splice(action.hoverIndex, 0, ...otherIngredientsMove);
+            return {
+                ...state,
+                burgerIngredients: moveIngridients
             };
         }
 
