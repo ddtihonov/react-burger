@@ -10,7 +10,7 @@ import {
     DELETE_SELECTED_INGREDIENT,
     BURGER_INGREDIENT,
     DELETE_BURGER_INGREDIENT,
-    DELETE_ORDER,
+    CLEAR_INGREDIENT_ORDER,
     MOVE_CONSTRUCTOR_INGREDIENTS,
 } from '../actions/actions';
 
@@ -162,13 +162,17 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
             };
         }
 
-        case DELETE_ORDER: {
+        case CLEAR_INGREDIENT_ORDER: {
+            let bun = null;
+            let Ingredients = []
             return {
                 ...state,
-                burgerBun: null,
-                burgerIngredients: [],
+                burgerBun: bun,
+                burgerIngredients: Ingredients,
             };   
         }
+
+        
         
         default: {
             return state;

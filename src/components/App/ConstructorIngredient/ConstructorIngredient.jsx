@@ -84,5 +84,5 @@ ConstructorIngredient.propTypes = {
     deleteIngridient: PropTypes.func,
     id: PropTypes.string,
     index: PropTypes.number,
-    item: ingredientPropTypes.isRequired,
+    item: ingredientPropTypes,
 };

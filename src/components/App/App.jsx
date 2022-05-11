@@ -6,7 +6,7 @@ import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, DELETE_ORDER} from '../../services/actions/actions'
+import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions'
 
 export default function App() {
 
@@ -19,8 +19,8 @@ const handleOrderClose = useCallback(() => {
   dispatch({
     type: DELETE_ORDER_NUMBER,
   });
-
-  dispatch({type: DELETE_ORDER});
+//пока не работает
+  dispatch({type: CLEAR_INGREDIENT_ORDER});
 }, [dispatch]);
 
 const handleIngredientClose = useCallback(() => {
