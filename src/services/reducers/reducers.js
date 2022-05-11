@@ -163,12 +163,10 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
         }
 
         case CLEAR_INGREDIENT_ORDER: {
-            let bun = null;
-            let Ingredients = []
             return {
                 ...state,
-                burgerBun: bun,
-                burgerIngredients: Ingredients,
+                burgerBun: null,
+                burgerIngredients: [],
             };   
         }
 

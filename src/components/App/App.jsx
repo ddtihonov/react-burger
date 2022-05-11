@@ -19,7 +19,7 @@ const handleOrderClose = useCallback(() => {
   dispatch({
     type: DELETE_ORDER_NUMBER,
   });
-//пока не работает
+  
   dispatch({type: CLEAR_INGREDIENT_ORDER});
 }, [dispatch]);
 
