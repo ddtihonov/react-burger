@@ -4,8 +4,8 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import constructor_ingredirnt from './ConstructorIngredient.module.css';
 import { useDrop, useDrag } from "react-dnd";
 import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../../utils/tupes'
-import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../../services/actions/actions'
+import {ingredientPropTypes} from '../../utils/tupes'
+import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/actions'
 
 export default function ConstructorIngredient({item, deleteIngridient, index, id}) {
 
@@ -81,8 +81,8 @@ export default function ConstructorIngredient({item, deleteIngridient, index, id
 };
 
 ConstructorIngredient.propTypes = {
-    deleteIngridient: PropTypes.func,
-    id: PropTypes.string,
-    index: PropTypes.number,
-    item: ingredientPropTypes,
+    deleteIngridient: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    item: ingredientPropTypes.isRequired,
 };

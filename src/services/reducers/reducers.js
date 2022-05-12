@@ -125,13 +125,14 @@ export const selectedIngredientsReducer = (state = selectedIngredientState, acti
 const burgerConstructorState = {
     burgerIngredients: [],
     burgerBun: null,
+    keyUid: null,
 };
 
 export const burgerConstructorReducer = (state = burgerConstructorState, action) => {
     switch (action.type) {
 
         case BURGER_INGREDIENT: {
-            const { ingredient } = action.payload;
+            const { ingredient, keyUid} = action.payload;
             if (ingredient.type === 'bun') {
             return {
                 ...state,
@@ -140,6 +141,7 @@ export const burgerConstructorReducer = (state = burgerConstructorState, action)
             } else return {
             ...state,
             burgerIngredients: [...state.burgerIngredients, ingredient],
+            keyUid: keyUid,
             };
         }
 

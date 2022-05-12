@@ -57,5 +57,5 @@ export default function IngredientsCard({card}) {
 };
 
 IngredientsCard.propTypes = {
-    card: ingredientPropTypes,
+    card: ingredientPropTypes.isRequired,
 };

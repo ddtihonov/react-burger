@@ -6,6 +6,7 @@ import { CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-com
 import { useDispatch, useSelector } from 'react-redux';
 import {BURGER_INGREDIENT} from '../../services/actions/actions'
 import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from 'uuid'
 
 
 export default function BurgerConstructor() {
@@ -23,7 +24,8 @@ export default function BurgerConstructor() {
             isHover: monitor.isOver()
           }),
           drop(ingredient) {
-              dispatch({ type: BURGER_INGREDIENT, payload: { ingredient} })
+            const keyUid = uuidv4()
+              dispatch({ type: BURGER_INGREDIENT, payload: { keyUid, ingredient} })
           },
         });
 
