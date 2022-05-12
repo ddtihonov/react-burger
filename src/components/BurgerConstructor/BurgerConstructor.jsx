@@ -25,7 +25,8 @@ export default function BurgerConstructor() {
           }),
           drop(ingredient) {
             const keyUid = uuidv4()
-              dispatch({ type: BURGER_INGREDIENT, payload: { keyUid, ingredient} })
+            ingredient.keyUid = keyUid
+              dispatch({ type: BURGER_INGREDIENT, payload: { ingredient} })
           },
         });
 

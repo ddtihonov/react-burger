@@ -125,7 +125,6 @@ export const selectedIngredientsReducer = (state = selectedIngredientState, acti
 const burgerConstructorState = {
     burgerIngredients: [],
     burgerBun: null,
-    keyUid: null,
 };
 
 export const burgerConstructorReducer = (state = burgerConstructorState, action) => {

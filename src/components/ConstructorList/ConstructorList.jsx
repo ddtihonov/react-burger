@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback} from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
@@ -11,8 +11,7 @@ export default function ConstructorList() {
 
     const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
     const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
-    const  keyUid = useSelector(state => state.burgerConstructorIngredients.keyUid);
-
+    
     // удаляем ингридиент и перезаписываем массив в хранилище
     const handleDeleteIngredient = useCallback((Index) => {
             dispatch({ type: DELETE_BURGER_INGREDIENT, Index });
@@ -37,7 +36,7 @@ export default function ConstructorList() {
                 deleteIngridient={handleDeleteIngredient}  
                 index={index} 
                 id={item._id}
-                key={keyUid}
+                key={item.keyUid}
                 />))}
             </ul>
             <div className={constructor_list.cell}>
