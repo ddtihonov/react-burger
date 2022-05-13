@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export  const arrPropTypes = PropTypes.shape({
+export const ingredientPropTypes = PropTypes.shape({
     calories: PropTypes.number.isRequired,
     carbohydrates: PropTypes.number.isRequired,
     fat: PropTypes.number.isRequired,
@@ -13,4 +13,4 @@ export  const arrPropTypes = PropTypes.shape({
     image: PropTypes.string.isRequired,
     image_mobile: PropTypes.string,
     image_large: PropTypes.string,
-})
+});

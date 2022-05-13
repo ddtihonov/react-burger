@@ -11,6 +11,8 @@
 ### Технологический стек:
 - **React**
 - **JavaScript**
+- **Redux**
+- **DND**
 - **JSX**
 - **CSS3**
 - **Grid-layout**

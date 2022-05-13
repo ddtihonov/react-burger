@@ -1,100 +1,52 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
-import api from '../../utils/IngredientsApi';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import { BurgerContext } from '../../utils/BurgerContext';
-
+import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions'
 
 export default function App() {
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [ingredientsList, setIngredientsList] = useState([]);
+  const dispatch = useDispatch();
 
-// данные для popup ингредиента
-  const [selectedCard, setSelectedCard] = useState({}); 
+  const orderNumber = useSelector(state => state.orderState.orderNumber);
+  const ingredient = useSelector(state => state.ingredientState.selectedIngredient);
 
-  ///ссстояния popup
-  const [isIngredientPopupOpen, setIsIngredientPopupOpen] = useState(false);
-  const [isOrderPopupOpen, setIsOrderPopupOpen] = useState(false);
-
-  //номер заказа
-  const [orderNumber, setIsOrderNumber] = useState();
+const handleOrderClose = useCallback(() => {
+  dispatch({
+    type: DELETE_ORDER_NUMBER,
+  });
   
-  // Эффект запроса карточек
-  useEffect(() => {
-    api.getIngredients()
-        .then((ingredientsInfo) => {
-          setIngredientsList(ingredientsInfo.data);
-          setIsSubmitting(true);
-        })
-        .catch((err) => {
-          console.log(`Внимание! ${err}`);
-      }) 
-}, []);
+  dispatch({type: CLEAR_INGREDIENT_ORDER});
+}, [dispatch]);
 
+const handleIngredientClose = useCallback(() => {
+  dispatch({
+    type: DELETE_SELECTED_INGREDIENT,
+  });
+}, [dispatch]);
 
-// обработчик для popup ингредиента
-const handleCardClick = useCallback((data) => {
-  setIsIngredientPopupOpen(true);
-  setSelectedCard(data);
-}, []);
-
-const handleAddOrder = useCallback((arr) => {
-  api.useIngredients(arr)
-  .then((data) => {
-    setIsOrderNumber(data.order.number)
-    setIsOrderPopupOpen(true)
-  })
-  .catch((err) => {
-    console.log(`Внимание! ${err}`);
-}) 
-}, []);
-
-
-// закрытие всех popup
-const closeAllPopups = useCallback(() => {
-  setIsOrderPopupOpen(false);
-  setIsIngredientPopupOpen(false);
-}, []);
 
   return (
-    <BurgerContext.Provider value={ingredientsList}>
     <div className={app.page}>
       <AppHeader/>
-      {isSubmitting &&
-        <Main
-        onAddOrder={handleAddOrder}
-        onCardClick={handleCardClick}
-        />
-      }
-      {isOrderPopupOpen && 
-      <Modal
-      isOpen={isIngredientPopupOpen}
-      onClose={closeAllPopups}
-      >
-      <OrderDetails
-        isOpen={isOrderPopupOpen}
-        onClose={closeAllPopups}
-        orderNumber={orderNumber}
-      />
+        <Main/>
+      {orderNumber && 
+      <Modal onClose={handleOrderClose}>
+      <OrderDetails/>
       </Modal>
       }
-      {isIngredientPopupOpen && 
-      <Modal
-      isOpen={isIngredientPopupOpen}
-      onClose={closeAllPopups}
+      {ingredient && 
+      <Modal 
+      onClose={handleIngredientClose}
+      title="Детали ингредиента"
       >
-      <IngredientDetails
-      card={selectedCard}
-      onClose={closeAllPopups}
-      />
+      <IngredientDetails/>
     </Modal>
       }
     </div>
-    </BurgerContext.Provider>
   );
 };

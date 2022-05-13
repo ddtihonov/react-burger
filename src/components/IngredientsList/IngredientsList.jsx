@@ -1,56 +1,31 @@
-import React, { useContext } from 'react';
+import React, {forwardRef} from 'react';
 import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
-import PropTypes from "prop-types";
-import { BurgerContext } from '../../utils/BurgerContext';
+import PropTypes from 'prop-types';
+import {ingredientPropTypes} from '../../utils/tupes'
 
 
-export default function IngredientsList({onCardClick }) {
 
-    const ingredientsList  = useContext(BurgerContext);
-
-    const buns = ingredientsList.filter(item => item.type === 'bun');
-    const sauce = ingredientsList.filter(item => item.type === 'sauce');
-    const main = ingredientsList.filter(item => item.type === 'main');
+const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
 
     return (
-    <section className={ingredients_list.box}>
-        <h3 className={ingredients_list.title}>Булки</h3>
+        <>
+        <h3 className={ingredients_list.title} ref={ref}>{title}</h3>
         <ul className={ingredients_list.list}>
-            {buns.map(item => {
+            {ingredients.map(item => {
                 return (<IngredientsCard 
                 card={item} 
                 key={item._id}
-                onCardClick ={onCardClick}
                 />)
             })}
         </ul>
-        <h3 className={ingredients_list.title}>Соусы</h3>
-        <ul className={ingredients_list.list}>
-            {sauce.map(item => {
-                return (<IngredientsCard 
-                card={item} 
-                key={item._id}
-                onCardClick ={onCardClick}
-                />)
-            })}
-        </ul>
-        <h3 className={ingredients_list.title}>Начинки</h3>
-        <ul className={ingredients_list.list}>
-            {main.map(item => {
-                return (<IngredientsCard 
-                card={item} 
-                key={item._id}
-                onCardClick ={onCardClick}
-                />)
-            })}
-        </ul>
-    </section>
-    
+        </>
 );
-};
+});
 
 IngredientsList.propTypes = {
-    onCardClick: PropTypes.func,
+    ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+    title: PropTypes.string.isRequired,
 };
 
+export default IngredientsList

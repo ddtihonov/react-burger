@@ -1,10 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import order_detals from './OrderDetails.module.css';
 import icon from '../../image/icon.svg';
-import PropTypes from "prop-types";
 
-export default function OrderDetails({orderNumber}) {
+export default function OrderDetails() {
 
+    const orderNumber = useSelector(state => state.orderState.orderNumber);
 
     return(
             <div className={order_detals.box} >
@@ -14,10 +15,5 @@ export default function OrderDetails({orderNumber}) {
                 <p className={order_detals.text}>Ваш заказ начали готовить</p>
                 <p className={order_detals.text_purple}>Дождитесь готовности на орбитальной станции</p>
             </div>
-    
     );
-};
-
-OrderDetails.propTypes = {
-    orderNumber: PropTypes.number,  
 };

@@ -1,13 +1,25 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import constructor_list from './ConstructorList.module.css';
-import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import {arrPropTypes} from '../../utils/tupes';
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
+import { useDispatch, useSelector} from 'react-redux';
+import ConstructorIngredient from '../ConstructorIngredient/ConstructorIngredient';
 
-export default function ConstructorList({ingredients, bun}) {
+export default function ConstructorList() {
+
+    const dispatch = useDispatch();
+
+    const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
+    const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
+    
+    // удаляем ингридиент и перезаписываем массив в хранилище
+    const handleDeleteIngredient = useCallback((Index) => {
+            dispatch({ type: DELETE_BURGER_INGREDIENT, Index });
+        }, [dispatch]
+    );
 
     return(
-        <section className={constructor_list.container}>
+        <>
             <div className={constructor_list.cell}>
                 <ConstructorElement
                         type="top"
@@ -18,18 +30,14 @@ export default function ConstructorList({ingredients, bun}) {
                     />
             </div>
             <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
-                {ingredients.map((item, index) => {
-                        return (<li className={constructor_list.item} key={item._id}>
-                                    <div className={constructor_list.box}>
-                                        <DragIcon type="primary" />
-                                    </div>
-                                    <ConstructorElement
-                                        text={item.name}
-                                        price={item.price}
-                                        thumbnail={item.image}
-                                    /> 
-                                </li>)
-                    })}
+                {ingredientsConstructorList.map((item, index) => (
+                <ConstructorIngredient   
+                item={item} 
+                deleteIngridient={handleDeleteIngredient}  
+                index={index} 
+                id={item._id}
+                key={item.keyUid}
+                />))}
             </ul>
             <div className={constructor_list.cell}>
                 <ConstructorElement
@@ -40,13 +48,7 @@ export default function ConstructorList({ingredients, bun}) {
                     thumbnail={bun.image}
                 /> 
             </div>
-            
-        </section>
+        </>
     
     );
-};
-
-ConstructorList.propTypes = {
-    ingredients: PropTypes.arrayOf(arrPropTypes).isRequired,
-    bun: PropTypes.object, 
 };
