@@ -1,21 +1,25 @@
-import React, { useCallback} from 'react';
+import React, { useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
-import Main from '../Main/Main';
 import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import { Login, Register, PageNotFound, Main, Profile, ForgotPassword } from '../../pages';
 import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions';
 
 export default function App() {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const orderNumber = useSelector(state => state.orderState.orderNumber);
   const ingredient = useSelector(state => state.ingredientState.selectedIngredient);
+
+  useEffect(() => {
+}, [])
 
 const handleOrderClose = useCallback(() => {
   dispatch({
@@ -42,7 +46,20 @@ const handleIngredientClose = useCallback(() => {
         <Route path='*' element={
                   <PageNotFound />
               }/>
+        <Route  path='/login'  element={
+                  <Login/>
+              } />          
+        <Route  path='/profile'  element={
+                  <Profile/>
+              } /> 
+        <Route  path='/register'  element={
+                  <Register/>
+              } /> 
+        <Route  path='/forgot-password'  element={
+                  <ForgotPassword/>
+              } />                      
         </Routes>
+        
       {orderNumber && 
       <Modal onClose={handleOrderClose}>
       <OrderDetails/>
