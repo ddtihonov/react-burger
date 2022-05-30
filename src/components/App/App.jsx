@@ -1,12 +1,14 @@
 import React, { useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions'
+import PageNotFound from '../PageNotFound/PageNotFound';
+import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions';
 
 export default function App() {
 
@@ -33,7 +35,14 @@ const handleIngredientClose = useCallback(() => {
   return (
     <div className={app.page}>
       <AppHeader/>
-        <Main/>
+      <Routes>
+        <Route  path='/'  element={
+                  <Main/>
+              } />   
+        <Route path='*' element={
+                  <PageNotFound />
+              }/>
+        </Routes>
       {orderNumber && 
       <Modal onClose={handleOrderClose}>
       <OrderDetails/>
