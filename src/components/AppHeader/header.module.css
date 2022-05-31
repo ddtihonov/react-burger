@@ -35,14 +35,22 @@
     align-items: center;
 }
 
-.navButton {
+.link {
     display: flex;
     border: none;
     background-color:  transparent;
     text-decoration: none;
     cursor: pointer;
-    color: #F2F2F3;
     padding: 16px 20px;
+    color: #8585AD;
+}
+
+.active {
+    color: #F2F2F3;
+}
+
+.active > * {
+    color: #F2F2F3;
 }
 
 .color{

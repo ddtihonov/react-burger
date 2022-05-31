@@ -27,7 +27,7 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) => {
         case GET_INGREDIENTS_REQUEST: {
             return {
                 ...state,
-                ingredientsFailed: false,
+                ingredientsError: false,
                 ingredientsRequest: true,
             };
         }
@@ -35,7 +35,7 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) => {
         case GET_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
-                ingredientsFailed: false,
+                ingredientsError: false,
                 ingredientsRequest: false,
                 ingredients: action.payload.ingredients,
             };
@@ -43,8 +43,9 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) => {
 
         case  GET_INGREDIENTS_ERROR: {
             return {
-                ...ingredientsInitialState,
-                ingredientsFailed: true,
+                ...state,
+                ingredientsError: true,
+                ingredientsRequest: false,
             };
         }
         default: {

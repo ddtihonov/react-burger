@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import header from './header.module.css';
 import {BurgerIcon, ListIcon, Logo, ProfileIcon,
@@ -13,13 +14,13 @@ export default function AppHeader() {
       <header className={header.header}>
         <div className={header.box} >
           <nav className={header.nav}>
-            <button className={header.navButton} onClick={() => { navigate('/')}}>
-              <BurgerIcon type="primary"/>
+            <NavLink className={header.link}  to={'/'} activeClassName={header.active}>
+              <BurgerIcon type="secondary"/>
               <span className={header.text}>
                 Конструктор
               </span>
-            </button>
-            <button className={header.navButton}>
+            </NavLink>
+            <button className={header.link}>
               <ListIcon type="secondary"/>
               <span
                 className={`${header.text} ${header.color}`}
@@ -29,14 +30,12 @@ export default function AppHeader() {
             </button>
           </nav>
           <Logo />
-            <button className={header.navButton} onClick={() => { navigate('/login') }}>
-              <ProfileIcon type="primary"/>
-              <span
-                  className={`${header.text} ${header.color}`}
-              >
+          <NavLink className={header.link}  to={'/profile'} activeClassName={header.active}>
+            <ProfileIcon type="secondary"/>
+            <span className={header.text}>
                 Личный кабинет
               </span>
-            </button>
+          </NavLink>
         </div>
       </header>
     );

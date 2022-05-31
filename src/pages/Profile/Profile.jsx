@@ -18,9 +18,9 @@ const location = useLocation();
 const navigate = useNavigate();
 const dispatch = useDispatch();    
     
-const [userEmail, setUserEmail] = useState();
+const [email, setUserEmail] = useState('');
 const [password, setPassword] = useState('');
-const [userName, setUserName] = useState();
+const [name, setUserName] = useState('');
 const [isInputChange, setIsInputChange] = useState(false);
 
 const handleChangeEmail = useCallback((e) =>{
@@ -66,9 +66,8 @@ function onEditProfile(e) {
             <form className={styles.form} onSubmit={onEditProfile}>
                 <div className={styles.input}>
                     <Input
-                    value={userName}
+                    value={name}
                     onChange={handleChangeName}
-                    type={'text'}
                     placeholder={'Имя'}
                     icon={'EditIcon'}
                     size={'default'}
@@ -77,7 +76,7 @@ function onEditProfile(e) {
                 <div className={styles.input}>
                     <EmailInput 
                     onChange={handleChangeEmail} 
-                    value={userEmail} 
+                    value={email} 
                     size={'default'}
                     />
                 </div>
