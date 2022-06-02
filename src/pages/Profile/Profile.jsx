@@ -16,19 +16,20 @@ export default function Profile () {
 
 const location = useLocation();
 const navigate = useNavigate();
-const dispatch = useDispatch();    
+const dispatch = useDispatch(); 
+
+const {name, email} = useSelector((store) => store.authData);
     
-const [email, setUserEmail] = useState('');
-const [password, setPassword] = useState('');
-const [name, setUserName] = useState('');
-const [isInputChange, setIsInputChange] = useState(false);
+const [userEmail, setUserEmail] = useState(email);
+const [userPassword, setUserPassword] = useState('');
+const [userName, setUserName] = useState(name);
 
 const handleChangeEmail = useCallback((e) =>{
     setUserEmail(e.target.value);
 }, []);
 
 const handleChangePassword = useCallback((e) =>{
-    setPassword(e.target.value);
+    setUserPassword(e.target.value);
 }, []);
 
 const handleChangeName = useCallback((e) => {
@@ -39,25 +40,22 @@ function onEditProfile(e) {
 
 };
 
-
+const setActive =({isActive}) => isActive ? styles.link_active : styles.link
     
         return(
         <section className={styles.main}>
             <div className={styles.container}>
                 <NavLink 
                 to='/profile' 
-                className={styles.link} 
-                activeClassName={styles.link_active}
+                className={setActive} 
                 >Профиль</NavLink>
                 <NavLink 
                 to='/profile' 
                 className={styles.link} 
-                activeClassName={styles.link_active}
                 >История заказов</NavLink>
                 <NavLink 
                 to='/profile' 
                 className={styles.link} 
-                activeClassName={styles.link_active}
                 >Выход</NavLink>
                 <p className={styles.text}>
                 В этом разделе вы можете изменить свои персональные данные
@@ -66,7 +64,7 @@ function onEditProfile(e) {
             <form className={styles.form} onSubmit={onEditProfile}>
                 <div className={styles.input}>
                     <Input
-                    value={name}
+                    value={userName}
                     onChange={handleChangeName}
                     placeholder={'Имя'}
                     icon={'EditIcon'}
@@ -76,14 +74,14 @@ function onEditProfile(e) {
                 <div className={styles.input}>
                     <EmailInput 
                     onChange={handleChangeEmail} 
-                    value={email} 
+                    value={userEmail} 
                     size={'default'}
                     />
                 </div>
                 <div className={styles.input}>
                     <PasswordInput 
                     onChange={handleChangePassword} 
-                    value={password} 
+                    value={userPassword} 
                     size={'default'}
                     />
                 </div>

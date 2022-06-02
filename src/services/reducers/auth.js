@@ -4,7 +4,11 @@ import {
     GET_REGISTER_ERROR,
 } from '../actions/register'
 
-
+import {
+    GET_LOGIN_REQUEST,
+    GET_LOGIN_SUCCESS,
+    GET_LOGIN_ERROR,
+} from '../actions/login'
 
 
 
@@ -13,13 +17,21 @@ const initialState = {
     name: '',
     accessToken: '',
     refreshToken: '',
+    loggedIn: false,
+    signOutSuccess: false,
+
     registerRequest: false,
     regiterError: false,
     registerSuccess: false,
+
+    loginRequest: false,
+    loginError: false,
+    loginSuccess: false,
 }
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
+        //регистрация
         case GET_REGISTER_REQUEST: {
             return {
                 ...state,
@@ -35,10 +47,6 @@ export const authReducer = (state = initialState, action) => {
                 registerSuccess: true,
                 signOutSuccess: false,
                 loggedIn: true,
-                email: action.payload.data.user.email,
-                name: action.payload.data.user.name,
-                accessToken: action.payload.data.accessToken.split('Bearer ')[1],
-                refreshToken: action.payload.data.refreshToken,
             };
         }
         case  GET_REGISTER_ERROR: {
@@ -46,6 +54,31 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 registerRequest: false,
                 regiterError: true,
+            };
+        }
+        //вход
+        case GET_LOGIN_REQUEST: {
+            return {
+                ...state,
+                loginRequest: true,
+                loginError: false,
+            };
+        }
+        case  GET_LOGIN_SUCCESS: {
+            return {
+                ...state,
+                loginRequest: false,
+                loginError: false,
+                loginSuccess: true,
+                signOutSuccess: false,
+                loggedIn: true,
+            };
+        }
+        case  GET_LOGIN_ERROR: {
+            return {
+                ...state,
+                loginRequest: false,
+                loginError: true,
             };
         }
         default:

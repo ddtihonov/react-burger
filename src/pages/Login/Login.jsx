@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom'
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Login.module.css';
 import {
@@ -8,36 +8,47 @@ import {
     PasswordInput,
     Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {onLogin} from '../../services/actions/login';
 
 export default function Login () {
 
-const location = useLocation();
-const navigate = useNavigate();
-const dispatch = useDispatch();    
+    const navigate = useNavigate();
+    const dispatch = useDispatch();    
+        
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const loggedIn = useSelector(state => state.authData.loggedIn);
+
+    useEffect(() => {
+        if(loggedIn === true) {
+            navigate('/profile')
+            setEmail('')
+            setPassword('')
+        }
+    }, [loggedIn, navigate]);
+
+    const handleChangeEmail = useCallback((e) =>{
+        setEmail(e.target.value);
+    }, []);
     
-const [userEmail, setUserEmail] = useState('');
-const [password, setPassword] = useState('');
-
-const handleChangeEmail = useCallback((e) =>{
-    setUserEmail(e.target.value);
-}, []);
-
-const handleChangePassword = useCallback((e) =>{
-    setPassword(e.target.value);
-}, []);
-
-function onEditProfile(e) {
-
-};
+    const handleChangePassword = useCallback((e) =>{
+        setPassword(e.target.value);
+    }, []);
+    
+    const signIn = useCallback((e) => {
+        e.preventDefault();
+        dispatch(onLogin({email, password}));
+    }, [email, password, dispatch] );
 
     return (
         <section className={styles.main}>
-            <form className={styles.form} onSubmit={onEditProfile}>
+            <form className={styles.form} onSubmit={signIn}>
             <h2 className={styles.title}>Вход</h2>
                 <div className={styles.input}>
                     <EmailInput 
                     onChange={handleChangeEmail} 
-                    value={userEmail}
+                    value={email}
                     size={'default'}
                     />
                 </div>

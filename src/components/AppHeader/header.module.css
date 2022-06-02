@@ -45,12 +45,18 @@
     color: #8585AD;
 }
 
-.active {
+.link_active {
+    display: flex;
+    border: none;
+    background-color:  transparent;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 16px 20px;
     color: #F2F2F3;
 }
 
-.active > * {
-    color: #F2F2F3;
+.link_active > svg {
+    fill: #F2F2F3;
 }
 
 .color{

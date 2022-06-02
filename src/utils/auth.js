@@ -3,9 +3,7 @@
     export const register = ({name, email, password}) => {
         return fetch('https://norma.nomoreparties.space/api/auth/register', {
             method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-        },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ 
                 name: name,
                 email: email,
@@ -16,8 +14,7 @@
     };
 
     export const authorize = ({ email, password }) => {
-        return fetch('https://api.ddtihonov.students.nomoredomains.work/signin', {
-            credentials: 'include',
+        return fetch('https://norma.nomoreparties.space/api/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

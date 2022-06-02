@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
@@ -6,8 +6,20 @@ import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import { Login, Register, PageNotFound, Main, Profile, ForgotPassword } from '../../pages';
-import {DELETE_ORDER_NUMBER, DELETE_SELECTED_INGREDIENT, CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { 
+  Login, 
+  Register, 
+  PageNotFound, 
+  Main, 
+  Profile, 
+  ForgotPassword,
+  ResetPassword
+} from '../../pages';
+import {
+  DELETE_ORDER_NUMBER, 
+  DELETE_SELECTED_INGREDIENT, 
+  CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions';
 
 export default function App() {
 
@@ -18,7 +30,13 @@ export default function App() {
   const orderNumber = useSelector(state => state.orderState.orderNumber);
   const ingredient = useSelector(state => state.ingredientState.selectedIngredient);
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const state = useSelector(state => state);
+console.log(state)
+
   useEffect(() => {
+   
 }, [])
 
 const handleOrderClose = useCallback(() => {
@@ -50,14 +68,19 @@ const handleIngredientClose = useCallback(() => {
                   <Login/>
               } />          
         <Route  path='/profile'  element={
+              <ProtectedRoute loggedIn={loggedIn}>
                   <Profile/>
+              </ProtectedRoute>       
               } /> 
         <Route  path='/register'  element={
                   <Register/>
               } /> 
         <Route  path='/forgot-password'  element={
                   <ForgotPassword/>
-              } />                      
+              } />
+        <Route  path='/reset-password'  element={
+                  <ResetPassword/>
+              } />                              
         </Routes>
         
       {orderNumber && 

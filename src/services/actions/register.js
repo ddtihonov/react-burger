@@ -1,23 +1,31 @@
 import { register } from '../../utils/auth';
-
+//регистрация
 export const GET_REGISTER_REQUEST = 'GET_REGISTER_REQUEST';// запрос
 export const GET_REGISTER_SUCCESS = 'GET_REGISTER_SUCCESS';//успешный запрос
 export const GET_REGISTER_ERROR = 'GET_REGISTER_ERROR';//неудачный запрос
 
-export function onRegister(email, password, name) {
+
+
+export function onRegister({name, email, password }) {
+
     return function (dispatch) {
         dispatch({
         type: GET_REGISTER_REQUEST,
     });
-        register({email, password, name})
-            .then((data) => {
-                console.log(data)
+        register({name, email, password })
+            .then((userData) => {
                 dispatch({
                     type: GET_REGISTER_SUCCESS,
                     payload: {
-                    Userdata: data,
+                        data: userData,
                     }, 
-            });
+                });
+                localStorage.setItem('userName', userData.user.name);
+                localStorage.setItem('userEmail', userData.user.email);
+                localStorage.setItem('accessToken',
+                    userData.accessToken.split('Bearer ')[1]);
+                localStorage.setItem('refreshToken', userData.refreshToken);
+
             
         }) 
         .catch(() => {

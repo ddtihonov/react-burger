@@ -4,5 +4,6 @@ import PageNotFound from "./PageNotFound/PageNotFound";
 import Main from "./Main/Main";
 import Profile from "./Profile/Profile";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
+import ResetPassword from "./ResetPassvord/ResetPassword";
 
-export { Login, Register, PageNotFound, Main, Profile, ForgotPassword};
+export { Login, Register, PageNotFound, Main, Profile, ForgotPassword, ResetPassword};

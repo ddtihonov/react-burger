@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './ForgotPassword.module.css';
@@ -21,7 +21,8 @@ const handleChangeEmail = useCallback((e) =>{
 
 
 function onEditProfile(e) {
-
+    e.preventDefault()
+    navigate('/reset-password')
 };
 
     return (
@@ -35,11 +36,11 @@ function onEditProfile(e) {
                     size={'default'}
                     />
                 </div>
-                <div className={styles.button}>
+                {userEmail && <div className={styles.button}>
                     <Button type='primary' size='medium'>
                     Восстановить
                     </Button>
-                </div>
+                </div>}
             </form>
             <div className={styles.box}>
             <p className={styles.caption}>

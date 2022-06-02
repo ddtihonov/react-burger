@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom'
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Register.module.css';
 import {
@@ -9,27 +9,28 @@ import {
     Input,
     Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import { register } from '../../utils/auth';
+import {onRegister} from '../../services/actions/register';
 
 export default function Register () {
 
-    const state = useSelector(state => state);
-    console.log(state)    
-
-const location = useLocation();
 const navigate = useNavigate();
-const dispatch = useDispatch();    
+const dispatch = useDispatch(); 
     
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [name, setName] = useState('');
-const [loggegIn, setLoggedIn] = useState(false)
-const [err, setErr] = useState('')
+
+const loggedIn = useSelector(state => state.authData.loggedIn);
 
 useEffect(() => {
+    if(loggedIn) {
+        navigate('/login')
+        setEmail('')
+        setPassword('')
+        setName('')
+    }
 
-}, []);
+}, [loggedIn, navigate]);
 
 const handleChangeEmail = useCallback((e) =>{
     setEmail(e.target.value);
@@ -45,23 +46,8 @@ const handleChangeName = useCallback((e) => {
 
 const signUp = useCallback((e) => {
     e.preventDefault();
-    handleRegister( name, email, password )
-}, [name, email, password ] );
-
-/*function handleRegister({ name, email, password }) {
-    register({ name, email, password })
-        .then((userData) => {
-            if (userData) {
-                console.log(userData)
-            }
-    
-            })
-        .catch((err) => setErr(err))
-}*/
-
-function handleRegister({name, email, password }) {
-    dispatch(register({email, password, name}));
-}
+    dispatch(onRegister({email, password, name}));
+}, [name, email, password, dispatch] );
 
     return (
         <section className={styles.main}>
