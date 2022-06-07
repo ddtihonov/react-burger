@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Profile.module.css';
+import {onGetUserInfo} from '../../services/actions/userInfo';
+import {onRefreshToken} from '../../services/actions/refreshToken';
 import {
     EmailInput,
     PasswordInput,
@@ -18,11 +20,20 @@ const location = useLocation();
 const navigate = useNavigate();
 const dispatch = useDispatch(); 
 
-const {name, email} = useSelector((store) => store.authData);
+const {name, email, accessToken} = useSelector((store) => store.authData);
     
 const [userEmail, setUserEmail] = useState(email);
 const [userPassword, setUserPassword] = useState('');
 const [userName, setUserName] = useState(name);
+
+useEffect(() => {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (accessToken) {
+        dispatch(onGetUserInfo(accessToken));
+    } else {
+        dispatch(onRefreshToken(refreshToken));
+    }
+}, [accessToken, dispatch]);
 
 const handleChangeEmail = useCallback((e) =>{
     setUserEmail(e.target.value);

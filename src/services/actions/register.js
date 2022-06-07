@@ -17,16 +17,10 @@ export function onRegister({name, email, password }) {
                 dispatch({
                     type: GET_REGISTER_SUCCESS,
                     payload: {
-                        data: userData,
+                        userData: userData,
                     }, 
                 });
-                localStorage.setItem('userName', userData.user.name);
-                localStorage.setItem('userEmail', userData.user.email);
-                localStorage.setItem('accessToken',
-                    userData.accessToken.split('Bearer ')[1]);
                 localStorage.setItem('refreshToken', userData.refreshToken);
-
-            
         }) 
         .catch(() => {
             dispatch({ type: GET_REGISTER_ERROR });

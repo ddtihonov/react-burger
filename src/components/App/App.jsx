@@ -33,7 +33,6 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const state = useSelector(state => state);
-console.log(state)
 
   useEffect(() => {
    

@@ -1,6 +1,7 @@
 
     
     export const register = ({name, email, password}) => {
+        console.log('привет')
         return fetch('https://norma.nomoreparties.space/api/auth/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -26,7 +27,32 @@
             .then((res) => checkError(res));
     }
 
-    export const deleteAuth = () =>{
+
+    export const getUserInfo = (token) => {
+        return fetch('https://norma.nomoreparties.space/api/auth/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+        })
+            .then((res) => checkError(res));
+    }
+
+    export const refreshingToken = (token) => {
+        console.log(token)
+        return fetch('https://norma.nomoreparties.space/api/auth/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((res) => checkError(res));
+    }
+
+
+//////////////
+   /* export const deleteAuth = () =>{
         return fetch('https://api.ddtihonov.students.nomoredomains.work/signout', {
             credentials: 'include',
             method: 'DELETE',
@@ -36,15 +62,6 @@
             .then((res) => checkError(res));
     }
     
-
-    export const getUserInfo = () => {
-        return fetch('https://api.ddtihonov.students.nomoredomains.work/users/me', {
-            credentials: 'include',
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'},
-        })
-            .then((res) => checkError(res));
-    }
 
     export const setUserInfo = ({ name, email }) => {
         return fetch('https://api.ddtihonov.students.nomoredomains.work/users/me', {
@@ -97,7 +114,7 @@
             headers: {'Content-Type': 'application/json'},
         })
             .then((res) => checkError(res));
-    };
+    };*/
 
     const checkError = (res) =>{
         if (res.ok) {
