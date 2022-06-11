@@ -1,7 +1,6 @@
 
     
     export const register = ({name, email, password}) => {
-        console.log('привет')
         return fetch('https://norma.nomoreparties.space/api/auth/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -14,10 +13,25 @@
         .then((res) => checkError(res));
     };
 
+    export const setUserInfo = ({name, email, password, token}) => {
+        return fetch('https://norma.nomoreparties.space/api/auth/user', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json',
+                        Authorization: token,
+                },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password
+            })
+        })
+            .then((res) => checkError(res));
+    }
+
     export const authorize = ({ email, password }) => {
         return fetch('https://norma.nomoreparties.space/api/auth/login', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({
                 email: email,
                 password: password
@@ -25,7 +39,7 @@
             })
 
             .then((res) => checkError(res));
-    }
+    };
 
 
     export const getUserInfo = (token) => {
@@ -37,46 +51,34 @@
             },
         })
             .then((res) => checkError(res));
-    }
+    };
 
     export const refreshingToken = (token) => {
-        console.log(token)
         return fetch('https://norma.nomoreparties.space/api/auth/token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                token: token,
+            }),
         })
             .then((res) => checkError(res));
     }
 
-
-//////////////
-   /* export const deleteAuth = () =>{
-        return fetch('https://api.ddtihonov.students.nomoredomains.work/signout', {
-            credentials: 'include',
-            method: 'DELETE',
+    export const deleteAuth = (token) =>{
+        return fetch('https://norma.nomoreparties.space/api/auth/logout', {
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                token: token,
+            }),
         })
-
             .then((res) => checkError(res));
     }
     
 
-    export const setUserInfo = ({ name, email }) => {
-        return fetch('https://api.ddtihonov.students.nomoredomains.work/users/me', {
-            credentials: 'include',
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: name,
-                email: email,
-            })
-        })
-            .then((res) => checkError(res));
-    }
-
-    export const saveFilm = (movie) => {
+    /*export const saveFilm = (movie) => {
         return fetch('https://api.ddtihonov.students.nomoredomains.work/movies', {
             method: "POST",
             credentials: "include",

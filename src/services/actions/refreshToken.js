@@ -16,6 +16,7 @@ export function onRefreshToken(refreshToken) {
                 data: data,
             });
             localStorage.setItem('refreshToken', data.refreshToken);
+            localStorage.setItem('accessToken', data.accessToken);
             } else {
             dispatch({ type: GET_REFRESH_TOKEN_ERROR });
             }

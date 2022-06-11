@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useNavigate} from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
 import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
@@ -14,12 +14,17 @@ import {
   Main, 
   Profile, 
   ForgotPassword,
-  ResetPassword
+  ResetPassword,
+  Ingredient,
 } from '../../pages';
 import {
   DELETE_ORDER_NUMBER, 
   DELETE_SELECTED_INGREDIENT, 
-  CLEAR_INGREDIENT_ORDER} from '../../services/actions/actions';
+  CLEAR_INGREDIENT_ORDER,
+  INGREDIENT_WINDOW_CLOSE,
+} from '../../services/actions/actions';
+import {onGetUserInfo} from '../../services/actions/userInfo';
+import {onRefreshToken} from '../../services/actions/refreshToken';
 
 export default function App() {
 
@@ -29,14 +34,22 @@ export default function App() {
 
   const orderNumber = useSelector(state => state.orderState.orderNumber);
   const ingredient = useSelector(state => state.ingredientState.selectedIngredient);
-
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const state = useSelector(state => state);
-
+  const loggedIn = useSelector(state => state.authData.loggedIn);
+  const ingredientWindowOpen = useSelector(state => state.ingredientState.ingredientWindowOpen);
+  //const state = useSelector(state => state);
+  //console.log(state)
   useEffect(() => {
    
 }, [])
+
+useEffect(() => {
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (refreshToken) {
+      dispatch(onRefreshToken(refreshToken));
+      dispatch(onGetUserInfo(accessToken));
+  }
+}, [dispatch, navigate]);
 
 const handleOrderClose = useCallback(() => {
   dispatch({
@@ -47,10 +60,15 @@ const handleOrderClose = useCallback(() => {
 }, [dispatch]);
 
 const handleIngredientClose = useCallback(() => {
+  navigate('/')
   dispatch({
     type: DELETE_SELECTED_INGREDIENT,
   });
-}, [dispatch]);
+  dispatch({
+    type: INGREDIENT_WINDOW_CLOSE,
+  });
+
+}, [dispatch, navigate]);
 
 
   return (
@@ -65,21 +83,28 @@ const handleIngredientClose = useCallback(() => {
               }/>
         <Route  path='/login'  element={
                   <Login/>
-              } />          
+              } />
+        {!loggedIn &&<Route  path='/register'  element={
+                  <Register/>
+              } />}                
         <Route  path='/profile'  element={
               <ProtectedRoute loggedIn={loggedIn}>
                   <Profile/>
               </ProtectedRoute>       
-              } /> 
-        <Route  path='/register'  element={
-                  <Register/>
               } /> 
         <Route  path='/forgot-password'  element={
                   <ForgotPassword/>
               } />
         <Route  path='/reset-password'  element={
                   <ResetPassword/>
-              } />                              
+              } />
+        <Route  path='/ingredients/:id'  element={
+                <Ingredient/>
+            } />   
+        <Route  path='/ingredients/:id'  element={
+                
+                  <Ingredient/>
+              } />                                         
         </Routes>
         
       {orderNumber && 
@@ -95,6 +120,8 @@ const handleIngredientClose = useCallback(() => {
       <IngredientDetails/>
     </Modal>
       }
+
+      {ingredientWindowOpen}
     </div>
   );
 };

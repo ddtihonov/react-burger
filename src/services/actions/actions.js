@@ -21,6 +21,10 @@ export const CLEAR_INGREDIENT_ORDER = 'CLEAR_INGREDIENT_ORDER'
 export const DELETE_BURGER_INGREDIENT = 'DELETE_BURGER_INGREDIENT'
 export const MOVE_CONSTRUCTOR_INGREDIENTS = 'MOVE_CONSTRUCTOR_INGREDIENTS'
 
+//тип страницы ингредиента
+export const INGREDIENT_WINDOW_OPEN = 'INGREDIENT_WINDOW'
+export const INGREDIENT_WINDOW_CLOSE = 'INGREDIENT_WINDOW_CLOSE'
+
 export function getIngredients() {
     return (dispatch) => {
         dispatch({

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Profile.module.css';
-import {onGetUserInfo} from '../../services/actions/userInfo';
-import {onRefreshToken} from '../../services/actions/refreshToken';
+import {onEditProfile} from '../../services/actions/updateUserInfo';
+import {onSignOut} from '../../services/actions/singnOut';
 import {
     EmailInput,
     PasswordInput,
@@ -20,20 +20,20 @@ const location = useLocation();
 const navigate = useNavigate();
 const dispatch = useDispatch(); 
 
-const {name, email, accessToken} = useSelector((store) => store.authData);
+const {name, email} = useSelector((store) => store.authData);
     
 const [userEmail, setUserEmail] = useState(email);
 const [userPassword, setUserPassword] = useState('');
 const [userName, setUserName] = useState(name);
+const [isChange, setIsChange] = useState(false);
 
 useEffect(() => {
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (accessToken) {
-        dispatch(onGetUserInfo(accessToken));
-    } else {
-        dispatch(onRefreshToken(refreshToken));
-    }
-}, [accessToken, dispatch]);
+        if (!(userEmail === email && userPassword === '' && userName === name)) {
+            setIsChange(true);
+        } else {
+            setIsChange(false);
+        }
+}, [userEmail, userPassword, userName, email, name]);
 
 const handleChangeEmail = useCallback((e) =>{
     setUserEmail(e.target.value);
@@ -47,10 +47,24 @@ const handleChangeName = useCallback((e) => {
     setUserName(e.target.value);
 }, []);
 
-function onEditProfile(e) {
+const onReset = useCallback(() => {
+    setUserEmail(email)
+    setUserName(name)
+    setUserPassword('')
+}, [email, name]);
 
-};
+const onEditProfile = useCallback((e) =>{
+    e.preventDefault();
+    const accessToken = localStorage.getItem('accessToken');
+    dispatch(onEditProfile({accessToken, userEmail, userPassword, userName }));
+}, [dispatch, userEmail, userPassword, userName]);
 
+const signOut = useCallback(() =>{
+    const refreshToken = localStorage.getItem('refreshToken');
+    dispatch(onSignOut(refreshToken));
+}, [dispatch]);
+
+// смена цвета ссылки для 6 react-router в 5 работает activСlassName
 const setActive =({isActive}) => isActive ? styles.link_active : styles.link
     
         return(
@@ -64,10 +78,11 @@ const setActive =({isActive}) => isActive ? styles.link_active : styles.link
                 to='/profile' 
                 className={styles.link} 
                 >История заказов</NavLink>
-                <NavLink 
-                to='/profile' 
-                className={styles.link} 
-                >Выход</NavLink>
+                <button
+                    type="button" 
+                    onClick={signOut} 
+                    className={styles.button} 
+                >Выход</button>
                 <p className={styles.text}>
                 В этом разделе вы можете изменить свои персональные данные
                 </p>
@@ -96,6 +111,23 @@ const setActive =({isActive}) => isActive ? styles.link_active : styles.link
                     size={'default'}
                     />
                 </div>
+                    {isChange && (
+                    <div className={styles.box_button}>
+                        <Button
+                            onClick={onReset}
+                            type='primary'
+                            size='medium'
+                        >
+                            Отмена
+                        </Button>
+                        <Button 
+                            type='primary' 
+                            size='medium'
+                            >
+                                Сохранить
+                        </Button>
+                    </div>
+                )}
                 </form>
         </section>
     )

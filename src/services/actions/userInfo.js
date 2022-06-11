@@ -13,12 +13,12 @@ export function onGetUserInfo(accessToken) {
         getUserInfo(accessToken)
         .then((userData) => {
             if (userData && userData.success) {
-                console.log(userData)
             dispatch({
                 type: GET_USER_INFO_SUCCESS,
+                payload: {
                 userData: userData,
+                }, 
             });
-            localStorage.setItem('refreshToken', userData.refreshToken);
             }  else {
             dispatch({ type: GET_USER_INFO_ERROR });
             }

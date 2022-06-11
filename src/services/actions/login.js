@@ -21,6 +21,7 @@ export function onLogin({email, password }) {
                     }, 
                 });
                 localStorage.setItem('refreshToken', userData.refreshToken);
+                localStorage.setItem('accessToken', userData.accessToken);
             } else {
                 dispatch({ type: GET_LOGIN_ERROR });
                 }

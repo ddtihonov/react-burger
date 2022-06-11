@@ -26,6 +26,23 @@
     align-items: center;
 }
 
+.button{
+    font-family: "JetBrainsMono", "Arial ", sans-serif;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+    color: #8585AD;
+    text-decoration: none;
+    cursor: pointer;
+    width: 320px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
 .link_active{
     font-family: "JetBrainsMono", "Arial ", sans-serif;
     font-size: 24px;
@@ -66,6 +83,7 @@
 .input {
     width: 100%;
     margin-bottom: 24px;
+    color: #8585AD;
 }
 
 .input > div{
@@ -78,4 +96,16 @@
 
 .input:last-child{
     margin: 0;
+}
+
+.box_button{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.box_button > button:first-child{
+    margin-right: 20px;
 }

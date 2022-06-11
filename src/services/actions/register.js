@@ -20,6 +20,7 @@ export function onRegister({name, email, password }) {
                         userData: userData,
                     }, 
                 });
+                localStorage.setItem('accessToken', userData.accessToken);
                 localStorage.setItem('refreshToken', userData.refreshToken);
         }) 
         .catch(() => {

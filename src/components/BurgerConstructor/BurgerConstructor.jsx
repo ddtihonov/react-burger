@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {getOrderNumber} from '../../services/actions/actions'
-import burger_constructor from './BurgerConstructor.module.css';
+import styles from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,11 +11,15 @@ import { v4 as uuidv4 } from 'uuid'
 
 
 export default function BurgerConstructor() {
+
+        const navigate = useNavigate();
+
         // получаем из хранилища массив ингредиентов
         const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
       
         // получаем булку
         const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
+        const loggedIn = useSelector(state => state.authData.loggedIn);
         const dispatch = useDispatch();
 
         //ловим перетаскиваемый элемент и сохраняем в хранилище
@@ -31,8 +36,8 @@ export default function BurgerConstructor() {
         });
 
         //подсветка контейнера при перетаскивании
-        const style = `${burger_constructor.border} ${burger_constructor.hover}`
-        const borderColor = isHover ? style : burger_constructor.border
+        const style = `${styles.border} ${styles.hover}`
+        const borderColor = isHover ? style : styles.border
 
         // расчет стоимости заказа
         const orderAmount = useMemo(() =>{
@@ -47,29 +52,34 @@ export default function BurgerConstructor() {
 
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
-          const iDingredients = ingredientsConstructorList.map(item => item._id).concat([bun._id]);
-          dispatch(getOrderNumber(iDingredients));
-        }, [ingredientsConstructorList, bun, dispatch]);
+          if (loggedIn === true) {
+            const iDingredients = ingredientsConstructorList.map(item => item._id).concat([bun._id]);
+            dispatch(getOrderNumber(iDingredients));
+          } else {
+              navigate('/login')
+          }
+          
+        }, [ingredientsConstructorList, bun, dispatch, loggedIn, navigate]);
 
     return (
-      <section className={burger_constructor.container}>
-        <div className={burger_constructor.list} ref={dropTarget}>
+      <section className={styles.container}>
+        <div className={styles.list} ref={dropTarget}>
           { bun === null
           ? (
               <div className={borderColor}>
-                <h2 className={burger_constructor.title}>ПРОГОЛОДАЛИСЬ?</h2>
-                <p className={burger_constructor.text}>Выберите вкусную булку!</p>
+                <h2 className={styles.title}>ПРОГОЛОДАЛИСЬ?</h2>
+                <p className={styles.text}>Выберите вкусную булку!</p>
               </div>
           )
           : (bun && <ConstructorList/>)
           }
         </div>
-        {(bun !== null) && (<div className={burger_constructor.box}>
-          <p className={burger_constructor.price}>{orderAmount}</p>
-          <div className={burger_constructor.item}>
+        {(bun !== null) && (<div className={styles.box}>
+          <p className={styles.price}>{orderAmount}</p>
+          <div className={styles.item}>
             <CurrencyIcon type="primary"/>
           </div>
-          <div className={burger_constructor.cell}>
+          <div className={styles.cell}>
             <Button size='large' onClick={handleOrder}>Оформить заказ</Button>
           </div>
         </div>)}

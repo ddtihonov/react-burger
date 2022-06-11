@@ -22,15 +22,25 @@ import {
     GET_REFRESH_TOKEN_ERROR,
 } from '../actions/refreshToken';
 
+import {
+    EDITPROFILE_REQUEST,
+    EDITPROFILE_SUCCESS,
+    EDITPROFILE_ERROR,
+} from '../actions/updateUserInfo';
+
+import {
+    SIGNOUT_REQUEST,
+    SIGNOUT_SUCCESS,
+    SIGNOUT_ERROR,
+} from "../actions/singnOut";
+
+
 
 
 const initialState = {
     email: '',
     name: '',
-    accessToken: '',
-    refreshToken: '',
     loggedIn: false,
-    signOutSuccess: false,
     //регистрация
     registerRequest: false,
     regiterError: false,
@@ -48,6 +58,17 @@ const initialState = {
     refreshTokenRequest: false,
     refreshTokenError: false,
     refreshTokenSuccess: false,
+
+    //обновить данные пользователя
+    editProfileRequest: false,
+    editProfileError: false,
+    editProfileSuccess: false,
+
+    //выход из аккаунта
+    signOutSuccess: false,
+    signOutRequest: false,
+    signOutError: false,
+    
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -68,10 +89,7 @@ export const authReducer = (state = initialState, action) => {
                 loggedIn: true,
                 email: action.payload.userData.user.email,
                 name: action.payload.userData.user.name,
-                accessToken: action.payload.userData.accessToken,
-                refreshToken: action.payload.userData.refreshToken,
                 registerSuccess: true,
-                signOutSuccess: false,
             };
         }
         case  GET_REGISTER_ERROR: {
@@ -95,12 +113,9 @@ export const authReducer = (state = initialState, action) => {
                 loginRequest: false,
                 loginError: false,
                 loginSuccess: true,
-                signOutSuccess: false,
                 loggedIn: true,
                 email: action.payload.userData.user.email,
                 name: action.payload.userData.user.name,
-                accessToken: action.payload.userData.accessToken,
-                refreshToken: action.payload.userData.refreshToken,
             };
         }
         case  GET_LOGIN_ERROR: {
@@ -108,6 +123,33 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 loginRequest: false,
                 loginError: true,
+            };
+        }
+
+        //выход
+        case SIGNOUT_REQUEST: {
+            return {
+                ...state,
+                signOutError: false,
+                signOutRequest: true,
+            };
+        }
+        case  SIGNOUT_SUCCESS: {
+            return {
+                ...state,
+                signOutSuccess: true,
+                signOutRequest: false,
+                signOutError: false,
+                loggedIn: false,
+                email: '',
+                name: '',
+            };
+        }
+        case  SIGNOUT_ERROR: {
+            return {
+                ...state,
+                signOutRequest: false,
+                signOutError: true,
             };
         }
 
@@ -154,8 +196,6 @@ export const authReducer = (state = initialState, action) => {
                 refreshTokenRequest: false,
                 refreshTokenError: false,
                 refreshTokenSuccess: true,
-                accessToken: action.payload.userData.accessToken,
-                refreshToken: action.payload.userData.refreshToken,
             };
         }
         case   GET_REFRESH_TOKEN_ERROR: {
@@ -163,6 +203,33 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 refreshTokenRequest: false,
                 refreshTokenError: true,
+            };
+        }
+
+        //обновить данные пользователя
+        case   EDITPROFILE_REQUEST: {
+            return {
+                ...state,
+                editProfileRequest: true,
+                editProfileError: false,
+            };
+        }
+        
+        case   EDITPROFILE_SUCCESS: {
+            return {
+                ...state,
+                editProfileRequest: false,
+                editProfileError: false,
+                editProfileSuccess: true,
+                email: action.payload.userData.user.email,
+                name: action.payload.userData.user.name,
+            };
+        }
+        case   EDITPROFILE_ERROR: {
+            return {
+                ...state,
+                editProfileRequest: false,
+                editProfileError: true,
             };
         }
         default:
