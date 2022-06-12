@@ -19,9 +19,7 @@ export function onGetUserInfo(accessToken) {
                 userData: userData,
                 }, 
             });
-            }  else {
-            dispatch({ type: GET_USER_INFO_ERROR });
-            }
+            }  
         })
             .catch(() => {
             dispatch({ type: GET_USER_INFO_ERROR });

@@ -1,4 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router';
+import { useDispatch} from 'react-redux';
+import {onResetPassword} from '../../services/actions/resetPassword'
 import { Link } from 'react-router-dom';
 import styles from './ResetPassword.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -6,20 +9,25 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 
 export default function ResetPassword () {
 
-    const [userPassword, setUserPassword] = useState('');
-    const [code, setCode] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch(); 
+
+    const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
 
     const handleChangePassword = useCallback((e) =>{
-        setUserPassword(e.target.value);
+        setPassword(e.target.value);
     }, []);
 
     const handleChangeCode = useCallback((e) =>{
-        setCode(e.target.value);
+        setToken(e.target.value);
     }, []);
 
     const onPasswordChange = useCallback((e) =>{
         e.preventDefault();
-    }, [])
+        dispatch(onResetPassword({password, token}));
+        navigate('/login')
+    }, [navigate, dispatch, password, token])
         
             return(
             <section className={styles.main}>
@@ -28,7 +36,7 @@ export default function ResetPassword () {
                     <div className={styles.input}>
                         <Input
                         onChange={handleChangePassword} 
-                        value={userPassword} 
+                        value={password} 
                         placeholder={'Введите новый пароль'}
                         icon={'EditIcon'}
                         size={'default'}
@@ -36,14 +44,14 @@ export default function ResetPassword () {
                     </div>
                     <div className={styles.input}>
                         <Input
-                        value={code}
+                        value={token}
                         onChange={handleChangeCode}
                         placeholder={'Введите код из письма'}
                         icon={'EditIcon'}
                         size={'default'}
                         />
                     </div>
-                    {code && userPassword && <div className={styles.button}>
+                    {token && password && <div className={styles.button}>
                     <Button type='primary' size='medium'>
                     Сохранить
                     </Button>

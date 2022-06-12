@@ -10,16 +10,11 @@ export function onRefreshToken(refreshToken) {
         });
         refreshingToken(refreshToken)
         .then((data) => {
-            if (data && data.success) {
             dispatch({
                 type: GET_REFRESH_TOKEN_SUCCESS,
-                data: data,
             });
             localStorage.setItem('refreshToken', data.refreshToken);
             localStorage.setItem('accessToken', data.accessToken);
-            } else {
-            dispatch({ type: GET_REFRESH_TOKEN_ERROR });
-            }
         })
         .catch(() => {
             dispatch({ type: GET_REFRESH_TOKEN_ERROR });

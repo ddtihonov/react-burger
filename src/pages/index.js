@@ -6,5 +6,6 @@ import Profile from "./Profile/Profile";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
 import ResetPassword from "./ResetPassvord/ResetPassword";
 import Ingredient from "./Ingredient/Ingredient";
+import Orders from "./Orders/Orders";
 
-export { Login, Register, PageNotFound, Main, Profile, ForgotPassword, ResetPassword, Ingredient};
+export { Login, Register, PageNotFound, Main, Profile, ForgotPassword, ResetPassword, Ingredient, Orders};

@@ -9,15 +9,10 @@ export function onSignOut(token) {
         type: SIGNOUT_REQUEST,
         });
         deleteAuth(token)
-        .then((data) => {
-            if (data && data.success) {
+        .then(() => {
             dispatch({
                 type: SIGNOUT_SUCCESS,
-                data: data,
             });
-            } else {
-            dispatch({ type: SIGNOUT_ERROR });
-            }
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('accessToken');
         })

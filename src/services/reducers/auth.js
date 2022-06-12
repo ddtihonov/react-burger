@@ -32,7 +32,19 @@ import {
     SIGNOUT_REQUEST,
     SIGNOUT_SUCCESS,
     SIGNOUT_ERROR,
-} from "../actions/singnOut";
+} from '../actions/singnOut';
+
+import {
+    RECOVERY_PASSWORD_REQUEST,
+    RECOVERY_PASSWORD_SUCCESS,
+    RECOVERY_PASSWORD_ERROR,
+} from '../actions/recoveryPassword';
+
+import {
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_ERROR
+} from '../actions/resetPassword'
 
 
 
@@ -68,6 +80,16 @@ const initialState = {
     signOutSuccess: false,
     signOutRequest: false,
     signOutError: false,
+
+    //восстановление пароля
+    recoveryPasswordSuccess: false,
+    recoveryPasswordRequest: false,
+    recoveryPasswordError: false,
+
+    //новый пароль
+    resetPasswordSuccess: false,
+    resetPasswordRequest: false,
+    resetPasswordError: false,
     
 }
 
@@ -206,6 +228,57 @@ export const authReducer = (state = initialState, action) => {
             };
         }
 
+        //восстановление пароля
+        case   RECOVERY_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                recoveryPasswordRequest: true,
+                recoveryPasswordError: false,
+            };
+        }
+        
+        case   RECOVERY_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                recoveryPasswordSuccess: true,
+                recoveryPasswordRequest: false,
+                recoveryPasswordError: false,
+            };
+        }
+        case   RECOVERY_PASSWORD_ERROR: {
+            return {
+                ...state,
+                recoveryPasswordRequest: false,
+                recoveryPasswordError: true,
+            };
+        }
+
+        //новый пароль
+        case   RESET_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                resetPasswordRequest: true,
+                resetPasswordError: false,
+            };
+        }
+        
+        case   RESET_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                resetPasswordSuccess: true,
+                resetPasswordRequest: false,
+                resetPasswordError: false,
+            };
+        }
+        case   RESET_PASSWORD_ERROR: {
+            return {
+                ...state,
+                resetPasswordRequest: false,
+                resetPasswordError: true,
+            };
+        }
+
+
         //обновить данные пользователя
         case   EDITPROFILE_REQUEST: {
             return {
@@ -232,6 +305,8 @@ export const authReducer = (state = initialState, action) => {
                 editProfileError: true,
             };
         }
+
+
         default:
             return state;
         }

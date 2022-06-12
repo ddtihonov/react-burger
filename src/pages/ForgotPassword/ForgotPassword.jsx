@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { useDispatch} from 'react-redux';
 import styles from './ForgotPassword.module.css';
+import {onRecoveryPassword} from '../../services/actions/recoveryPassword'
 import {
     EmailInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export default function ForgotPassword () {
 
-const location = useLocation();
 const navigate = useNavigate();
 const dispatch = useDispatch();    
     
@@ -20,14 +20,15 @@ const handleChangeEmail = useCallback((e) =>{
 }, []);
 
 
-function onEditProfile(e) {
+const passwordRecovery = useCallback((e) => {
     e.preventDefault()
+    dispatch(onRecoveryPassword(userEmail));
     navigate('/reset-password')
-};
+}, [dispatch, navigate, userEmail]);
 
     return (
         <section className={styles.main}>
-            <form className={styles.form} onSubmit={onEditProfile}>
+            <form className={styles.form} onSubmit={passwordRecovery}>
             <h2 className={styles.title}>Восстановление пароля</h2>
                 <div className={styles.input}>
                     <EmailInput 

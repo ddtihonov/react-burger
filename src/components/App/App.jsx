@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate} from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
@@ -7,6 +7,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Preloader from '../Preloader/Preolader';
 import { 
   Login, 
   Register, 
@@ -16,6 +17,7 @@ import {
   ForgotPassword,
   ResetPassword,
   Ingredient,
+  Orders,
 } from '../../pages';
 import {
   DELETE_ORDER_NUMBER, 
@@ -37,9 +39,10 @@ export default function App() {
   const loggedIn = useSelector(state => state.authData.loggedIn);
   const ingredientWindowOpen = useSelector(state => state.ingredientState.ingredientWindowOpen);
   //const state = useSelector(state => state);
-  //console.log(state)
+
+  const [isSubmitting, setIsSubmitting] = useState(true);
   useEffect(() => {
-   
+
 }, [])
 
 useEffect(() => {
@@ -74,38 +77,47 @@ const handleIngredientClose = useCallback(() => {
   return (
     <div className={app.page}>
       <AppHeader/>
-      <Routes>
-        <Route  path='/'  element={
-                  <Main/>
-              } />   
-        <Route path='*' element={
-                  <PageNotFound />
-              }/>
-        <Route  path='/login'  element={
-                  <Login/>
-              } />
-        {!loggedIn &&<Route  path='/register'  element={
-                  <Register/>
-              } />}                
-        <Route  path='/profile'  element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                  <Profile/>
-              </ProtectedRoute>       
-              } /> 
-        <Route  path='/forgot-password'  element={
-                  <ForgotPassword/>
-              } />
-        <Route  path='/reset-password'  element={
-                  <ResetPassword/>
-              } />
-        <Route  path='/ingredients/:id'  element={
-                <Ingredient/>
-            } />   
-        <Route  path='/ingredients/:id'  element={
-                
+          <Routes>
+          {!isSubmitting ? 
+        (<Preloader /> ) : 
+        (
+          <Route  path='/'  element={
+                    <Main/>
+                } />
+        )}   
+          <Route path='*' element={
+                    <PageNotFound />
+                }/>
+          <Route  path='/login'  element={
+                    <Login/>
+                } />
+          {!loggedIn &&<Route  path='/register'  element={
+                    <Register/>
+                } />}                
+          <Route  path='/profile'  element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                    <Profile/>
+                </ProtectedRoute>       
+                } />
+          <Route  path='/profile/orders'  element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                    <Orders/>
+                </ProtectedRoute>       
+                } />       
+          <Route  path='/forgot-password'  element={
+                    <ForgotPassword/>
+                } />
+          <Route  path='/reset-password'  element={
+                    <ResetPassword/>
+                } />
+          <Route  path='/ingredients/:id'  element={
                   <Ingredient/>
-              } />                                         
-        </Routes>
+              } />   
+          <Route  path='/ingredients/:id'  element={
+                  
+                    <Ingredient/>
+                } />                                         
+          </Routes>
         
       {orderNumber && 
       <Modal onClose={handleOrderClose}>

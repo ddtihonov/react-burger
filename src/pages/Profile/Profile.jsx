@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Profile.module.css';
+import ProfileMenu from '../../components/ProfileMnu/ProfileMenu';
 import {onEditProfile} from '../../services/actions/updateUserInfo';
-import {onSignOut} from '../../services/actions/singnOut';
 import {
     EmailInput,
     PasswordInput,
@@ -16,8 +14,6 @@ import {
 
 export default function Profile () {
 
-const location = useLocation();
-const navigate = useNavigate();
 const dispatch = useDispatch(); 
 
 const {name, email} = useSelector((store) => store.authData);
@@ -53,41 +49,16 @@ const onReset = useCallback(() => {
     setUserPassword('')
 }, [email, name]);
 
-const onEditProfile = useCallback((e) =>{
+const editProfile = useCallback((e) => {
     e.preventDefault();
-    const accessToken = localStorage.getItem('accessToken');
-    dispatch(onEditProfile({accessToken, userEmail, userPassword, userName }));
+    const token = localStorage.getItem('accessToken');
+    dispatch(onEditProfile({token, userEmail, userPassword, userName }));
 }, [dispatch, userEmail, userPassword, userName]);
-
-const signOut = useCallback(() =>{
-    const refreshToken = localStorage.getItem('refreshToken');
-    dispatch(onSignOut(refreshToken));
-}, [dispatch]);
-
-// смена цвета ссылки для 6 react-router в 5 работает activСlassName
-const setActive =({isActive}) => isActive ? styles.link_active : styles.link
     
         return(
         <section className={styles.main}>
-            <div className={styles.container}>
-                <NavLink 
-                to='/profile' 
-                className={setActive} 
-                >Профиль</NavLink>
-                <NavLink 
-                to='/profile' 
-                className={styles.link} 
-                >История заказов</NavLink>
-                <button
-                    type="button" 
-                    onClick={signOut} 
-                    className={styles.button} 
-                >Выход</button>
-                <p className={styles.text}>
-                В этом разделе вы можете изменить свои персональные данные
-                </p>
-            </div>
-            <form className={styles.form} onSubmit={onEditProfile}>
+            <ProfileMenu/>
+            <form className={styles.form} onSubmit={editProfile}>
                 <div className={styles.input}>
                     <Input
                     value={userName}
@@ -113,13 +84,13 @@ const setActive =({isActive}) => isActive ? styles.link_active : styles.link
                 </div>
                     {isChange && (
                     <div className={styles.box_button}>
-                        <Button
+                        <button
                             onClick={onReset}
-                            type='primary'
-                            size='medium'
+                            type='button'
+                            className={styles.button_reset}
                         >
                             Отмена
-                        </Button>
+                        </button>
                         <Button 
                             type='primary' 
                             size='medium'

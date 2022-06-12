@@ -4,12 +4,12 @@ export const EDITPROFILE_REQUEST = 'EDITPROFILE_REQUEST';
 export const EDITPROFILE_SUCCESS = 'EDITPROFILE_SUCCESS';
 export const EDITPROFILE_ERROR = 'EDITPROFILE_ERROR';
 
-export function onEditProfile(email, name, password, token) {
+export function onEditProfile({userEmail, userPassword, userName, token}) {
     return function (dispatch) {
         dispatch({
         type: EDITPROFILE_REQUEST,
         });
-        setUserInfo(email, name, password, token)
+        setUserInfo({userEmail, userPassword, userName, token})
         .then((userDat) => {
             if (userDat && userDat.success) {
             dispatch({

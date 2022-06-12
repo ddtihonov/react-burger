@@ -13,16 +13,16 @@
         .then((res) => checkError(res));
     };
 
-    export const setUserInfo = ({name, email, password, token}) => {
+    export const setUserInfo = ({userEmail, userPassword, userName, token}) => {
         return fetch('https://norma.nomoreparties.space/api/auth/user', {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         Authorization: token,
                 },
             body: JSON.stringify({
-                name: name,
-                email: email,
-                password: password
+                name: userName,
+                email: userEmail,
+                password: userPassword
             })
         })
             .then((res) => checkError(res));
@@ -54,6 +54,7 @@
     };
 
     export const refreshingToken = (token) => {
+        console.log(token)
         return fetch('https://norma.nomoreparties.space/api/auth/token', {
             method: 'POST',
             headers: {
@@ -76,47 +77,30 @@
         })
             .then((res) => checkError(res));
     }
-    
 
-    /*export const saveFilm = (movie) => {
-        return fetch('https://api.ddtihonov.students.nomoredomains.work/movies', {
-            method: "POST",
-            credentials: "include",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-            country: movie.country,
-            director: movie.director,
-            duration: movie.duration,
-            year: movie.year,
-            description: movie.description,
-            image: `https://api.nomoreparties.co${movie.image.url}`,
-            trailer: movie.trailerLink,
-            thumbnail: movie.trailerLink,
-            movieId: movie.id,
-            nameRU: movie.nameRU,
-            nameEN: movie.nameEN,
+    export const passwordRecovery = (email) => {
+        return fetch('https://norma.nomoreparties.space/api/password-reset', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                email: email,
             }),
-        })
-            .then((res) => checkError(res));
+        }).then((res) => checkError(res));
     };
-    
-    export const getMyMovies = () =>{
-        return fetch('https://api.ddtihonov.students.nomoredomains.work/movies', {
-            credentials: 'include',
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'}
-        })
-            .then((res) => checkError(res));
-    }
-    
-    export const deleteFilm = (movieId) => {
-        return fetch(`https://api.ddtihonov.students.nomoredomains.work/movies/${movieId}`, {
-            method: "DELETE",
-            credentials: "include",
-            headers: {'Content-Type': 'application/json'},
-        })
-            .then((res) => checkError(res));
-    };*/
+
+    export const resetPassword = ({password, token}) => {
+        return fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                password: password, 
+                token: token, 
+            }),
+            }).then((res) => checkError(res));
+    };
 
     const checkError = (res) =>{
         if (res.ok) {
