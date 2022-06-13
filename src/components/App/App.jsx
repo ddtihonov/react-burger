@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes, useNavigate} from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation} from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
 import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
@@ -31,19 +31,14 @@ import {onRefreshToken} from '../../services/actions/refreshToken';
 export default function App() {
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+  const location = useLocation(); 
+  let background = location.state && location.state.background
 
   const orderNumber = useSelector(state => state.orderState.orderNumber);
-  const ingredient = useSelector(state => state.ingredientState.selectedIngredient);
   const loggedIn = useSelector(state => state.authData.loggedIn);
-  const ingredientWindowOpen = useSelector(state => state.ingredientState.ingredientWindowOpen);
+  const loading  = useSelector(state => state.authData.loading);
   //const state = useSelector(state => state);
-
-  const [isSubmitting, setIsSubmitting] = useState(true);
-  useEffect(() => {
-
-}, [])
 
 useEffect(() => {
   const accessToken = localStorage.getItem('accessToken');
@@ -78,45 +73,50 @@ const handleIngredientClose = useCallback(() => {
     <div className={app.page}>
       <AppHeader/>
           <Routes>
-          {!isSubmitting ? 
-        (<Preloader /> ) : 
-        (
-          <Route  path='/'  element={
-                    <Main/>
-                } />
-        )}   
-          <Route path='*' element={
-                    <PageNotFound />
-                }/>
-          <Route  path='/login'  element={
-                    <Login/>
-                } />
-          {!loggedIn &&<Route  path='/register'  element={
-                    <Register/>
-                } />}                
-          <Route  path='/profile'  element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                    <Profile/>
-                </ProtectedRoute>       
-                } />
-          <Route  path='/profile/orders'  element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                    <Orders/>
-                </ProtectedRoute>       
-                } />       
-          <Route  path='/forgot-password'  element={
-                    <ForgotPassword/>
-                } />
-          <Route  path='/reset-password'  element={
-                    <ResetPassword/>
-                } />
-          <Route  path='/ingredients/:id'  element={
-                  <Ingredient/>
-              } />   
-          <Route  path='/ingredients/:id'  element={
-                  
-                    <Ingredient/>
-                } />                                         
+            <Route  path='/'  element={
+                      <Main/>
+                  } />
+            <Route path='*' element={
+                      <PageNotFound />
+                  }/>
+            <Route  path='/login'  element={
+                      <Login/>
+                  } />
+            <Route  path='/register'  element={
+                      <Register/>
+                  } />               
+            <Route  path='/profile'  element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                      <Profile/>
+                  </ProtectedRoute>       
+                  } />
+            <Route  path='/profile/orders'  element={
+                  <ProtectedRoute loggedIn={loggedIn}>
+                      <Orders/>
+                  </ProtectedRoute>       
+                  } />       
+            <Route  path='/forgot-password'  element={
+                      <ForgotPassword/>
+                  } />
+            <Route  path='/reset-password'  element={
+                      <ResetPassword/>
+                  } />
+            
+            {background  ? (
+              <Route  path='/ingredients/:id'  element={
+                <Modal 
+                onClose={handleIngredientClose}
+                title="Детали ингредиента"
+                >
+                <IngredientDetails/>
+              </Modal>
+            } />
+            )  : (
+              <Route  path='/ingredients/:id'  element={
+                                  <Ingredient/>
+                              } />
+                          ) 
+            }                                         
           </Routes>
         
       {orderNumber && 
@@ -124,16 +124,9 @@ const handleIngredientClose = useCallback(() => {
       <OrderDetails/>
       </Modal>
       }
-      {ingredient && 
-      <Modal 
-      onClose={handleIngredientClose}
-      title="Детали ингредиента"
-      >
-      <IngredientDetails/>
-    </Modal>
+      {loading &&
+        <Preloader/>
       }
-
-      {ingredientWindowOpen}
     </div>
   );
 };

@@ -7,10 +7,11 @@
 }
 
 .title{
-    font-family:  "JetBrainsMono", "Arial ", sans-serif; 
+    font-family:  "JetBrainsMono", "Arial ", sans-serif;
+    width: 100%; 
     font-size: 36px;
     line-height: 40px;
     font-weight: 700;
-    margin: 40px auto auto 40px;
+    margin: 0;
     text-align: left;
 }

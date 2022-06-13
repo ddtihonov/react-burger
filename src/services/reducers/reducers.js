@@ -97,13 +97,13 @@ export const orderNumberReducer = (state = orderInitialState, action) => {
         }
 };
 
-// начальное состояние ingredients
+
 const selectedIngredientState = {
     selectedIngredient: null,
     ingredientWindowOpen: false
 };
 
-//редюсер загрузки ингредиентов
+
 export const selectedIngredientsReducer = (state = selectedIngredientState, action) => {
     switch(action.type) {
         case SELECT_INGREDIENT: {
@@ -119,7 +119,7 @@ export const selectedIngredientsReducer = (state = selectedIngredientState, acti
                 selectedIngredient: null,
             };
         }
-/////////
+
         case  INGREDIENT_WINDOW_OPEN: {
             return {
                 ...state,

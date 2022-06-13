@@ -1,4 +1,4 @@
-import api from '../../utils/IngredientsApi'
+import {getIngredients, useIngredients} from '../../utils/IngredientsApi'
 
 //тиры по запросу ингредиентов
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';// запрос получение ингредиентов
@@ -25,12 +25,12 @@ export const MOVE_CONSTRUCTOR_INGREDIENTS = 'MOVE_CONSTRUCTOR_INGREDIENTS'
 export const INGREDIENT_WINDOW_OPEN = 'INGREDIENT_WINDOW'
 export const INGREDIENT_WINDOW_CLOSE = 'INGREDIENT_WINDOW_CLOSE'
 
-export function getIngredients() {
+export function onGetIngredients() {
     return (dispatch) => {
         dispatch({
         type: GET_INGREDIENTS_REQUEST,
     });
-    api.getIngredients()
+    getIngredients()
     .then((res) => {
             dispatch({
             type: GET_INGREDIENTS_SUCCESS,
@@ -53,7 +53,7 @@ export function getOrderNumber(ingredientIds) {
         dispatch({
             type: GET_ORDER_NUMBER_REQUEST,
         });
-        api.useIngredients(ingredientIds)
+        useIngredients(ingredientIds)
         .then((res) => {
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,

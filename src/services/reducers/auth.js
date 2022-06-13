@@ -44,8 +44,13 @@ import {
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR
-} from '../actions/resetPassword'
+} from '../actions/resetPassword';
 
+import {
+    LOADING_START,
+    LOADING_FINISH,
+}
+from '../actions/loading'
 
 
 
@@ -53,6 +58,7 @@ const initialState = {
     email: '',
     name: '',
     loggedIn: false,
+    loading: false,
     //регистрация
     registerRequest: false,
     regiterError: false,
@@ -95,6 +101,19 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case LOADING_START: {
+            return {
+                ...state,
+                loading: true,
+            };
+        }
+        case  LOADING_FINISH: {
+            return {
+                ...state,
+                loading: false,
+            };
+        }
         //регистрация
         case GET_REGISTER_REQUEST: {
             return {

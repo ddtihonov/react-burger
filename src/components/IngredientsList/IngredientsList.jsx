@@ -2,7 +2,7 @@ import React, {forwardRef, useCallback} from 'react';
 import { useDispatch } from 'react-redux';
 import ingredients_list from './IngredientsList.module.css';
 import IngredientsCard from '../IngredientsCard/IngredientsCard';
-import { Link } from 'react-router-dom';
+import { Link, useLocation }  from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/tupes';
 import {
@@ -14,6 +14,7 @@ import {
 const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
 
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const windowOpen = useCallback(() =>{
         dispatch({
@@ -31,6 +32,7 @@ const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
                     onClick={windowOpen}
                     className={ingredients_list.link}
                     to={`/ingredients/${item._id}`}
+                    state={{ background: location.pathname }}
                     key={item._id}
                     >
                         

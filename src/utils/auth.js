@@ -31,7 +31,7 @@
     export const authorize = ({ email, password }) => {
         return fetch('https://norma.nomoreparties.space/api/auth/login', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json',},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 email: email,
                 password: password
@@ -54,7 +54,6 @@
     };
 
     export const refreshingToken = (token) => {
-        console.log(token)
         return fetch('https://norma.nomoreparties.space/api/auth/token', {
             method: 'POST',
             headers: {

@@ -3,7 +3,12 @@ import burger_ingredients from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {getIngredients} from '../../services/actions/actions'
+import {onGetIngredients} from '../../services/actions/actions';
+import {
+  LOADING_START,
+  LOADING_FINISH,
+}
+from '../../services/actions/loading';
 
 
 export default function BurgerIngredients() {
@@ -11,10 +16,22 @@ export default function BurgerIngredients() {
   const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
     const dispatch = useDispatch(); 
 
+    useEffect(() => {
+      if(ingredientsList.length === 0){
+        dispatch({
+          type: LOADING_START,
+        });
+      } else {
+        dispatch({
+          type: LOADING_FINISH,
+        });
+      }
+      }, [dispatch, ingredientsList]);  
 
     useEffect(() => {
-    dispatch(getIngredients());
+      dispatch(onGetIngredients());
     }, [dispatch]);
+
 
     const buns = ingredientsList.filter(item => item.type === 'bun');
     const sauce = ingredientsList.filter(item => item.type === 'sauce');

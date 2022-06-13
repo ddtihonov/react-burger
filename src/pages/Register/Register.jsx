@@ -24,7 +24,7 @@ const loggedIn = useSelector(state => state.authData.loggedIn);
 
 useEffect(() => {
     if(loggedIn) {
-        navigate('/login')
+        navigate('/profile')
         setEmail('')
         setPassword('')
         setName('')
