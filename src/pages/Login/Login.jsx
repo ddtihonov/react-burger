@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Login.module.css';
@@ -13,7 +13,8 @@ import {onLogin} from '../../services/actions/login';
 export default function Login () {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();    
+    const dispatch = useDispatch(); 
+    const location = useLocation()   
         
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,11 +23,11 @@ export default function Login () {
 
     useEffect(() => {
         if(loggedIn === true) {
-            navigate('/profile')
+            navigate(location.state?.from || '/')
             setEmail('')
             setPassword('')
         }
-    }, [loggedIn, navigate]);
+    }, [loggedIn, navigate, location]);
 
     const handleChangeEmail = useCallback((e) =>{
         setEmail(e.target.value);
@@ -40,6 +41,7 @@ export default function Login () {
         e.preventDefault();
         dispatch(onLogin({email, password}));
     }, [email, password, dispatch] );
+
 
     return (
         <section className={styles.main}>
