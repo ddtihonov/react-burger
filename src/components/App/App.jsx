@@ -39,8 +39,6 @@ export default function App() {
   const orderNumber = useSelector(state => state.orderState.orderNumber);
   const loggedIn = useSelector(state => state.authData.loggedIn);
   const loading  = useSelector(state => state.authData.loading);
-  const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
-  console.log(ingredientsConstructorList)
 
   useEffect(() => {
     dispatch(onGetIngredients());
@@ -65,6 +63,7 @@ const handleOrderClose = useCallback(() => {
 
 const handleIngredientClose = useCallback(() => {
   navigate('/')
+  localStorage.removeItem('ingredientItem');
   dispatch({
     type: DELETE_SELECTED_INGREDIENT,
   });
@@ -108,7 +107,7 @@ const handleIngredientClose = useCallback(() => {
                       <ResetPassword/>
                   } />
             
-            {background  ? (
+            {background  &&
               <Route  path='/ingredients/:id'  element={
                 <Modal 
                 onClose={handleIngredientClose}
@@ -116,13 +115,10 @@ const handleIngredientClose = useCallback(() => {
                 >
                 <IngredientDetails/>
               </Modal>
-            } />
-            )  : (
-              <Route  path='/ingredients/:id'  element={
-                                  <Ingredient/>
-                              } />
-                          ) 
-            }                                         
+            } />}
+            <Route  path='/ingredients/:id'  element={
+              <Ingredient/>
+            } />                                        
           </Routes>
         
       {orderNumber && 

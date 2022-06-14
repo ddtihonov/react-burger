@@ -9,7 +9,12 @@ export default function IngredientDetails() {
     const { state } = useLocation();
 
     const ingredientModal = useSelector(state => state.ingredientState.selectedIngredient);
-    console.log(ingredientModal)
+
+    if (ingredientModal){
+    localStorage.setItem('ingredient', JSON.stringify(ingredientModal))
+    }
+
+    const ingredientItem = JSON.parse(localStorage.getItem('ingredient'));
 
     const ingredients = useSelector(state => state.ingredientsState.ingredients);
     
@@ -25,24 +30,24 @@ export default function IngredientDetails() {
             <div className={ingredient_detals.box} >
                 {state ? (
                 <>
-                    <img className={ingredient_detals.image} src={ingredientModal.image} alt={ingredient.name}></img>
-                    <h3 className={ingredient_detals.subtitle}>{ingredientModal.name}</h3>
+                    <img className={ingredient_detals.image} src={ingredientItem.image} alt={ingredient.name}></img>
+                    <h3 className={ingredient_detals.subtitle}>{ingredientItem.name}</h3>
                     <ul className={ingredient_detals.list} >
                         <li className={ingredient_detals.item} >
                             <p className={ingredient_detals.text}>Калории,ккал</p>
-                            <p className={ingredient_detals.number}>{ingredientModal.calories}</p>
+                            <p className={ingredient_detals.number}>{ingredientItem.calories}</p>
                         </li>
                         <li className={ingredient_detals.item}>
                             <p className={ingredient_detals.text} >Белки, г</p>
-                            <p className={ingredient_detals.number}>{ingredientModal.proteins}</p>
+                            <p className={ingredient_detals.number}>{ingredientItem.proteins}</p>
                         </li>
                         <li className={ingredient_detals.item}>
                             <p className={ingredient_detals.text}>Жиры, г</p>
-                            <p className={ingredient_detals.number}>{ingredientModal.fat}</p>
+                            <p className={ingredient_detals.number}>{ingredientItem.fat}</p>
                         </li>
                         <li className={ingredient_detals.item}>
                             <p className={ingredient_detals.text}>Углеводы, г</p>
-                            <p className={ingredient_detals.number}>{ingredientModal.carbohydrates}</p>
+                            <p className={ingredient_detals.number}>{ingredientItem.carbohydrates}</p>
                         </li>
                     </ul>
                 </>
@@ -75,45 +80,3 @@ export default function IngredientDetails() {
             </div>
     );
 };
-
-/*<img className={ingredient_detals.image} src={ingredientModal.image} alt={ingredient.name}></img>
-                <h3 className={ingredient_detals.subtitle}>{ingredientModal.name}</h3>
-                <ul className={ingredient_detals.list} >
-                    <li className={ingredient_detals.item} >
-                        <p className={ingredient_detals.text}>Калории,ккал</p>
-                        <p className={ingredient_detals.number}>{ingredientModal.calories}</p>
-                    </li>
-                    <li className={ingredient_detals.item}>
-                        <p className={ingredient_detals.text} >Белки, г</p>
-                        <p className={ingredient_detals.number}>{ingredientModal.proteins}</p>
-                    </li>
-                    <li className={ingredient_detals.item}>
-                        <p className={ingredient_detals.text}>Жиры, г</p>
-                        <p className={ingredient_detals.number}>{ingredientModal.fat}</p>
-                    </li>
-                    <li className={ingredient_detals.item}>
-                        <p className={ingredient_detals.text}>Углеводы, г</p>
-                        <p className={ingredient_detals.number}>{ingredientModal.carbohydrates}</p>
-                    </li>
-                </ul>
-                ) : (
-                    <img className={ingredient_detals.image} src={ingredient.image} alt={ingredient.name}></img>
-                <h3 className={ingredient_detals.subtitle}>{ingredient.name}</h3>
-                <ul className={ingredient_detals.list} >
-                    <li className={ingredient_detals.item} >
-                        <p className={ingredient_detals.text}>Калории,ккал</p>
-                        <p className={ingredient_detals.number}>{ingredient.calories}</p>
-                    </li>
-                    <li className={ingredient_detals.item}>
-                        <p className={ingredient_detals.text} >Белки, г</p>
-                        <p className={ingredient_detals.number}>{ingredient.proteins}</p>
-                    </li>
-                    <li className={ingredient_detals.item}>
-                        <p className={ingredient_detals.text}>Жиры, г</p>
-                        <p className={ingredient_detals.number}>{ingredient.fat}</p>
-                    </li>
-                    <li className={ingredient_detals.item}>
-                        <p className={ingredient_detals.text}>Углеводы, г</p>
-                        <p className={ingredient_detals.number}>{ingredient.carbohydrates}</p>
-                    </li>
-                </ul>*/

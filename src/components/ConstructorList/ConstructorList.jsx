@@ -4,6 +4,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
 import { useDispatch, useSelector} from 'react-redux';
 import ConstructorIngredient from '../ConstructorIngredient/ConstructorIngredient';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function ConstructorList() {
 
@@ -30,14 +31,16 @@ export default function ConstructorList() {
                     />
             </div>
             <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
-                {ingredientsConstructorList.map((item, index) => (
-                <ConstructorIngredient   
+                {ingredientsConstructorList.map((item, index) => {
+                    const keyUid = uuidv4()
+                return (<ConstructorIngredient   
                 item={item} 
                 deleteIngridient={handleDeleteIngredient}  
                 index={index} 
                 id={item._id}
-                key={item.keyUid}
-                />))}
+                key={keyUid}
+                />)
+            })}
             </ul>
             <div className={constructor_list.cell}>
                 <ConstructorElement
