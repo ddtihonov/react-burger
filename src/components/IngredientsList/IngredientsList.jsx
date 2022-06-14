@@ -33,11 +33,12 @@ const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
                     className={ingredients_list.link}
                     to={`/ingredients/${item._id}`}
                     state={{ background: location.pathname }}
-                    key={item._id}
+                    key={item._id} 
                     >
                         
                     <IngredientsCard 
-                        card={item} 
+                        card={item}
+                        key={item._id} 
                         />
                 </Link>
                 )

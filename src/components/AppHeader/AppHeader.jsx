@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import header from './header.module.css';
 import {BurgerIcon, ListIcon, Logo, ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -27,7 +27,7 @@ export default function AppHeader() {
               </span>
             </button>
           </nav>
-          <Logo />
+          <Link className={header.link_logo}  to={'/'}><Logo /></Link>
           <NavLink className={setActive}  to={'/profile'}>
             <ProfileIcon type='secondary'/>
             <span className={header.text}>

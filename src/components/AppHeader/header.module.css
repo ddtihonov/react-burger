@@ -55,6 +55,10 @@
     color: #F2F2F3;
 }
 
+.link_logo{
+    box-sizing: content-box;
+}
+
 .link_active > svg {
     fill: #F2F2F3;
 }

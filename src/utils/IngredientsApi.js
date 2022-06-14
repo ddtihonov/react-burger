@@ -1,6 +1,7 @@
+import {BASE_URL, checkError} from './constants'
 
     export  const getIngredients = () => {
-        return fetch('https://norma.nomoreparties.space/api/ingredients', {
+        return fetch(BASE_URL + 'ingredients', {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -9,7 +10,7 @@
     }
 
     export  const useIngredients = (arr) => {
-        return  fetch('https://norma.nomoreparties.space/api/orders', {
+        return  fetch(BASE_URL + 'orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,9 +22,4 @@
             .then((res) => checkError(res));
     }
 
-    const checkError = (res) =>{
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status} : ${res.statusText}`);
-    }
+    

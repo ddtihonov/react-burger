@@ -1,21 +1,15 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import ingredient_detals from './IngredientDetails.module.css'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { useLocation, useParams } from "react-router-dom";
-import {onGetIngredients} from '../../services/actions/actions';
 
 
 export default function IngredientDetails() {
 
-    const dispatch = useDispatch()
     const { state } = useLocation();
 
-    useEffect(() => {
-        dispatch(onGetIngredients());
-    }, [dispatch]);
-
-
     const ingredientModal = useSelector(state => state.ingredientState.selectedIngredient);
+    console.log(ingredientModal)
 
     const ingredients = useSelector(state => state.ingredientsState.ingredients);
     

@@ -27,6 +27,7 @@ import {
 } from '../../services/actions/actions';
 import {onGetUserInfo} from '../../services/actions/userInfo';
 import {onRefreshToken} from '../../services/actions/refreshToken';
+import {onGetIngredients} from '../../services/actions/actions';
 
 export default function App() {
 
@@ -38,7 +39,12 @@ export default function App() {
   const orderNumber = useSelector(state => state.orderState.orderNumber);
   const loggedIn = useSelector(state => state.authData.loggedIn);
   const loading  = useSelector(state => state.authData.loading);
-  //const state = useSelector(state => state);
+  const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
+  console.log(ingredientsConstructorList)
+
+  useEffect(() => {
+    dispatch(onGetIngredients());
+  }, [dispatch]);  
 
 useEffect(() => {
   const accessToken = localStorage.getItem('accessToken');

@@ -16,9 +16,7 @@ export function onEditProfile({userEmail, userPassword, userName, token}) {
                 type: EDITPROFILE_SUCCESS,
                 userDat: userDat,
             });
-            } else {
-            dispatch({ type: EDITPROFILE_ERROR });
-            }
+            } 
         })
         .catch(() => {
             dispatch({ type: EDITPROFILE_ERROR });
