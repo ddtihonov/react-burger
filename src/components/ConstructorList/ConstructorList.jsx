@@ -3,10 +3,10 @@ import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
 import { useDispatch, useSelector} from 'react-redux';
-import ConstructorIngredient from '../ConstructorIngredient/ConstructorIngredient';
+import {ConstructorIngredient} from '../ConstructorIngredient/ConstructorIngredient';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function ConstructorList() {
+export const ConstructorList = () => {
 
     const dispatch = useDispatch();
 

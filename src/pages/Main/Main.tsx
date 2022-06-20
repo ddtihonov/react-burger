@@ -5,7 +5,7 @@ import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredie
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 
-export default function Main() {
+export const Main = () => {
 
     return (
     <main className={main.main} >

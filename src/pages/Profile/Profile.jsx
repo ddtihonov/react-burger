@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Profile.module.css';
-import ProfileMenu from '../../components/ProfileMnu/ProfileMenu';
+import {ProfileMenu} from '../../components/ProfileMnu/ProfileMenu';
 import {onEditProfile} from '../../services/actions/updateUserInfo';
 import {
     EmailInput,
@@ -12,7 +12,7 @@ import {
 
 
 
-export default function Profile () {
+export const Profile = () => {
 
 const dispatch = useDispatch(); 
 

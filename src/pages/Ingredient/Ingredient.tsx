@@ -3,7 +3,7 @@ import styles from './Ingredient.module.css'
 import IngredientDetails from '../../components/IngredientDetails/IngredientDetails';
 
 
-export default function Ingredient() {
+export const Ingredient = () => {
 
     return(
             <div className={styles.box} >

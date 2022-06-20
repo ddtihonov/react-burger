@@ -2,7 +2,7 @@ import React, { useCallback, useMemo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {getOrderNumber} from '../../services/actions/actions'
 import styles from './BurgerConstructor.module.css';
-import ConstructorList from '../ConstructorList/ConstructorList';
+import {ConstructorList} from '../ConstructorList/ConstructorList';
 import { CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux';
 import {BURGER_INGREDIENT} from '../../services/actions/actions'

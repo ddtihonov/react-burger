@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, ChangeEvent, FormEvent, FC } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {onLogin} from '../../services/actions/login';
 
-export default function Login () {
+export const Login = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch(); 
@@ -19,7 +19,7 @@ export default function Login () {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const loggedIn = useSelector(state => state.authData.loggedIn);
+    const loggedIn = useSelector((state) => state.authData.loggedIn);
 
     useEffect(() => {
         if(loggedIn === true) {
@@ -29,16 +29,16 @@ export default function Login () {
         }
     }, [loggedIn, navigate, location]);
 
-    const handleChangeEmail = useCallback((e) =>{
-        setEmail(e.target.value);
+    const handleChangeEmail = useCallback((evt) =>{
+        setEmail(evt.target.value);
     }, []);
     
-    const handleChangePassword = useCallback((e) =>{
-        setPassword(e.target.value);
+    const handleChangePassword = useCallback((evt) =>{
+        setPassword(evt.target.value);
     }, []);
     
-    const signIn = useCallback((e) => {
-        e.preventDefault();
+    const signIn = useCallback((evt) => {
+        evt.preventDefault();
         dispatch(onLogin(email, password));
     }, [email, password, dispatch] );
 

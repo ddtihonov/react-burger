@@ -7,7 +7,7 @@ import styles from './ResetPassword.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-export default function ResetPassword () {
+export const ResetPassword = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch(); 

@@ -6,7 +6,7 @@ import {BurgerIcon, ListIcon, Logo, ProfileIcon,
 
 export default function AppHeader() {
 
-  const setActive =({isActive}) => isActive ? header.link_active : header.link;
+  const setActive =({isActive}: any) => isActive ? header.link_active : header.link;
 
     return (
       <header className={header.header}>

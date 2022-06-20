@@ -5,9 +5,9 @@ import AppHeader from '../AppHeader/AppHeader';
 import app from './App.module.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import Modal from '../Modal/Modal';
+import {Modal} from '../Modal/Modal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import Preloader from '../Preloader/Preolader';
+import {Preloader} from '../Preloader/Preolader';
 import { 
   Login, 
   Register, 
@@ -29,7 +29,7 @@ import {onGetUserInfo} from '../../services/actions/userInfo';
 import {onRefreshToken} from '../../services/actions/refreshToken';
 import {onGetIngredients} from '../../services/actions/actions';
 
-export default function App() {
+export const App = () =>{
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

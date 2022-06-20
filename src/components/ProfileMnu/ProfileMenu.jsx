@@ -4,7 +4,7 @@ import styles from './ProfileMenu.module.css';
 import { useDispatch} from 'react-redux';
 import {onSignOut} from '../../services/actions/singnOut';
 
-export default function ProfileMenu () {
+export const ProfileMenu = () => {
 
     const dispatch = useDispatch(); 
 

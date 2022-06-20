@@ -3,7 +3,7 @@ import { Link} from 'react-router-dom'
 import { useNavigate } from "react-router";
 import styles from './PageNotFound.module.css'
 
-export default function PageNotFound () {
+export const PageNotFound = () => {
 
     const navigate = useNavigate();
     

@@ -10,7 +10,7 @@ const ProtectedRoute = ({children, anonymous = false}) => {
 // Если разрешен неавторизованный доступ, а пользователь авторизован...
     if (anonymous && loggedIn) {
         // ...то отправляем его на предыдущую страницу
-        return <Navigate to={ from } />;
+        return <Navigate to={ from }/>;
     }
 
 // Если требуется авторизация, а пользователь не авторизован...

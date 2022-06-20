@@ -1,17 +1,16 @@
-import React, {forwardRef, useCallback} from 'react';
+import React, {forwardRef, useCallback, Ref} from 'react';
 import { useDispatch } from 'react-redux';
 import ingredients_list from './IngredientsList.module.css';
-import IngredientsCard from '../IngredientsCard/IngredientsCard';
+import {IngredientsCard} from '../IngredientsCard/IngredientsCard';
 import { Link, useLocation }  from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../utils/tupes';
+import {TIngredientsList} from '../../utils/tupes'
 import {
     INGREDIENT_WINDOW_OPEN,
 } from '../../services/actions/actions';
 
 
 
-const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
+const IngredientsList = forwardRef(({ ingredients, title }: TIngredientsList, ref: Ref<HTMLHeadingElement>) => {
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -26,7 +25,7 @@ const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
         <>
         <h3 className={ingredients_list.title} ref={ref}>{title}</h3>
         <ul className={ingredients_list.list}>
-            {ingredients.map(item => {
+            {ingredients.map((item: any) => {
                 return (
                 <Link
                     onClick={windowOpen}
@@ -47,10 +46,5 @@ const IngredientsList = forwardRef(({ ingredients, title }, ref) => {
         </>
 );
 });
-
-IngredientsList.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-    title: PropTypes.string.isRequired,
-};
 
 export default IngredientsList

@@ -11,7 +11,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {onRegister} from '../../services/actions/register';
 
-export default function Register () {
+export const Register = () => {
 
 const navigate = useNavigate();
 const dispatch = useDispatch(); 

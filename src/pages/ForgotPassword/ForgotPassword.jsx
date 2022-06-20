@@ -8,7 +8,7 @@ import {
     EmailInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function ForgotPassword () {
+export const ForgotPassword = () => {
 
 const navigate = useNavigate();
 const dispatch = useDispatch();    
