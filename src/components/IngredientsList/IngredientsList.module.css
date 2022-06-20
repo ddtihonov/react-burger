@@ -19,3 +19,11 @@
     margin: 0;
     padding: 0 16px;
 }
+
+.link{
+    color: #F2F2F3;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }

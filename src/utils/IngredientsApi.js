@@ -1,38 +1,25 @@
-class IngredientsApi {
-    constructor({baseUrl, headers}) {
-        this.baseUrl = baseUrl;
-        this.headers = headers;
-    };
+import {BASE_URL, checkError} from './constants'
 
-    getIngredients() {
-        return fetch(`${this.baseUrl}/api/ingredients`, {
-            headers: this.headers
+    export  const getIngredients = () => {
+        return fetch(BASE_URL + 'ingredients', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         })
-            .then(this._checkError);
+            .then((res) => checkError(res));
     }
 
-    useIngredients(arr) {
-        return  fetch(`${this.baseUrl}/api/orders`, {
+    export  const useIngredients = (arr) => {
+        return  fetch(BASE_URL + 'orders', {
             method: 'POST',
-            headers: this.headers,
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 ingredients: arr
             }),
         })
-            .then(this._checkError);
+            .then((res) => checkError(res));
     }
 
-    _checkError(res) {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }
-}
-
-const api = new  IngredientsApi({
-    baseUrl: 'https://norma.nomoreparties.space',
-headers: {'Content-Type': 'application/json'}
-});
-
-export default api
+    

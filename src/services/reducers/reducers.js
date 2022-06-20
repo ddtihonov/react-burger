@@ -12,6 +12,8 @@ import {
     DELETE_BURGER_INGREDIENT,
     CLEAR_INGREDIENT_ORDER,
     MOVE_CONSTRUCTOR_INGREDIENTS,
+    INGREDIENT_WINDOW_OPEN,
+    INGREDIENT_WINDOW_CLOSE,
 } from '../actions/actions';
 
 // начальное состояние ingredients
@@ -27,7 +29,7 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) => {
         case GET_INGREDIENTS_REQUEST: {
             return {
                 ...state,
-                ingredientsFailed: false,
+                ingredientsError: false,
                 ingredientsRequest: true,
             };
         }
@@ -35,7 +37,7 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) => {
         case GET_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
-                ingredientsFailed: false,
+                ingredientsError: false,
                 ingredientsRequest: false,
                 ingredients: action.payload.ingredients,
             };
@@ -43,8 +45,9 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) => {
 
         case  GET_INGREDIENTS_ERROR: {
             return {
-                ...ingredientsInitialState,
-                ingredientsFailed: true,
+                ...state,
+                ingredientsError: true,
+                ingredientsRequest: false,
             };
         }
         default: {
@@ -94,12 +97,13 @@ export const orderNumberReducer = (state = orderInitialState, action) => {
         }
 };
 
-// начальное состояние ingredients
+
 const selectedIngredientState = {
     selectedIngredient: null,
+    ingredientWindowOpen: false
 };
 
-//редюсер загрузки ингредиентов
+
 export const selectedIngredientsReducer = (state = selectedIngredientState, action) => {
     switch(action.type) {
         case SELECT_INGREDIENT: {
@@ -113,6 +117,20 @@ export const selectedIngredientsReducer = (state = selectedIngredientState, acti
             return {
                 ...state,
                 selectedIngredient: null,
+            };
+        }
+
+        case  INGREDIENT_WINDOW_OPEN: {
+            return {
+                ...state,
+                ingredientWindowOpen: true,
+            };
+        }
+
+        case  INGREDIENT_WINDOW_CLOSE: {
+            return {
+                ...state,
+                ingredientWindowOpen: false,
             };
         }
 

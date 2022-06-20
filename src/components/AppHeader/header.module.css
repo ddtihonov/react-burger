@@ -35,14 +35,32 @@
     align-items: center;
 }
 
-.navButton {
+.link {
     display: flex;
     border: none;
     background-color:  transparent;
     text-decoration: none;
     cursor: pointer;
-    color: #F2F2F3;
     padding: 16px 20px;
+    color: #8585AD;
+}
+
+.link_active {
+    display: flex;
+    border: none;
+    background-color:  transparent;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 16px 20px;
+    color: #F2F2F3;
+}
+
+.link_logo{
+    box-sizing: content-box;
+}
+
+.link_active > svg {
+    fill: #F2F2F3;
 }
 
 .color{
