@@ -39,7 +39,7 @@ export default function Login () {
     
     const signIn = useCallback((e) => {
         e.preventDefault();
-        dispatch(onLogin({email, password}));
+        dispatch(onLogin(email, password));
     }, [email, password, dispatch] );
 
 

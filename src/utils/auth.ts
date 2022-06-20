@@ -1,6 +1,6 @@
 import {BASE_URL, checkError} from './constants'
     
-    export const register = ({name, email, password}) => {
+    export const register = (name: string, email: string, password: string) => {
         return fetch(BASE_URL + 'auth/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -13,7 +13,8 @@ import {BASE_URL, checkError} from './constants'
         .then((res) => checkError(res));
     };
 
-    export const setUserInfo = ({userEmail, userPassword, userName, token}) => {
+    export const setUserInfo = (userName: string, userEmail: string, userPassword: string,  token: string) => {
+    
         return fetch(BASE_URL + 'auth/user', {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
@@ -28,7 +29,7 @@ import {BASE_URL, checkError} from './constants'
             .then((res) => checkError(res));
     }
 
-    export const authorize = ({ email, password }) => {
+    export const authorize = ( email: string, password: string ) => {
         return fetch(BASE_URL + 'auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -42,7 +43,7 @@ import {BASE_URL, checkError} from './constants'
     };
 
 
-    export const getUserInfo = (token) => {
+    export const getUserInfo = (token: string) => {
         return fetch(BASE_URL + 'auth/user', {
             method: 'GET',
             headers: {
@@ -53,7 +54,7 @@ import {BASE_URL, checkError} from './constants'
             .then((res) => checkError(res));
     };
 
-    export const refreshingToken = (token) => {
+    export const refreshingToken = (token: string) => {
         return fetch(BASE_URL + 'auth/token', {
             method: 'POST',
             headers: {
@@ -66,7 +67,7 @@ import {BASE_URL, checkError} from './constants'
             .then((res) => checkError(res));
     }
 
-    export const deleteAuth = (token) =>{
+    export const deleteAuth = (token: string) =>{
         return fetch(BASE_URL + 'auth/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -77,7 +78,7 @@ import {BASE_URL, checkError} from './constants'
             .then((res) => checkError(res));
     }
 
-    export const passwordRecovery = (email) => {
+    export const passwordRecovery = (email: string) => {
         return fetch(BASE_URL + 'password-reset', {
             method: 'POST',
             headers: {'Content-Type': 'application/json',
@@ -88,7 +89,7 @@ import {BASE_URL, checkError} from './constants'
         }).then((res) => checkError(res));
     };
 
-    export const resetPassword = ({password, token}) => {
+    export const resetPassword = (password: string, token: string) => {
         return fetch(BASE_URL + 'password-reset/reset', {
             method: 'POST',
             headers: {

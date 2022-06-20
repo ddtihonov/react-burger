@@ -25,7 +25,7 @@ export default function ResetPassword () {
 
     const onPasswordChange = useCallback((e) =>{
         e.preventDefault();
-        dispatch(onResetPassword({password, token}));
+        dispatch(onResetPassword(password, token));
         navigate('/login')
     }, [navigate, dispatch, password, token])
         

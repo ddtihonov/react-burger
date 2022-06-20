@@ -52,7 +52,7 @@ const onReset = useCallback(() => {
 const editProfile = useCallback((e) => {
     e.preventDefault();
     const token = localStorage.getItem('accessToken');
-    dispatch(onEditProfile({token, userEmail, userPassword, userName }));
+    dispatch(onEditProfile(userName, userEmail, userPassword, token));
     setUserEmail(email)
     setUserName(name)
     setUserPassword('')

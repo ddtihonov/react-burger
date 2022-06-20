@@ -46,7 +46,7 @@ const handleChangeName = useCallback((e) => {
 
 const signUp = useCallback((e) => {
     e.preventDefault();
-    dispatch(onRegister({email, password, name}));
+    dispatch(onRegister(name, email, password));
 }, [name, email, password, dispatch] );
 
     return (
