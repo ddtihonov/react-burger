@@ -37,7 +37,6 @@ export const App = () =>{
   let background = location.state && location.state.background
 
   const orderNumber = useSelector(state => state.orderState.orderNumber);
-  const loggedIn = useSelector(state => state.authData.loggedIn);
   const loading  = useSelector(state => state.authData.loading);
 
   useEffect(() => {
@@ -91,12 +90,12 @@ const handleIngredientClose = useCallback(() => {
                       <Register/>
                   } />               
             <Route  path='/profile'  element={
-                  <ProtectedRoute loggedIn={loggedIn}>
+                  <ProtectedRoute>
                       <Profile/>
                   </ProtectedRoute>       
                   } />
             <Route  path='/profile/orders'  element={
-                  <ProtectedRoute loggedIn={loggedIn}>
+                  <ProtectedRoute>
                       <Orders/>
                   </ProtectedRoute>       
                   } />       

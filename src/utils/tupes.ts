@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
 export type TModalOverlay = {
     children: ReactNode,
@@ -36,4 +36,20 @@ export type TConstructorIngredient = {
     index: number
     id: string
     deleteIngridient?: any
+}
+
+export type TIngredient = {
+    fat: number
+    carbohydrates: number
+    calories: number
+    price: number
+    proteins: number
+    __v: number
+    _id: string
+    name: string
+    type: string
+    image: string
+    image_mobile: string
+    image_large: string
+    keyUid: string 
 }

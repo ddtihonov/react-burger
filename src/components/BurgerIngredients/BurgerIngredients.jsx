@@ -10,7 +10,7 @@ import {
 from '../../services/actions/loading';
 
 
-export default function BurgerIngredients() {
+export const BurgerIngredients = () => {
 
   const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
     const dispatch = useDispatch(); 
