@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useDispatch} from 'react-redux';
@@ -15,13 +15,13 @@ const dispatch = useDispatch();
     
 const [userEmail, setUserEmail] = useState('');
 
-const handleChangeEmail = useCallback((e) =>{
-    setUserEmail(e.target.value);
+const handleChangeEmail = useCallback((evt) =>{
+    setUserEmail(evt.target.value);
 }, []);
 
 
-const passwordRecovery = useCallback((e) => {
-    e.preventDefault()
+const passwordRecovery = useCallback((evt) => {
+    evt.preventDefault()
     dispatch(onRecoveryPassword(userEmail));
     navigate('/reset-password')
 }, [dispatch, navigate, userEmail]);
@@ -32,14 +32,14 @@ const passwordRecovery = useCallback((e) => {
             <h2 className={styles.title}>Восстановление пароля</h2>
                 <div className={styles.input}>
                     <EmailInput 
-                    onChange={handleChangeEmail} 
-                    value={userEmail}
-                    size={'default'}
+                        onChange={handleChangeEmail} 
+                        value={userEmail}
+                        size='default'
                     />
                 </div>
                 {userEmail && <div className={styles.button}>
                     <Button type='primary' size='medium'>
-                    Восстановить
+                        Восстановить
                     </Button>
                 </div>}
             </form>
