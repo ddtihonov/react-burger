@@ -1,26 +1,27 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, FC} from 'react';
 import ingredient_detals from './IngredientDetails.module.css'
 import { useSelector} from 'react-redux';
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from 'react-router-dom';
+import {TIngredientsCard} from '../../utils/tupes'
 
 
-export default function IngredientDetails() {
+export const IngredientDetails: FC = () => {
 
     const { state } = useLocation();
 
-    const ingredientModal = useSelector(state => state.ingredientState.selectedIngredient);
+    const ingredientModal = useSelector((state:any) => state.ingredientState.selectedIngredient);
 
     if (ingredientModal){
     localStorage.setItem('ingredient', JSON.stringify(ingredientModal))
     }
 
-    const ingredientItem = JSON.parse(localStorage.getItem('ingredient'));
+    const ingredientItem = JSON.parse(localStorage.getItem('ingredient') || '');
 
-    const ingredients = useSelector(state => state.ingredientsState.ingredients);
+    const ingredients = useSelector((state:any) => state.ingredientsState.ingredients);
     
     const { id } = useParams()
     const ingredient = useMemo(() => {
-        return ingredients.find(ingredient => ingredient._id === id)
+        return ingredients.find((ingredient:TIngredientsCard) => ingredient._id === id)
         }, [ingredients, id]
     )
 

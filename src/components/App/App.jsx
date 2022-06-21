@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate, useLocation} from 'react-router-dom';
-import AppHeader from '../AppHeader/AppHeader';
+import {AppHeader} from '../AppHeader/AppHeader';
 import app from './App.module.css';
-import OrderDetails from '../OrderDetails/OrderDetails';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import {OrderDetails} from '../OrderDetails/OrderDetails';
+import {IngredientDetails} from '../IngredientDetails/IngredientDetails';
 import {Modal} from '../Modal/Modal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {Preloader} from '../Preloader/Preolader';
