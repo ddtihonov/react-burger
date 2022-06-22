@@ -52,10 +52,10 @@ const editProfile = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const token = localStorage.getItem('accessToken');
     dispatch(onEditProfile(userName, userEmail, userPassword, token));
-    setUserEmail(email)
-    setUserName(name)
+    setUserEmail(userEmail)
+    setUserName(userName)
     setUserPassword('')
-}, [dispatch, userEmail, userPassword, userName, email, name]);
+}, [dispatch, userEmail, userPassword, userName]);
     
         return(
         <section className={styles.main}>

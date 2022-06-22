@@ -31,13 +31,6 @@ export type TIngredientsList = {
     title: string
 }
 
-export type TConstructorIngredient = {
-    ingredient: TIngredientsCard
-    index: number
-    id: string
-    deleteIngridient?: any
-}
-
 export type TIngredient = {
     fat: number
     carbohydrates: number
@@ -52,4 +45,11 @@ export type TIngredient = {
     image_mobile: string
     image_large: string
     keyUid: string 
+}
+
+export type TConstructorIngredientData = {
+    item: TIngredient
+    index: number
+    id: string
+    deleteIngridient: any
 }

@@ -12,21 +12,22 @@ import {onLogin} from '../../services/actions/login';
 export const Login = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const location = useLocation();
+    const dispatch: any = useDispatch();
+    const {state}: any = useLocation();
         
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
-    const loggedIn = useSelector((state) => state.authData.loggedIn);
+    const loggedIn = useSelector((state: any) => state.authData.loggedIn);
 
     useEffect(() => {
         if(loggedIn === true) {
-            navigate(location.state?.from || '/')
+            navigate(state?.from || '/')
             setEmail('')
             setPassword('')
         }
-    }, [loggedIn, navigate, location]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loggedIn, navigate, state?.path]);
 
     const handleChangeEmail = useCallback((value) =>{
         setEmail(value);

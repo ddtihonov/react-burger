@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router';
 
-const ProtectedRoute = ({children, anonymous = false}) => {
-    const loggedIn = useSelector((store) => store.authData.loggedIn);
-    const location = useLocation();
+const ProtectedRoute: FC<{ children: ReactElement}> = ({children}) => {
+    const loggedIn = useSelector((store: any) => store.authData.loggedIn);
+    const location: any = useLocation();
     const from = location.state?.from || '/';
+    let anonymous = false
 
 // Если разрешен неавторизованный доступ, а пользователь авторизован...
     if (anonymous && loggedIn) {
