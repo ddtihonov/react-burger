@@ -4,19 +4,16 @@
   "private": true,
   "homepage": "https://ddtihonov.github.io/react-burger/",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.27",
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1",
+    "@types/react-router": "^5.1.18",
+    "@types/react-router-dom": "^5.3.3",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
+    "react": "^17.0.1",
     "react-dnd": "^15.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^17.0.2",
+    "react-dom": "^17.0.1",
     "react-redux": "^8.0.1",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
@@ -54,7 +51,11 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
     "@types/uuid": "^8.3.4",
     "gh-pages": "^3.2.3"
   }

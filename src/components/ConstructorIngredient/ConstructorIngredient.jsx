@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, FC} from 'react';
 import { useDispatch} from 'react-redux';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import constructor_ingredirnt from './ConstructorIngredient.module.css';

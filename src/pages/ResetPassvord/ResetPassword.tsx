@@ -12,8 +12,8 @@ export const ResetPassword: FC = () => {
     const navigate = useNavigate();
     const dispatch: any = useDispatch(); 
 
-    const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
+    const [password, setPassword] = useState<string>('');
+    const [token, setToken] = useState<string>('');
 
     const handleChangePassword = useCallback((evt: ChangeEvent<HTMLInputElement>) =>{
         setPassword(evt.target.value);

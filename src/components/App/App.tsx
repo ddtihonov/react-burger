@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect, FC} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate, useLocation} from 'react-router-dom';
 import {AppHeader} from '../AppHeader/AppHeader';
@@ -29,15 +29,15 @@ import {onGetUserInfo} from '../../services/actions/userInfo';
 import {onRefreshToken} from '../../services/actions/refreshToken';
 import {onGetIngredients} from '../../services/actions/actions';
 
-export const App = () =>{
+export const App: FC = () =>{
 
-  const dispatch = useDispatch();
+  const dispatch: any = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location: any = useLocation(); 
   let background = location.state && location.state.background
 
-  const orderNumber = useSelector(state => state.orderState.orderNumber);
-  const loading  = useSelector(state => state.authData.loading);
+  const orderNumber = useSelector((state: any) => state.orderState.orderNumber);
+  const loading  = useSelector((state: any) => state.authData.loading);
 
   useEffect(() => {
     dispatch(onGetIngredients());

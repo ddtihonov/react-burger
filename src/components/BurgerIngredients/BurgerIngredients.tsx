@@ -1,4 +1,4 @@
-import React, {useState, useRef, useCallback, useEffect} from 'react';
+import React, {useState, useRef, useCallback, useEffect, FC} from 'react';
 import burger_ingredients from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,12 +8,13 @@ import {
   LOADING_FINISH,
 }
 from '../../services/actions/loading';
+import {TIngredientsCard} from '../../utils/tupes'
 
 
-export const BurgerIngredients = () => {
+export const BurgerIngredients: FC = () => {
 
-  const ingredientsList = useSelector(state => state.ingredientsState.ingredients);
-    const dispatch = useDispatch(); 
+  const ingredientsList = useSelector((state: any) => state.ingredientsState.ingredients);
+    const dispatch: any = useDispatch(); 
 
     useEffect(() => {
       if(ingredientsList.length === 0){
@@ -28,29 +29,38 @@ export const BurgerIngredients = () => {
       }, [dispatch, ingredientsList]);  
 
 
-    const buns = ingredientsList.filter(item => item.type === 'bun');
-    const sauce = ingredientsList.filter(item => item.type === 'sauce');
-    const main = ingredientsList.filter(item => item.type === 'main');
+    const buns = ingredientsList.filter((item: TIngredientsCard) => item.type === 'bun');
+    const sauce = ingredientsList.filter((item: TIngredientsCard) => item.type === 'sauce');
+    const main = ingredientsList.filter((item: TIngredientsCard) => item.type === 'main');
 
-  const bunRef = useRef(null)
-  const sauceRef = useRef(null)
-  const mainRef = useRef(null)
+  const bunRef = useRef<HTMLDivElement | null>(null)
+  const sauceRef = useRef<HTMLDivElement | null>(null)
+  const mainRef = useRef<HTMLDivElement | null>(null)
 
-  const [current, setCurrent] = useState('bun')
+  const [current, setCurrent] = useState<string>('bun')
 
 
 // скролл при клике
   const handleBunClick = useCallback(() => {
+    if (bunRef.current == null) {
+      return;
+    }
     bunRef.current.scrollIntoView({behavior: 'smooth'});
     setCurrent('bun')
   },[setCurrent]);
 
   const handleSauceClick = useCallback(() => {
+    if (sauceRef.current == null) {
+      return;
+    }
     sauceRef.current.scrollIntoView({behavior: 'smooth'});
     setCurrent("sauce")
   },[setCurrent]);
 
   const handleMainClick = useCallback(() => {
+    if (mainRef.current == null) {
+      return;
+    }
     mainRef.current.scrollIntoView({behavior: 'smooth'});
     setCurrent("main")
   },[setCurrent]);
@@ -71,6 +81,10 @@ export const BurgerIngredients = () => {
 
   const handleScroll = useCallback(
     (evt) => {
+
+      if (sauceRef.current == null || mainRef.current == null) {
+        return;
+      }
       const container = evt.target;
       const scrollPosition = container.scrollTop;
       const saucePosition = sauceRef.current.offsetTop;
@@ -84,7 +98,7 @@ export const BurgerIngredients = () => {
       }
     },
     [handleBunScroll, handleSauceScroll, handleMainScroll]
-  ); 
+  );
 
   return (
       <section className={burger_ingredients.container}>
