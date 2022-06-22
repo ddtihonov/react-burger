@@ -1,6 +1,6 @@
 import React, {FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, useLocation } from 'react-router';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute: FC<{ children: ReactElement}> = ({children}) => {
     const loggedIn = useSelector((store: any) => store.authData.loggedIn);

@@ -4,10 +4,10 @@ import { useDrag } from "react-dnd";
 import styles from './IngredientsCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import {SELECT_INGREDIENT} from '../../services/actions/actions';
-import {TIngredientsCard} from '../../utils/tupes';
+import {TIngredient} from '../../utils/tupes';
 
 
-export const IngredientsCard: FC<{card: TIngredientsCard}> = ({card}) => {
+export const IngredientsCard: FC<{card: TIngredient}> = ({card}) => {
 
     let counter = 0
     const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);

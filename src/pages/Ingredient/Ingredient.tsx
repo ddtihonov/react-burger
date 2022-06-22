@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import styles from './Ingredient.module.css'
+import styles from './Ingredient.module.css';
 import {IngredientDetails} from '../../components/IngredientDetails/IngredientDetails';
 
 

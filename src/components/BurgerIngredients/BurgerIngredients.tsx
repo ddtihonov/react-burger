@@ -8,7 +8,7 @@ import {
   LOADING_FINISH,
 }
 from '../../services/actions/loading';
-import {TIngredientsCard} from '../../utils/tupes'
+import {TIngredient} from '../../utils/tupes'
 
 
 export const BurgerIngredients: FC = () => {
@@ -29,9 +29,9 @@ export const BurgerIngredients: FC = () => {
       }, [dispatch, ingredientsList]);  
 
 
-    const buns = ingredientsList.filter((item: TIngredientsCard) => item.type === 'bun');
-    const sauce = ingredientsList.filter((item: TIngredientsCard) => item.type === 'sauce');
-    const main = ingredientsList.filter((item: TIngredientsCard) => item.type === 'main');
+    const buns = ingredientsList.filter((item: TIngredient) => item.type === 'bun');
+    const sauce = ingredientsList.filter((item: TIngredient) => item.type === 'sauce');
+    const main = ingredientsList.filter((item: TIngredient) => item.type === 'main');
 
   const bunRef = useRef<HTMLDivElement | null>(null)
   const sauceRef = useRef<HTMLDivElement | null>(null)

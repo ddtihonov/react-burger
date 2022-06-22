@@ -1,11 +1,6 @@
 export const BASE_URL = 'https://norma.nomoreparties.space/api/';
 
-export const checkError = (res: {
-    ok: boolean;
-    status: number;
-    statusText: string;
-    json(): Promise<object>;
-}) =>{
+export const checkError = (res: Response) => {
     if (res.ok) {
         return res.json();
     }
