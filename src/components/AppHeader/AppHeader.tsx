@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import header from './header.module.css';
 import {BurgerIcon, ListIcon, Logo, ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function AppHeader() {
+export const AppHeader: FC = () => {
 
-  const setActive =({isActive}) => isActive ? header.link_active : header.link;
+  const setActive =({isActive}: any) => isActive ? header.link_active : header.link;
 
     return (
       <header className={header.header}>

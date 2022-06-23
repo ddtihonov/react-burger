@@ -1,9 +1,9 @@
-import React from 'react';
-import styles from './Ingredient.module.css'
-import IngredientDetails from '../../components/IngredientDetails/IngredientDetails';
+import React, {FC} from 'react';
+import styles from './Ingredient.module.css';
+import {IngredientDetails} from '../../components/IngredientDetails/IngredientDetails';
 
 
-export default function Ingredient() {
+export const Ingredient: FC = () => {
 
     return(
             <div className={styles.box} >

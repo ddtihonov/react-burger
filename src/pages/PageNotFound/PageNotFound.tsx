@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 import { Link} from 'react-router-dom'
 import { useNavigate } from "react-router";
 import styles from './PageNotFound.module.css'
 
-export default function PageNotFound () {
+export const PageNotFound: FC = () => {
 
     const navigate = useNavigate();
     

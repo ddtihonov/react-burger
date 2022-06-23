@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback} from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,40 +6,40 @@ import styles from './Login.module.css';
 import {
     EmailInput,
     PasswordInput,
-    Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {onLogin} from '../../services/actions/login';
 
-export default function Login () {
+export const Login = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch(); 
-    const location = useLocation()   
+    const dispatch: any = useDispatch();
+    const {state}: any = useLocation();
         
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
-    const loggedIn = useSelector(state => state.authData.loggedIn);
+    const loggedIn = useSelector((state: any) => state.authData.loggedIn);
 
     useEffect(() => {
         if(loggedIn === true) {
-            navigate(location.state?.from || '/')
+            navigate(state?.from || '/')
             setEmail('')
             setPassword('')
         }
-    }, [loggedIn, navigate, location]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loggedIn, navigate, state?.path]);
 
-    const handleChangeEmail = useCallback((e) =>{
-        setEmail(e.target.value);
+    const handleChangeEmail = useCallback((value) =>{
+        setEmail(value);
     }, []);
     
-    const handleChangePassword = useCallback((e) =>{
-        setPassword(e.target.value);
+    const handleChangePassword = useCallback((value) =>{
+        setPassword(value);
     }, []);
     
-    const signIn = useCallback((e) => {
-        e.preventDefault();
-        dispatch(onLogin({email, password}));
+    const signIn = useCallback((evt) => {
+        evt.preventDefault();
+        dispatch(onLogin(email, password));
     }, [email, password, dispatch] );
 
 
@@ -49,23 +49,21 @@ export default function Login () {
             <h2 className={styles.title}>Вход</h2>
                 <div className={styles.input}>
                     <EmailInput 
-                    onChange={handleChangeEmail} 
-                    value={email}
-                    size={'default'}
+                        name='email'
+                        onChange={(evt) => handleChangeEmail(evt.target.value)} 
+                        value={email}
+                        size={'default'}
                     />
                 </div>
                 <div className={styles.input}>
-                    <PasswordInput 
-                    onChange={handleChangePassword} 
-                    value={password}
-                    size={'default'}
+                    <PasswordInput
+                        name='password' 
+                        onChange={(evt) => handleChangePassword(evt.target.value)}  
+                        value={password}
+                        size={'default'}
                     />
                 </div>
-                <div className={styles.button}>
-                    <Button type='primary' size='medium'>
-                        Войти
-                    </Button>
-                </div>
+                <button className={styles.button} type='submit'>Войти</button>
             </form>
             <div className={styles.box}>
             <p className={styles.caption}>

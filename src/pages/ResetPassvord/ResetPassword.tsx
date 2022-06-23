@@ -1,31 +1,31 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, FC, ChangeEvent, FormEvent} from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch} from 'react-redux';
 import {onResetPassword} from '../../services/actions/resetPassword'
 import { Link } from 'react-router-dom';
 import styles from './ResetPassword.module.css'
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-export default function ResetPassword () {
+export const ResetPassword: FC = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch(); 
+    const dispatch: any = useDispatch(); 
 
-    const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
+    const [password, setPassword] = useState<string>('');
+    const [token, setToken] = useState<string>('');
 
-    const handleChangePassword = useCallback((e) =>{
-        setPassword(e.target.value);
+    const handleChangePassword = useCallback((evt: ChangeEvent<HTMLInputElement>) =>{
+        setPassword(evt.target.value);
     }, []);
 
-    const handleChangeCode = useCallback((e) =>{
-        setToken(e.target.value);
+    const handleChangeCode = useCallback((evt: ChangeEvent<HTMLInputElement>) =>{
+        setToken(evt.target.value);
     }, []);
 
-    const onPasswordChange = useCallback((e) =>{
-        e.preventDefault();
-        dispatch(onResetPassword({password, token}));
+    const onPasswordChange = useCallback((evt: FormEvent<HTMLFormElement>) =>{
+        evt.preventDefault();
+        dispatch(onResetPassword(password, token));
         navigate('/login')
     }, [navigate, dispatch, password, token])
         
@@ -51,11 +51,8 @@ export default function ResetPassword () {
                         size={'default'}
                         />
                     </div>
-                    {token && password && <div className={styles.button}>
-                    <Button type='primary' size='medium'>
-                    Сохранить
-                    </Button>
-                </div>}
+                    {token && password && 
+                    <button className={styles.button} type='submit'>Сохранить</button>}
                     </form>
                     <div className={styles.box}>
                         <p className={styles.caption}>

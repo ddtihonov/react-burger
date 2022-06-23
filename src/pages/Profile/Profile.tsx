@@ -1,27 +1,26 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, FC, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Profile.module.css';
-import ProfileMenu from '../../components/ProfileMnu/ProfileMenu';
+import {ProfileMenu} from '../../components/ProfileMnu/ProfileMenu';
 import {onEditProfile} from '../../services/actions/updateUserInfo';
 import {
     EmailInput,
     PasswordInput,
     Input,
-    Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 
-export default function Profile () {
+export const Profile: FC = () => {
 
-const dispatch = useDispatch(); 
+const dispatch: any = useDispatch(); 
 
-const {name, email} = useSelector((store) => store.authData);
+const {name, email} = useSelector((store: any) => store.authData);
     
-const [userEmail, setUserEmail] = useState(email);
-const [userPassword, setUserPassword] = useState('');
-const [userName, setUserName] = useState(name);
-const [isChange, setIsChange] = useState(false);
+const [userEmail, setUserEmail] = useState<string>(email);
+const [userPassword, setUserPassword] = useState<string>('');
+const [userName, setUserName] = useState<string>(name);
+const [isChange, setIsChange] = useState<boolean>(false);
 
 useEffect(() => {
         if (!(userEmail === email && userPassword === '' && userName === name)) {
@@ -31,16 +30,16 @@ useEffect(() => {
         }
 }, [userEmail, userPassword, userName, email, name]);
 
-const handleChangeEmail = useCallback((e) =>{
-    setUserEmail(e.target.value);
+const handleChangeEmail = useCallback((value: string) => {
+    setUserEmail(value);
 }, []);
 
-const handleChangePassword = useCallback((e) =>{
-    setUserPassword(e.target.value);
+const handleChangePassword = useCallback((value: string) =>{
+    setUserPassword(value);
 }, []);
 
-const handleChangeName = useCallback((e) => {
-    setUserName(e.target.value);
+const handleChangeName = useCallback((value: string) => {
+    setUserName(value);
 }, []);
 
 const onReset = useCallback(() => {
@@ -49,14 +48,14 @@ const onReset = useCallback(() => {
     setUserPassword('')
 }, [email, name]);
 
-const editProfile = useCallback((e) => {
-    e.preventDefault();
+const editProfile = useCallback((evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
     const token = localStorage.getItem('accessToken');
-    dispatch(onEditProfile({token, userEmail, userPassword, userName }));
-    setUserEmail(email)
-    setUserName(name)
+    dispatch(onEditProfile(userName, userEmail, userPassword, token));
+    setUserEmail(userEmail)
+    setUserName(userName)
     setUserPassword('')
-}, [dispatch, userEmail, userPassword, userName, email, name]);
+}, [dispatch, userEmail, userPassword, userName]);
     
         return(
         <section className={styles.main}>
@@ -65,22 +64,24 @@ const editProfile = useCallback((e) => {
                 <div className={styles.input}>
                     <Input
                     value={userName}
-                    onChange={handleChangeName}
+                    onChange={(evt) => handleChangeName(evt.target.value)}
                     placeholder={'Имя'}
                     icon={'EditIcon'}
                     size={'default'}
                     />
                 </div>
                 <div className={styles.input}>
-                    <EmailInput 
-                    onChange={handleChangeEmail} 
+                    <EmailInput
+                    name='email'
+                    onChange={(evt) => handleChangeEmail(evt.target.value)}  
                     value={userEmail} 
                     size={'default'}
                     />
                 </div>
                 <div className={styles.input}>
-                    <PasswordInput 
-                    onChange={handleChangePassword} 
+                    <PasswordInput
+                    name='password' 
+                    onChange={(evt) => handleChangePassword(evt.target.value)}   
                     value={userPassword} 
                     size={'default'}
                     />
@@ -90,19 +91,15 @@ const editProfile = useCallback((e) => {
                         <button
                             onClick={onReset}
                             type='button'
-                            className={styles.button_reset}
-                        >
-                            Отмена
+                            className={styles.button_reset}>Отмена
                         </button>
-                        <Button 
-                            type='primary' 
-                            size='medium'
-                            >
-                                Сохранить
-                        </Button>
+                        <button 
+                            className={styles.button_reset} 
+                            type='submit'>Сохранить
+                        </button>
                     </div>
                 )}
                 </form>
         </section>
     )
-}
+}         

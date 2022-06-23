@@ -1,27 +1,27 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, FC, FormEvent} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useDispatch} from 'react-redux';
 import styles from './ForgotPassword.module.css';
 import {onRecoveryPassword} from '../../services/actions/recoveryPassword'
 import {
-    EmailInput, Button
+    EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function ForgotPassword () {
+export const ForgotPassword: FC = () => {
 
 const navigate = useNavigate();
-const dispatch = useDispatch();    
+const dispatch: any = useDispatch();    
     
-const [userEmail, setUserEmail] = useState('');
+const [userEmail, setUserEmail] = useState<string>('');
 
-const handleChangeEmail = useCallback((e) =>{
-    setUserEmail(e.target.value);
+const handleChangeEmail = useCallback((value: string) =>{
+    setUserEmail(value);
 }, []);
 
 
-const passwordRecovery = useCallback((e) => {
-    e.preventDefault()
+const passwordRecovery = useCallback((evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault()
     dispatch(onRecoveryPassword(userEmail));
     navigate('/reset-password')
 }, [dispatch, navigate, userEmail]);
@@ -31,17 +31,16 @@ const passwordRecovery = useCallback((e) => {
             <form className={styles.form} onSubmit={passwordRecovery}>
             <h2 className={styles.title}>Восстановление пароля</h2>
                 <div className={styles.input}>
-                    <EmailInput 
-                    onChange={handleChangeEmail} 
-                    value={userEmail}
-                    size={'default'}
+                    <EmailInput
+                        name='email'
+                        onChange={(evt) => handleChangeEmail(evt.target.value)}
+                        value={userEmail}
+                        size='default'
                     />
                 </div>
-                {userEmail && <div className={styles.button}>
-                    <Button type='primary' size='medium'>
-                    Восстановить
-                    </Button>
-                </div>}
+                {userEmail && 
+                    <button className={styles.button} type='submit'>Восстановить</button>
+                }
             </form>
             <div className={styles.box}>
             <p className={styles.caption}>

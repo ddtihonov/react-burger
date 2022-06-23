@@ -1,26 +1,27 @@
-import React, { useCallback, useMemo} from 'react';
+import React, { useCallback, useMemo, FC} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {getOrderNumber} from '../../services/actions/actions'
+import {getOrderNumber} from '../../services/actions/actions';
 import styles from './BurgerConstructor.module.css';
-import ConstructorList from '../ConstructorList/ConstructorList';
-import { CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
+import {ConstructorList} from '../ConstructorList/ConstructorList';
+import { CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {BURGER_INGREDIENT} from '../../services/actions/actions'
+import {BURGER_INGREDIENT} from '../../services/actions/actions';
 import { useDrop } from "react-dnd";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
+import {TIngredient} from '../../utils/tupes';
 
 
-export default function BurgerConstructor() {
+export const BurgerConstructor: FC = () => {
 
         const navigate = useNavigate();
 
         // получаем из хранилища массив ингредиентов
-        const ingredientsConstructorList = useSelector(state => state.burgerConstructorIngredients.burgerIngredients);
+        const ingredientsConstructorList = useSelector((state: any) => state.burgerConstructorIngredients.burgerIngredients);
       
         // получаем булку
-        const bun = useSelector(state => state.burgerConstructorIngredients.burgerBun);
-        const loggedIn = useSelector(state => state.authData.loggedIn);
-        const dispatch = useDispatch();
+        const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
+        const loggedIn = useSelector((state: any) => state.authData.loggedIn);
+        const dispatch: any = useDispatch();
 
         //ловим перетаскиваемый элемент и сохраняем в хранилище
         const [{ isHover }, dropTarget] = useDrop({
@@ -28,7 +29,7 @@ export default function BurgerConstructor() {
           collect: monitor => ({
             isHover: monitor.isOver()
           }),
-          drop(ingredient) {
+          drop: (ingredient: TIngredient) => {
             const keyUid = uuidv4()
             ingredient.keyUid = keyUid
               dispatch({ type: BURGER_INGREDIENT, payload: { ingredient} })
@@ -44,7 +45,7 @@ export default function BurgerConstructor() {
           if (!bun) {
             return 0;
           }
-          const amountIngredients = ingredientsConstructorList.reduce((sum, item) => {
+          const amountIngredients = ingredientsConstructorList.reduce((sum: number, item: TIngredient) => {
               return sum + item.price
           }, 0)
             return amountIngredients + bun.price * 2
@@ -53,7 +54,7 @@ export default function BurgerConstructor() {
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
           if (loggedIn === true) {
-            const iDingredients = ingredientsConstructorList.map(item => item._id).concat([bun._id]);
+            const iDingredients = ingredientsConstructorList.map((item: TIngredient) => item._id).concat([bun._id]);
             dispatch(getOrderNumber(iDingredients));
           } else {
               navigate('/login')
@@ -74,15 +75,21 @@ export default function BurgerConstructor() {
           : (bun && <ConstructorList/>)
           }
         </div>
-        {(bun !== null) && (<div className={styles.box}>
+        {(bun !== null) && (
+        <div className={styles.box}>
           <p className={styles.price}>{orderAmount}</p>
           <div className={styles.item}>
             <CurrencyIcon type="primary"/>
           </div>
-          <div className={styles.cell}>
-            <Button size='large' onClick={handleOrder}>Оформить заказ</Button>
-          </div>
+          <button
+            className={styles.button}
+            type='submit' 
+            onClick={handleOrder}>
+              Оформить заказ
+          </button>
         </div>)}
       </section>
     );
   };
+
+  /*<Button type='primary' size='large' onClick={handleOrder}>Оформить заказ</Button>*/

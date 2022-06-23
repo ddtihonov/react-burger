@@ -6,13 +6,13 @@ export const GET_REGISTER_ERROR = 'GET_REGISTER_ERROR';//неудачный за
 
 
 
-export function onRegister({name, email, password }) {
+export function onRegister(name, email, password ) {
 
     return function (dispatch) {
         dispatch({
         type: GET_REGISTER_REQUEST,
     });
-        register({name, email, password })
+        register(name, email, password )
             .then((userData) => {
                 dispatch({
                     type: GET_REGISTER_SUCCESS,

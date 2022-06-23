@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './Orders.module.css';
-import ProfileMenu from '../../components/ProfileMnu/ProfileMenu';
+import {ProfileMenu} from '../../components/ProfileMnu/ProfileMenu';
 
-export default function Orders () {
+export const Orders: FC = () => {
 
 
     return (

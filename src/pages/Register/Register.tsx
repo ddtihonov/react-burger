@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, FC, FormEvent } from 'react';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,20 +7,19 @@ import {
     EmailInput,
     PasswordInput,
     Input,
-    Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {onRegister} from '../../services/actions/register';
 
-export default function Register () {
+export const Register: FC = () => {
 
 const navigate = useNavigate();
-const dispatch = useDispatch(); 
+const dispatch: any = useDispatch(); 
     
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [name, setName] = useState('');
+const [email, setEmail] = useState<string>('');
+const [password, setPassword] = useState<string>('');
+const [name, setName] = useState<string>('');
 
-const loggedIn = useSelector(state => state.authData.loggedIn);
+const loggedIn = useSelector((state: any) => state.authData.loggedIn);
 
 useEffect(() => {
     if(loggedIn) {
@@ -32,21 +31,21 @@ useEffect(() => {
 
 }, [loggedIn, navigate]);
 
-const handleChangeEmail = useCallback((e) =>{
-    setEmail(e.target.value);
+const handleChangeEmail = useCallback((value : string) =>{
+    setEmail(value);
 }, []);
 
-const handleChangePassword = useCallback((e) =>{
-    setPassword(e.target.value);
+const handleChangePassword = useCallback((value : string) =>{
+    setPassword(value);
 }, []);
 
-const handleChangeName = useCallback((e) => {
-    setName(e.target.value);
+const handleChangeName = useCallback((value : string) => {
+    setName(value);
 }, []);
 
-const signUp = useCallback((e) => {
-    e.preventDefault();
-    dispatch(onRegister({email, password, name}));
+const signUp = useCallback((evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    dispatch(onRegister(name, email, password));
 }, [name, email, password, dispatch] );
 
     return (
@@ -56,7 +55,7 @@ const signUp = useCallback((e) => {
                 <div className={styles.input}>
                     <Input
                     value={name}
-                    onChange={handleChangeName}
+                    onChange={(evt) => handleChangeName(evt.target.value)}
                     size={'default'}
                     placeholder={'Имя'}
                     icon={'EditIcon'}
@@ -64,23 +63,24 @@ const signUp = useCallback((e) => {
                 </div>
                 <div className={styles.input}>
                     <EmailInput 
-                    onChange={handleChangeEmail} 
+                    name='email'
+                    onChange={(evt) => handleChangeEmail(evt.target.value)}   
                     value={email}
                     size={'default'}
                     />
                 </div>
                 <div className={styles.input}>
                     <PasswordInput 
-                    onChange={handleChangePassword} 
+                    name='password' 
+                    onChange={(evt) => handleChangePassword(evt.target.value)} 
                     value={password}
                     size={'default'}
                     />
                 </div>
-                <div className={styles.button}>
-                    <Button type='primary' size='medium'>
-                    Зарегистрироваться
-                    </Button>
-                </div>
+                <button 
+                    className={styles.button} 
+                    type='submit'>Зарегистрироваться
+                </button>
             </form>
             <div className={styles.box}>
             <p className={styles.caption}>

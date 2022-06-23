@@ -1,20 +1,19 @@
-import React, {useRef} from 'react';
+import React, {useRef, FC} from 'react';
 import { useDispatch} from 'react-redux';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import constructor_ingredirnt from './ConstructorIngredient.module.css';
-import { useDrop, useDrag } from "react-dnd";
-import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../utils/tupes'
-import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/actions'
+import { useDrop, useDrag, DragObjectFactory, DropTargetMonitor } from "react-dnd";
+import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/actions';
+import {TConstructorIngredientData, TIngredient} from '../../utils/tupes';
 
-export default function ConstructorIngredient({item, deleteIngridient, index, id}) {
+export const ConstructorIngredient:FC<TConstructorIngredientData> = ({item, deleteIngridient, index, id}) => {
 
-    const dispatch = useDispatch();
-    const ref = useRef(null)
+    const dispatch: any = useDispatch();
+    const ref = useRef<HTMLLIElement>(null)
 
     const [, drop] = useDrop({
         accept: 'component',
-        hover(item, monitor) {
+        hover: (item: DragObjectFactory<TIngredient> & { index: number }, monitor: DropTargetMonitor) => {
             if (!ref.current) {
                 return;
             }
@@ -25,7 +24,7 @@ export default function ConstructorIngredient({item, deleteIngridient, index, id
             }
             const hoverBoundingRect = ref.current?.getBoundingClientRect();
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-            const clientOffset = monitor.getClientOffset();
+            const clientOffset: any = monitor.getClientOffset();
             const hoverClientY = clientOffset.y - hoverBoundingRect.top;
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return;
@@ -40,7 +39,7 @@ export default function ConstructorIngredient({item, deleteIngridient, index, id
         },
     });
 
-    const moveIngredient = (dragIndex, hoverIndex) => {
+    const moveIngredient = (dragIndex: number, hoverIndex: number) => {
         dispatch({
             type: MOVE_CONSTRUCTOR_INGREDIENTS,
             dragIndex,
@@ -59,11 +58,11 @@ export default function ConstructorIngredient({item, deleteIngridient, index, id
         })
     });
 
-        const dragDropRef = drag(drop(ref));
+        drag(drop(ref));
 
 
     return(
-        <li className={constructor_ingredirnt.item} ref={dragDropRef} style={{ opacity }}>
+        <li className={constructor_ingredirnt.item} ref={ref} style={{ opacity }}>
             <div className={constructor_ingredirnt.box}>
                 <DragIcon type="primary" />
             </div>
@@ -71,18 +70,10 @@ export default function ConstructorIngredient({item, deleteIngridient, index, id
             text={item.name}
             price={item.price}
             thumbnail={item.image}
-            index={index}
             handleClose={() => {
                 deleteIngridient(index)
             }}
             /> 
         </li>
     );
-};
-
-ConstructorIngredient.propTypes = {
-    deleteIngridient: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    item: ingredientPropTypes.isRequired,
 };
