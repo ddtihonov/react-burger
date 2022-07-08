@@ -18,6 +18,7 @@ import {
   ResetPassword,
   Ingredient,
   Orders,
+  Feed,
 } from '../../pages';
 import {
   DELETE_ORDER_NUMBER,
@@ -119,7 +120,9 @@ const handleIngredientClose = useCallback(() => {
             <Route  path='/reset-password'  element={
                       <ResetPassword/>
                   } />
-
+            <Route  path='/feed'  element={
+                      <Feed/>
+                  } />     
             {background  &&
               <Route  path='/ingredients/:id'  element={
                 <Modal
