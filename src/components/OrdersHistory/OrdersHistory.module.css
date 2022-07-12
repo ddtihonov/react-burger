@@ -1,0 +1,71 @@
+.main {
+    max-width: 584px;
+    width: 100%;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    gap: 56px;
+}
+
+.box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item{
+    font-family: 'Iceland';
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 30px;
+    color: #00CCCC;
+    margin: 8px 0 0;
+}
+
+.item_white{
+    font-family: 'Iceland';
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 30px;
+    color: #F2F2F3;
+    margin: 8px 0 0;
+}
+
+.info{
+    margin-top: 60px;
+}
+
+.text{
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 30px;
+    color: #F2F2F3;
+    margin: 0;
+}
+
+.text_list{
+    font-weight: 700;
+	font-size: 24px;
+	line-height: 30px;
+    color: #F2F2F3;
+    margin: 0 0 24px;
+}
+
+.price{
+    font-family: 'Iceland';
+	font-weight: normal;
+	font-size: 144px;
+	line-height: 120px;
+    margin: 0;
+    text-shadow: 0 0 16px rgb(51 51 255 / 25%), 0 0 8px rgb(51 51 255 / 25%), 0 4px 32px rgb(51 51 255 / 50%);
+}

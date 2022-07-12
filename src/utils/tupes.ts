@@ -1,4 +1,7 @@
 import { ReactNode } from 'react';
+import { TLoginAction } from '../services/actions/login';
+import { TUserAction } from '../services/actions/userInfo';
+import { TRecoveryPasswordAction } from '../services/actions/recoveryPassword';
 
 export type TModalOverlay = {
     children: ReactNode,
@@ -44,3 +47,26 @@ export interface IBackgroundState {
         background: Location
     }
 }
+
+export type TLogin = {
+    accessToken: string;
+    refreshToken: string;
+    success: boolean;
+    user: {
+        name: string;
+        email: string;
+    }
+}
+
+export type TUser = {
+    success: boolean;
+    user: {
+        name: string;
+        email: string;
+    }
+}
+
+export type TApplicationActions =
+| TLoginAction
+| TUserAction
+|TRecoveryPasswordAction;
