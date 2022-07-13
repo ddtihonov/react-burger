@@ -1,7 +1,7 @@
 import React, {useCallback, FC} from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import {DELETE_BURGER_INGREDIENT} from '../../services/actions/actions'
+import {DELETE_BURGER_INGREDIENT} from '../../services/actions/burgerConstructor'
 import { useDispatch, useSelector} from 'react-redux';
 import {ConstructorIngredient} from '../ConstructorIngredient/ConstructorIngredient';
 import { v4 as uuidv4 } from 'uuid';

@@ -1,5 +1,5 @@
 import React, {forwardRef, useCallback, Ref} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../utils/hooks';
 import ingredients_list from './IngredientsList.module.css';
 import {IngredientsCard} from '../IngredientsCard/IngredientsCard';
 import { Link, useLocation }  from 'react-router-dom';

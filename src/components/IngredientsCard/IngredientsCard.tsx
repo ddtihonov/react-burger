@@ -1,5 +1,5 @@
 import React, { useCallback, FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import { useDrag } from "react-dnd";
 import styles from './IngredientsCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';

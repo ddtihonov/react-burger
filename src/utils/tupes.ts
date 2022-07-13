@@ -2,6 +2,14 @@ import { ReactNode } from 'react';
 import { TLoginAction } from '../services/actions/login';
 import { TUserAction } from '../services/actions/userInfo';
 import { TRecoveryPasswordAction } from '../services/actions/recoveryPassword';
+import { TSignoutAction } from '../services/actions/singnOut';
+import { TLoadingAction } from '../services/actions/loading';
+import { TRefreshTokenAction } from '../services/actions/refreshToken';
+import { TResetPasswordAction } from '../services/actions/resetPassword';
+import { TRegisterAction } from '../services/actions/register';
+import { TEditProfileAction } from '../services/actions/updateUserInfo';
+import { TIngredientsAction } from '../services/actions/ingredients';
+//import { TOrderNumberAction } from '../services/actions/order';
 
 export type TModalOverlay = {
     children: ReactNode,
@@ -66,7 +74,21 @@ export type TUser = {
     }
 }
 
+export type TOrder = {
+    name: string;
+    order: { number: number };
+    success: boolean;
+};
+
 export type TApplicationActions =
 | TLoginAction
 | TUserAction
-|TRecoveryPasswordAction;
+| TRecoveryPasswordAction
+| TSignoutAction
+| TLoadingAction
+| TRefreshTokenAction
+| TResetPasswordAction
+| TRegisterAction
+| TEditProfileAction
+| TIngredientsAction
+//| TOrderNumberAction;

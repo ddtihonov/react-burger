@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, FC} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import { Route, Routes, useNavigate, useLocation, Location} from 'react-router-dom';
 import {AppHeader} from '../AppHeader/AppHeader';
 import app from './App.module.css';
@@ -21,14 +21,20 @@ import {
   Feed,
 } from '../../pages';
 import {
-  DELETE_ORDER_NUMBER,
-  DELETE_SELECTED_INGREDIENT,
   CLEAR_INGREDIENT_ORDER,
+} from '../../services/actions/burgerConstructor';
+
+import {
+  DELETE_SELECTED_INGREDIENT,
   INGREDIENT_WINDOW_CLOSE,
 } from '../../services/actions/actions';
+
+import {
+  DELETE_ORDER_NUMBER,
+} from '../../services/actions/order';
 import {onGetUserInfo} from '../../services/actions/userInfo';
 import {onRefreshToken} from '../../services/actions/refreshToken';
-import {onGetIngredients} from '../../services/actions/actions';
+import {onGetIngredients} from '../../services/actions/ingredients';
 import {IBackgroundState} from '../../utils/tupes';
 
 
@@ -42,7 +48,7 @@ function isBackgroundLocation(location: Location): location is Location & IBackg
 }
 export const App: FC = () =>{
 
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   let background = null
@@ -51,8 +57,9 @@ export const App: FC = () =>{
     background = location.state.background
   }
 
-  const orderNumber = useSelector((state: any) => state.orderState.orderNumber);
-  const loading  = useSelector((state: any) => state.authData.loading);
+  const orderNumber = useSelector((state) => state.orderState.orderNumber);
+  console.log(orderNumber)
+  const loading  = useSelector((state) => state.authData.loading);
 
   useEffect(() => {
     dispatch(onGetIngredients());

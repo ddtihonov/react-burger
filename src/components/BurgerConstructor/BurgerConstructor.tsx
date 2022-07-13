@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo, FC} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {getOrderNumber} from '../../services/actions/actions';
+import {getOrderNumber} from '../../services/actions/order';
 import styles from './BurgerConstructor.module.css';
 import {ConstructorList} from '../ConstructorList/ConstructorList';
 import { CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
-import {BURGER_INGREDIENT} from '../../services/actions/actions';
+import { useDispatch, useSelector } from '../../utils/hooks';
+import {BURGER_INGREDIENT} from '../../services/actions/burgerConstructor';
 import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
 import {TIngredient} from '../../utils/tupes';

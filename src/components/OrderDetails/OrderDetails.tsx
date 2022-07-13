@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks';
 import order_detals from './OrderDetails.module.css';
 import icon from '../../image/icon.svg';
 
 export const OrderDetails: FC = () => {
 
-    const orderNumber = useSelector((state: any) => state.orderState.orderNumber);
+    const orderNumber = useSelector((state) => state.orderState.orderNumber);
 
     return(
             <div className={order_detals.box} >

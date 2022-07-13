@@ -3,7 +3,7 @@ import { useDispatch} from 'react-redux';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import constructor_ingredirnt from './ConstructorIngredient.module.css';
 import { useDrop, useDrag, DragObjectFactory, DropTargetMonitor } from "react-dnd";
-import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/actions';
+import {MOVE_CONSTRUCTOR_INGREDIENTS} from '../../services/actions/burgerConstructor';
 import {TConstructorIngredientData, TIngredient} from '../../utils/tupes';
 
 export const ConstructorIngredient:FC<TConstructorIngredientData> = ({item, deleteIngridient, index, id}) => {

@@ -45,7 +45,6 @@ export const onGetUserInfo: AppThunk = (accessToken: string) => {
         
         getUserInfo(accessToken)
         .then((userData) => {
-            console.log(userData)
             if (userData && userData.success) {
                 dispatch(getUserSuccessAction(userData));
             }  
