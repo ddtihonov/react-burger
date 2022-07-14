@@ -9,7 +9,7 @@ import { TResetPasswordAction } from '../services/actions/resetPassword';
 import { TRegisterAction } from '../services/actions/register';
 import { TEditProfileAction } from '../services/actions/updateUserInfo';
 import { TIngredientsAction } from '../services/actions/ingredients';
-//import { TOrderNumberAction } from '../services/actions/order';
+import { TOrderNumberAction } from '../services/actions/order';
 
 export type TModalOverlay = {
     children: ReactNode,
@@ -80,6 +80,34 @@ export type TOrder = {
     success: boolean;
 };
 
+export type TFeedOrder = {
+    createdAt: string;
+    ingredients: TIngredient[] | string[];
+    name: string;
+    number: number;
+    status: string;
+    updatedAt: string;
+    _id: string;
+};
+
+export type TFeedOrders = {
+    success: boolean;
+    orders: TFeedOrder[];
+    total: number;
+    totalToday: number;
+};
+
+export type TWsActions = {
+    wsInit: string;
+    wsUserInit: string;
+    wsUserOrder: string;
+    wsSendMessage: string;
+    onOpen: string;
+    onClose: string;
+    onError: string;
+    onMessage: string;
+};
+
 export type TApplicationActions =
 | TLoginAction
 | TUserAction
@@ -91,4 +119,4 @@ export type TApplicationActions =
 | TRegisterAction
 | TEditProfileAction
 | TIngredientsAction
-//| TOrderNumberAction;
+| TOrderNumberAction;

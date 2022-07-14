@@ -2,7 +2,7 @@ import React, {useState, useRef, useCallback, useEffect, FC} from 'react';
 import burger_ingredients from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import {
   LOADING_START,
   LOADING_FINISH,
@@ -14,7 +14,7 @@ import {TIngredient} from '../../utils/tupes'
 export const BurgerIngredients: FC = () => {
 
   const ingredientsList = useSelector((state: any) => state.ingredientsState.ingredients);
-    const dispatch: any = useDispatch(); 
+    const dispatch = useDispatch(); 
 
     useEffect(() => {
       if(ingredientsList.length === 0){

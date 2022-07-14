@@ -1,12 +1,12 @@
 import {useIngredients} from '../../utils/IngredientsApi';
-//import { AppDispatch, AppThunk } from '../../utils';
+import { AppDispatch, AppThunk } from '../../utils';
 
-export const GET_ORDER_NUMBER_REQUEST = 'GET_ORDER_NUMBER_REQUEST';
+/*export const GET_ORDER_NUMBER_REQUEST = 'GET_ORDER_NUMBER_REQUEST';
 export const GET_ORDER_NUMBER_SUCCESS = 'GET_ORDER_NUMBER_SUCCESS';
 export const GET_ORDER_NUMBER_ERROR = 'GET_ORDER_NUMBER_ERROR';
-export const DELETE_ORDER_NUMBER = 'DELETE_ORDER_DATA';//удалить номер заказа
+export const DELETE_ORDER_NUMBER = 'DELETE_ORDER_DATA';//удалить номер заказа*/
 
-/*export const GET_ORDER_NUMBER_REQUEST: 'GET_ORDER_NUMBER_REQUEST' = 'GET_ORDER_NUMBER_REQUEST';
+export const GET_ORDER_NUMBER_REQUEST: 'GET_ORDER_NUMBER_REQUEST' = 'GET_ORDER_NUMBER_REQUEST';
 export const GET_ORDER_NUMBER_SUCCESS: 'GET_ORDER_NUMBER_SUCCESS' = 'GET_ORDER_NUMBER_SUCCESS';
 export const GET_ORDER_NUMBER_ERROR: 'GET_ORDER_NUMBER_ERROR' = 'GET_ORDER_NUMBER_ERROR';
 export const DELETE_ORDER_NUMBER: 'DELETE_ORDER_DATA' = 'DELETE_ORDER_DATA';//удалить номер заказа
@@ -49,7 +49,7 @@ export const getOrderNumberErrorAction = (): TOrderNumberAction => ({
     type: GET_ORDER_NUMBER_ERROR,
 });
 
-export const getOrderNumber: AppThunk = (ingredientsId: string) => {
+export const getOrderNumber: AppThunk = (ingredientsId: number[]) => {
     return (dispatch: AppDispatch) => {
         dispatch(getOrderNumberRequestAction());
         useIngredients(ingredientsId)
@@ -62,15 +62,16 @@ export const getOrderNumber: AppThunk = (ingredientsId: string) => {
                 dispatch(getOrderNumberErrorAction());
             }) 
     };
-}*/
+}
 
-export function getOrderNumber(ingredientIds) {
+/*export function getOrderNumber(ingredientIds) {
     return (dispatch) => {
         dispatch({
             type: GET_ORDER_NUMBER_REQUEST,
         });
         useIngredients(ingredientIds)
         .then((res) => {
+            console.log(res.order.number)
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,
                     payload: {
@@ -85,4 +86,4 @@ export function getOrderNumber(ingredientIds) {
                 });
             }) 
     };
-}
+}*/

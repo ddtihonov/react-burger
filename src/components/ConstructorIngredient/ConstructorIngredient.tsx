@@ -1,5 +1,5 @@
 import React, {useRef, FC} from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch} from '../../utils/hooks';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import constructor_ingredirnt from './ConstructorIngredient.module.css';
 import { useDrop, useDrag, DragObjectFactory, DropTargetMonitor } from "react-dnd";
@@ -8,7 +8,7 @@ import {TConstructorIngredientData, TIngredient} from '../../utils/tupes';
 
 export const ConstructorIngredient:FC<TConstructorIngredientData> = ({item, deleteIngridient, index, id}) => {
 
-    const dispatch: any = useDispatch();
+    const dispatch = useDispatch();
     const ref = useRef<HTMLLIElement>(null)
 
     const [, drop] = useDrop({

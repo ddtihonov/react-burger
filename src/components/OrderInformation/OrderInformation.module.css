@@ -1,0 +1,56 @@
+.main {
+    background: #1C1C21;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #F2F2F3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.number{
+    font-family: 'Iceland';
+	font-weight: 400;
+	font-size: 28px;
+	line-height: 24px;
+    color: #F2F2F3;
+    margin: 0;
+}
+
+.date{
+    font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+    color: #8585AD;
+    margin: 0;
+}
+
+.title{
+    font-weight: 700;
+	font-size: 24px;
+	line-height: 30px;
+    color: #F2F2F3;
+}
+
+.box_prise{
+    display: flex;
+    align-items: center;
+}
+
+.price{
+    font-family: 'Iceland';
+	font-weight: 400;
+	font-size: 28px;
+	line-height: 24px;
+    color: #F2F2F3;
+    margin: 0 8px 0 0;
+}

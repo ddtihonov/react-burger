@@ -16,12 +16,12 @@ export const BurgerConstructor: FC = () => {
         const navigate = useNavigate();
 
         // получаем из хранилища массив ингредиентов
-        const ingredientsConstructorList = useSelector((state: any) => state.burgerConstructorIngredients.burgerIngredients);
+        const ingredientsConstructorList = useSelector((state) => state.burgerConstructorIngredients.burgerIngredients);
       
         // получаем булку
         const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
-        const loggedIn = useSelector((state: any) => state.authData.loggedIn);
-        const dispatch: any = useDispatch();
+        const loggedIn = useSelector((state) => state.authData.loggedIn);
+        const dispatch = useDispatch();
 
         //ловим перетаскиваемый элемент и сохраняем в хранилище
         const [{ isHover }, dropTarget] = useDrop({
@@ -91,5 +91,3 @@ export const BurgerConstructor: FC = () => {
       </section>
     );
   };
-
-  /*<Button type='primary' size='large' onClick={handleOrder}>Оформить заказ</Button>*/

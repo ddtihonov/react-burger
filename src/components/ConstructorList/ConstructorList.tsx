@@ -2,7 +2,7 @@ import React, {useCallback, FC} from 'react';
 import constructor_list from './ConstructorList.module.css';
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import {DELETE_BURGER_INGREDIENT} from '../../services/actions/burgerConstructor'
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector} from '../../utils/hooks';
 import {ConstructorIngredient} from '../ConstructorIngredient/ConstructorIngredient';
 import { v4 as uuidv4 } from 'uuid';
 import {TIngredient} from '../../utils/tupes'
@@ -11,7 +11,7 @@ export const ConstructorList: FC = () => {
 
     const dispatch = useDispatch();
 
-    const ingredientsConstructorList = useSelector((state: any) => state.burgerConstructorIngredients.burgerIngredients);
+    const ingredientsConstructorList = useSelector((state) => state.burgerConstructorIngredients.burgerIngredients);
     const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
     
     // удаляем ингридиент и перезаписываем массив в хранилище

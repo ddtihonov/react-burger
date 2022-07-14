@@ -10,8 +10,8 @@ import {TIngredient} from '../../utils/tupes';
 export const IngredientsCard: FC<{card: TIngredient}> = ({card}) => {
 
     let counter = 0
-    const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
-    const ingredientsConstructorList = useSelector((state: any) => state.burgerConstructorIngredients.burgerIngredients);
+    const bun = useSelector((state) => state.burgerConstructorIngredients.burgerBun);
+    const ingredientsConstructorList = useSelector((state) => state.burgerConstructorIngredients.burgerIngredients);
 
     if(bun !== null) {
     const ingredientsTotal = ingredientsConstructorList.concat(bun);

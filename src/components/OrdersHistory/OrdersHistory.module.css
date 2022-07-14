@@ -16,8 +16,13 @@
 }
 
 .list{
+    height: 400px;
+    width: 270px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    column-gap: 10px;
     list-style: none;
     padding: 0;
     margin: 0;

@@ -1,6 +1,6 @@
 import React, {useMemo, FC} from 'react';
 import ingredient_detals from './IngredientDetails.module.css'
-import { useSelector} from 'react-redux';
+import { useSelector} from '../../utils/hooks';
 import { useLocation, useParams } from 'react-router-dom';
 import {TIngredient} from '../../utils/tupes'
 
@@ -9,7 +9,7 @@ export const IngredientDetails: FC = () => {
 
     const { state } = useLocation();
 
-    const ingredientModal = useSelector((state:any) => state.ingredientState.selectedIngredient);
+    const ingredientModal = useSelector((state) => state.ingredientState.selectedIngredient);
 
     const ingredients = useSelector((state:any) => state.ingredientsState.ingredients);
     

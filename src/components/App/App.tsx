@@ -58,7 +58,7 @@ export const App: FC = () =>{
   }
 
   const orderNumber = useSelector((state) => state.orderState.orderNumber);
-  console.log(orderNumber)
+  //console.log(orderNumber)
   const loading  = useSelector((state) => state.authData.loading);
 
   useEffect(() => {

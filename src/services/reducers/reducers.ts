@@ -9,7 +9,7 @@ import {
 
 import { TIngredient} from '../../utils/tupes';
 
-type TSelectedIngredientState = {
+export type TSelectedIngredientState = {
     selectedIngredient: TIngredient | null,
     ingredientWindowOpen: boolean
 };
