@@ -14,7 +14,7 @@ export const ProfileMenu: FC = () => {
     }, [dispatch]);
     
 
-    const setActive =({isActive}: any) => isActive ? styles.link_active : styles.link 
+    const setActive =({isActive}: any) => isActive ? styles.link_active : styles.link
 
     return (
             <div className={styles.container}>

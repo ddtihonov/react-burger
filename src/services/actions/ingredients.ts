@@ -14,7 +14,7 @@ export interface IIngredientsRequestAction {
 
 export interface IIngredientsSuccessAction {
     readonly type: typeof GET_INGREDIENTS_SUCCESS;
-    readonly payload: { ingredients: TIngredient};
+    readonly payload: { ingredients: ReadonlyArray<TIngredient>};
 }
 
 export interface IIngredientsErrorAction {
@@ -30,7 +30,7 @@ export const getIngredientsRequestAction = (): TIngredientsAction => ({
     type: GET_INGREDIENTS_REQUEST,
 });
 
-export const getIngredientsSuccessAction = (data: TIngredient): TIngredientsAction => ({
+export const getIngredientsSuccessAction = (data: ReadonlyArray<TIngredient>): TIngredientsAction => ({
     type: GET_INGREDIENTS_SUCCESS,
     payload: {
         ingredients: data,

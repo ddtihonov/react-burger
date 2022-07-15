@@ -4,11 +4,13 @@ import { useSelector } from '../../utils/hooks';
 import { OrderInformation } from '../../components/OrderInformation/OrderInformation';
 import { OrdersHistory } from '../../components/OrdersHistory/OrdersHistory';
 import { TFeedOrder } from '../../utils/tupes';
+import { Preloader } from '../../components/Preloader/Preolader';
 
 export const Feed: FC = () => {
 
     const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
-    //console.log(orders)
+    const loading  = useSelector((state) => state.orderHistory.wsConnected);
+
 
     return (
         <section className={style.main}>
@@ -30,7 +32,9 @@ export const Feed: FC = () => {
                 </ul>
                 <OrdersHistory/>
             </div>
+            {!loading &&
+                <Preloader/>
+            }
         </section>
-        
     )
 }

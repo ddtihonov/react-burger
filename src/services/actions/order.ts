@@ -1,10 +1,6 @@
 import {useIngredients} from '../../utils/IngredientsApi';
 import { AppDispatch, AppThunk } from '../../utils';
-
-/*export const GET_ORDER_NUMBER_REQUEST = 'GET_ORDER_NUMBER_REQUEST';
-export const GET_ORDER_NUMBER_SUCCESS = 'GET_ORDER_NUMBER_SUCCESS';
-export const GET_ORDER_NUMBER_ERROR = 'GET_ORDER_NUMBER_ERROR';
-export const DELETE_ORDER_NUMBER = 'DELETE_ORDER_DATA';//удалить номер заказа*/
+import { TOrder } from '../../utils/tupes';
 
 export const GET_ORDER_NUMBER_REQUEST: 'GET_ORDER_NUMBER_REQUEST' = 'GET_ORDER_NUMBER_REQUEST';
 export const GET_ORDER_NUMBER_SUCCESS: 'GET_ORDER_NUMBER_SUCCESS' = 'GET_ORDER_NUMBER_SUCCESS';
@@ -21,7 +17,7 @@ export interface IOrderNumberRequestAction {
 
 export interface IOrderNumberSuccessAction {
     readonly type: typeof GET_ORDER_NUMBER_SUCCESS;
-    readonly payload: { order: string};
+    readonly payload: { order: number};
 }
 
 export interface IOrderNumberErrorAction {
@@ -38,10 +34,10 @@ export const getOrderNumberRequestAction = (): TOrderNumberAction => ({
     type: GET_ORDER_NUMBER_REQUEST,
 });
 
-export const getOrderNumberSuccessAction = (order: string): TOrderNumberAction => ({
+export const getOrderNumberSuccessAction = (data: TOrder): TOrderNumberAction => ({
     type: GET_ORDER_NUMBER_SUCCESS,
     payload: {
-        order: order,
+        order: data.order.number,
     }, 
 });
 
@@ -49,13 +45,12 @@ export const getOrderNumberErrorAction = (): TOrderNumberAction => ({
     type: GET_ORDER_NUMBER_ERROR,
 });
 
-export const getOrderNumber: AppThunk = (ingredientsId: number[]) => {
+export const getOrderNumber: AppThunk = (ingredientsId) => {
     return (dispatch: AppDispatch) => {
         dispatch(getOrderNumberRequestAction());
         useIngredients(ingredientsId)
         .then((res) => {
-            console.log(res.order.number)
-            dispatch(getOrderNumberSuccessAction(res.order.number));   
+            dispatch(getOrderNumberSuccessAction(res));
         })
         .catch((err) => {
             console.log(`Внимание! ${err}`);
@@ -63,27 +58,3 @@ export const getOrderNumber: AppThunk = (ingredientsId: number[]) => {
             }) 
     };
 }
-
-/*export function getOrderNumber(ingredientIds) {
-    return (dispatch) => {
-        dispatch({
-            type: GET_ORDER_NUMBER_REQUEST,
-        });
-        useIngredients(ingredientIds)
-        .then((res) => {
-            console.log(res.order.number)
-                dispatch({
-                    type: GET_ORDER_NUMBER_SUCCESS,
-                    payload: {
-                    order: res.order.number,
-                    },
-                });
-        })
-        .catch((err) => {
-            console.log(`Внимание! ${err}`);
-                dispatch({
-                    type: GET_ORDER_NUMBER_ERROR,
-                });
-            }) 
-    };
-}*/

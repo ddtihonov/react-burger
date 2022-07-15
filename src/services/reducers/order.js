@@ -5,6 +5,14 @@ import {
     DELETE_ORDER_NUMBER,
 } from '../actions/order';
 
+//import { TApplicationActions } from '../../utils/tupes';
+
+/*type TOrderInitialState = {
+    orderNumber: number | null,
+    orderNumberRequest: boolean,
+    orderNumberError: boolean,
+};*/
+
 
 // начальное состояние popap заказа
 const orderInitialState = {

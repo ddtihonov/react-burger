@@ -15,7 +15,7 @@ export const OrderInformation: FC<{
 }> = ({ name, number, date, ingredients }) => {
     const location = useLocation();
 
-    const ingredientsList = useSelector((state: any) => state.ingredientsState.ingredients);
+    const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
     //console.log(ingredientsList)
     //console.log(ingredients)
 
@@ -27,7 +27,7 @@ export const OrderInformation: FC<{
         );
     }
 
-    console.log(orderIngredients)
+    //console.log(orderIngredients)
 
     function parseDate(date: string) {
         const currentDate = new Date();

@@ -19,7 +19,7 @@ export const BurgerConstructor: FC = () => {
         const ingredientsConstructorList = useSelector((state) => state.burgerConstructorIngredients.burgerIngredients);
       
         // получаем булку
-        const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
+        const bun = useSelector((state) => state.burgerConstructorIngredients.burgerBun);
         const loggedIn = useSelector((state) => state.authData.loggedIn);
         const dispatch = useDispatch();
 
@@ -51,9 +51,10 @@ export const BurgerConstructor: FC = () => {
             return amountIngredients + bun.price * 2
         }, [ingredientsConstructorList, bun]);
 
+
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
-          if (loggedIn === true) {
+          if (loggedIn === true && bun !== null) {
             const iDingredients = ingredientsConstructorList.map((item: TIngredient) => item._id).concat([bun._id]);
             dispatch(getOrderNumber(iDingredients));
           } else {

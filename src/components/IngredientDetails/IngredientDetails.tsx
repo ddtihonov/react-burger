@@ -11,7 +11,7 @@ export const IngredientDetails: FC = () => {
 
     const ingredientModal = useSelector((state) => state.ingredientState.selectedIngredient);
 
-    const ingredients = useSelector((state:any) => state.ingredientsState.ingredients);
+    const ingredients = useSelector((state) => state.ingredientsState.ingredients);
     
     const { id } = useParams()
     const ingredient = useMemo(() => {
@@ -25,7 +25,7 @@ export const IngredientDetails: FC = () => {
 
     return(
             <div className={ingredient_detals.box} >
-                {state ? (
+                {state && ingredientItem !== undefined ? (
                 <>
                     <img className={ingredient_detals.image} src={ingredientItem.image} alt={ingredientItem.name}></img>
                     <h3 className={ingredient_detals.subtitle}>{ingredientItem.name}</h3>

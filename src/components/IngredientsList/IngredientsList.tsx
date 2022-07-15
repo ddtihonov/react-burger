@@ -3,7 +3,7 @@ import { useDispatch } from '../../utils/hooks';
 import ingredients_list from './IngredientsList.module.css';
 import {IngredientsCard} from '../IngredientsCard/IngredientsCard';
 import { Link, useLocation }  from 'react-router-dom';
-import {TIngredientsList} from '../../utils/tupes'
+import {TIngredientsList, TIngredient } from '../../utils/tupes';
 import {
     INGREDIENT_WINDOW_OPEN,
 } from '../../services/actions/actions';
@@ -25,7 +25,7 @@ const IngredientsList = forwardRef(({ ingredients, title }: TIngredientsList, re
         <>
         <h3 className={ingredients_list.title} ref={ref}>{title}</h3>
         <ul className={ingredients_list.list}>
-            {ingredients.map((item: any) => {
+            {ingredients.map((item: TIngredient) => {
                 return (
                 <Link
                     onClick={windowOpen}

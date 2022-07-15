@@ -9,7 +9,7 @@ import {BASE_URL, checkError} from './constants'
             .then((res) => checkError(res));
     }
 
-    export  const useIngredients = (arr: number[]) => {
+    export  const useIngredients = (arr: string[]) => {
         return  fetch(BASE_URL + 'orders', {
             method: 'POST',
             headers: {

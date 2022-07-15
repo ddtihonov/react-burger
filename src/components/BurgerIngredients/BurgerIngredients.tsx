@@ -13,7 +13,7 @@ import {TIngredient} from '../../utils/tupes'
 
 export const BurgerIngredients: FC = () => {
 
-  const ingredientsList = useSelector((state: any) => state.ingredientsState.ingredients);
+  const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
     const dispatch = useDispatch(); 
 
     useEffect(() => {

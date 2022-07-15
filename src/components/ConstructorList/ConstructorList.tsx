@@ -12,7 +12,7 @@ export const ConstructorList: FC = () => {
     const dispatch = useDispatch();
 
     const ingredientsConstructorList = useSelector((state) => state.burgerConstructorIngredients.burgerIngredients);
-    const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
+    const bun = useSelector((state) => state.burgerConstructorIngredients.burgerBun);
     
     // удаляем ингридиент и перезаписываем массив в хранилище
     const handleDeleteIngredient = useCallback((Index: number) => {
@@ -23,13 +23,15 @@ export const ConstructorList: FC = () => {
     return(
         <>
             <div className={constructor_list.cell}>
-                <ConstructorElement
+                {bun !== null &&
+                    <ConstructorElement
                         type="top"
                         isLocked={true}
                         text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
                     />
+                }   
             </div>
             <ul className={`${constructor_list.list} ${constructor_list.scrollbar}`} >
                 {ingredientsConstructorList.map((item: TIngredient, index: number) => {
@@ -44,13 +46,14 @@ export const ConstructorList: FC = () => {
             })}
             </ul>
             <div className={constructor_list.cell}>
+            {bun !== null &&
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
                     text={`${bun.name} (низ)`}
                     price={bun.price}
                     thumbnail={bun.image}
-                /> 
+                />} 
             </div>
         </>
     
