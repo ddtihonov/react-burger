@@ -5,29 +5,46 @@ import { useLocation } from 'react-router';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './OrderInformation.module.css';
 import { TIngredient } from '../../utils/tupes';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const OrderInformation: FC<{
     number: string;
     date: string;
     name: string;
-    ingredients: TIngredient[] | string[];
-}> = ({ name, number, date, ingredients }) => {
+    ingredients: string[];
+    status: string;
+    id: string;
+}> = ({ name, number, date, ingredients, status, id }) => {
     const location = useLocation();
 
     const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
-    //console.log(ingredientsList)
-    //console.log(ingredients)
 
-    let orderIngredients = [];
+    console.log(status)
 
-    for (let i = 0; i < ingredients.length; i++) {
-        orderIngredients.push(
-            ingredientsList.find((item: TIngredient) => item._id === ingredients[i])
-        );
-    }
 
-    //console.log(orderIngredients)
+    const orderIngredients = useMemo(
+        () => {
+            let components  = [];
+            for (let i = 0; i < ingredients.length; i++) {
+                components.push(
+                    ingredientsList.find((item: TIngredient) => item._id === ingredients[i])
+                );
+                }
+            return components;
+            },
+            [ingredients, ingredientsList]
+    );
+    
+
+const orderIngredient = ingredientsList
+
+    // расчет стоимости заказов
+    const orderAmount = useMemo(() =>{
+            const price = orderIngredient.reduce((x: number, obj: TIngredient) => x + obj.price, 0)
+            return  price
+    }, [orderIngredient]);
+
 
     function parseDate(date: string) {
         const currentDate = new Date();
@@ -45,21 +62,41 @@ export const OrderInformation: FC<{
     }
 
     return (
-        <li className={style.main}>
-            <div className={style.box}>
-                <p className={style.number}>{number}</p>
-                <p className={style.date}>{parseDate(date)}</p>
-            </div>
-            <h3 className={style.title}>{name}</h3>
-            <div className={style.box_ingredient}>
-                <ul className={style.list}>
-
-                </ul>
-                <div className={style.box_prise}>
-                    <p className={style.price}>450</p>
-                    <CurrencyIcon type="primary"/>
+        <Link
+            className={style.link}
+            to={`${location.pathname}/${id}`}
+            state={{ background: location.pathname }}
+        >
+            <li className={style.main}>
+                <div className={style.box}>
+                    <p className={style.number}>{number}</p>
+                    <p className={style.date}>{parseDate(date)}</p>
                 </div>
-            </div>
-        </li>
+                <h3 className={style.title}>{name}</h3>
+                <div className={style.box_ingredient}>
+                    <ul className={style.list}>
+                        {orderIngredients.length > 6 &&
+                        (   <li className={style.cell}>
+                                <p className={style.quantity}>+{orderIngredients.length - 5}</p>
+                            </li>)
+                        }
+                        { orderIngredient?.slice(0, orderIngredients.length > 6 ? 5 : 6)
+                                .map((item) => {
+                                    const keyUid = uuidv4()
+                                    return (
+                                        <li className={style.cell} key={keyUid}>
+                                            <img className={style.image} src={item.image_mobile} alt={item.name} />
+                                        </li>
+                                    )
+                                })
+                        }
+                    </ul>
+                    <div className={style.box_prise}>
+                        <p className={style.price}>{orderAmount}</p>
+                        <CurrencyIcon type="primary"/>
+                    </div>
+                </div>
+            </li>
+        </Link>
     );
 };

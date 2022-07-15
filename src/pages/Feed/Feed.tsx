@@ -11,7 +11,6 @@ export const Feed: FC = () => {
     const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
     const loading  = useSelector((state) => state.orderHistory.wsConnected);
 
-
     return (
         <section className={style.main}>
             <h2 className={style.title}>Лента заказов</h2>
@@ -26,6 +25,8 @@ export const Feed: FC = () => {
                                     date={item.createdAt}
                                     number={'#' + String(item.number)}
                                     ingredients={item.ingredients}
+                                    status={item.status}
+                                    id={item._id}
                                 />
                             )
                     })}

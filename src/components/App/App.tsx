@@ -93,6 +93,10 @@ const handleIngredientClose = useCallback(() => {
 
 }, [dispatch, navigate]);
 
+const handleFeedClose = useCallback(() => {
+  navigate('/feed')
+}, [ navigate]);
+
 
   return (
     <div className={app.page}>
@@ -137,8 +141,19 @@ const handleIngredientClose = useCallback(() => {
                 >
                 <IngredientDetails/>
               </Modal>
-            } />}
+              }/>}
+              {background  &&
+              <Route  path='/feed/:id'  element={
+                <Modal
+                onClose={handleFeedClose}
+                >
+              </Modal>
+              }/> 
+              }
             <Route  path='/ingredients/:id'  element={
+              <Ingredient/>
+            } />
+            <Route  path='/feed/:id'  element={
               <Ingredient/>
             } />
           </Routes>

@@ -82,7 +82,7 @@ export type TOrder = {
 
 export type TFeedOrder = {
     createdAt: string;
-    ingredients: TIngredient[] | string[];
+    ingredients: string[];
     name: string;
     number: number;
     status: string;

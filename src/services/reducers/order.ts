@@ -5,24 +5,24 @@ import {
     DELETE_ORDER_NUMBER,
 } from '../actions/order';
 
-//import { TApplicationActions } from '../../utils/tupes';
+import { TApplicationActions } from '../../utils/tupes';
 
-/*type TOrderInitialState = {
+type TOrderInitialState = {
     orderNumber: number | null,
     orderNumberRequest: boolean,
     orderNumberError: boolean,
-};*/
+};
 
 
 // начальное состояние popap заказа
-const orderInitialState = {
+const orderInitialState: TOrderInitialState = {
     orderNumber: null,
     orderNumberRequest: false,
     orderNumberError: false,
 };
 
 //редюсер popap заказа
-export const orderNumberReducer = (state = orderInitialState, action) => {
+export const orderNumberReducer = (state = orderInitialState, action: any) => {
     switch (action.type) {
         case GET_ORDER_NUMBER_REQUEST: {
             return {
@@ -35,7 +35,7 @@ export const orderNumberReducer = (state = orderInitialState, action) => {
                 ...state,
                 orderNumberRequest: false,
                 orderNumberError: false,
-                orderNumber: action.payload.data.order,
+                orderNumber: action.payload.order,
             };
         }
         case GET_ORDER_NUMBER_ERROR: {

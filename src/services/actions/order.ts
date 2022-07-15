@@ -49,8 +49,8 @@ export const getOrderNumber: AppThunk = (ingredientsId) => {
     return (dispatch: AppDispatch) => {
         dispatch(getOrderNumberRequestAction());
         useIngredients(ingredientsId)
-        .then((res) => {
-            dispatch(getOrderNumberSuccessAction(res));
+        .then((data) => {
+            dispatch(getOrderNumberSuccessAction(data));
         })
         .catch((err) => {
             console.log(`Внимание! ${err}`);
