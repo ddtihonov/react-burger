@@ -8,6 +8,7 @@ import {
 } from '../actions/actions';
 
 import { TIngredient} from '../../utils/tupes';
+import { TApplicationActions } from "../../utils/tupes";
 
 export type TSelectedIngredientState = {
     selectedIngredient: TIngredient | null,
@@ -21,7 +22,7 @@ const selectedIngredientState: TSelectedIngredientState = {
 
 
 export const selectedIngredientsReducer: Reducer<TSelectedIngredientState
-> = (state = selectedIngredientState, action) => {
+> = (state = selectedIngredientState, action: TApplicationActions) => {
     switch(action.type) {
         case SELECT_INGREDIENT: {
             return {

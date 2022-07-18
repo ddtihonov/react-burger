@@ -10,6 +10,7 @@ import { TRegisterAction } from '../services/actions/register';
 import { TEditProfileAction } from '../services/actions/updateUserInfo';
 import { TIngredientsAction } from '../services/actions/ingredients';
 import { TOrderNumberAction } from '../services/actions/order';
+import { TSelectIngredient } from '../services/actions/actions';
 
 export type TModalOverlay = {
     children: ReactNode,
@@ -119,4 +120,5 @@ export type TApplicationActions =
 | TRegisterAction
 | TEditProfileAction
 | TIngredientsAction
-| TOrderNumberAction;
+| TOrderNumberAction
+| TSelectIngredient;

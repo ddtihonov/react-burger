@@ -8,6 +8,7 @@ import {IngredientDetails} from '../IngredientDetails/IngredientDetails';
 import {Modal} from '../Modal/Modal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {Preloader} from '../Preloader/Preolader';
+import { FeedOrder } from '../FeedOrder/FeedOrder';
 import {
   Login,
   Register,
@@ -147,6 +148,7 @@ const handleFeedClose = useCallback(() => {
                 <Modal
                 onClose={handleFeedClose}
                 >
+                <FeedOrder/>  
               </Modal>
               }/> 
               }

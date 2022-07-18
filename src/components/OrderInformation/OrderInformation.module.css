@@ -110,12 +110,3 @@
     z-index: 100;
     overflow: hidden;
 }
-
-.link{
-    text-decoration: none;
-    box-sizing: content-box;
-}
-
-.link:hover{
-    opacity: .8;
-}

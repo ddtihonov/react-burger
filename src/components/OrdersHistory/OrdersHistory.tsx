@@ -11,6 +11,9 @@ export const OrdersHistory: FC = () => {
     const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
     const total  = useSelector((state) => state.orderHistory.feed.total);
     const totalToday = useSelector((state) => state.orderHistory.feed.totalToday);
+    /*orders.map(item => {
+        console.log(item.status)
+    })*/
 
     useEffect(() => {
         dispatch(wsConnectionStart());
@@ -45,7 +48,7 @@ export const OrdersHistory: FC = () => {
                     .map(item => {
                         const keyUid = uuidv4()
                             return (
-                                <li className={style.item} key={keyUid}>{item.number}</li> 
+                                <li className={style.item_white} key={keyUid}>{item.number}</li> 
                             )
                     })}
                     </ul>
