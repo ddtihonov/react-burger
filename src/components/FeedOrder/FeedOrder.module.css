@@ -82,7 +82,7 @@
     margin: 0 0 0 16px;
 }
 
-.image {
+.box_img{
     background: #131316;
     border-radius: 50%;
     box-sizing: border-box;
@@ -92,6 +92,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.image {
+    width: 100%;
+    object-fit: cover;
 }
 
 .cell{
@@ -112,6 +117,18 @@
     margin: 0;
     max-height: 320px;
     overflow-y: scroll;
+}
+
+.list_min{
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    max-height: 320px; 
 }
 
 .scrollbar {

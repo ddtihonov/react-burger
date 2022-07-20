@@ -83,7 +83,7 @@ export type TOrder = {
 
 export type TFeedOrder = {
     createdAt: string;
-    ingredients: string[];
+    ingredients: ReadonlyArray<string>;
     name: string;
     number: number;
     status: string;
@@ -93,7 +93,7 @@ export type TFeedOrder = {
 
 export type TFeedOrders = {
     success: boolean;
-    orders: TFeedOrder[];
+    orders: Array< TFeedOrder>;
     total: number;
     totalToday: number;
 };

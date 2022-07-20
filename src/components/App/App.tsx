@@ -38,6 +38,8 @@ import {onRefreshToken} from '../../services/actions/refreshToken';
 import {onGetIngredients} from '../../services/actions/ingredients';
 import {IBackgroundState} from '../../utils/tupes';
 
+import {ORDER_WINDOW_CLOSE} from '../../services/actions/selectedOrder'
+
 
 // Сделав проверку мы говорим TS что мы программно убедились что у location.state есть background
 function isBackgroundLocation(location: Location): location is Location & IBackgroundState {
@@ -96,7 +98,13 @@ const handleIngredientClose = useCallback(() => {
 
 const handleFeedClose = useCallback(() => {
   navigate('/feed')
-}, [ navigate]);
+  dispatch({ type: ORDER_WINDOW_CLOSE})
+}, [dispatch, navigate]);
+
+const handleOrdersClose = useCallback(() => {
+  navigate('/profile/orders')
+  dispatch({ type: ORDER_WINDOW_CLOSE})
+}, [dispatch, navigate]);
 
 
   return (
@@ -143,20 +151,30 @@ const handleFeedClose = useCallback(() => {
                 <IngredientDetails/>
               </Modal>
               }/>}
-              {background  &&
+            {background  &&
               <Route  path='/feed/:id'  element={
                 <Modal
                 onClose={handleFeedClose}
                 >
                 <FeedOrder/>  
               </Modal>
-              }/> 
-              }
+              }/> }
+            {background  &&
+              <Route  path='/profile/orders/:id'  element={
+                <Modal
+                  onClose={handleOrdersClose}
+                >
+                <FeedOrder/>  
+              </Modal>
+              }/> }  
             <Route  path='/ingredients/:id'  element={
               <Ingredient/>
             } />
             <Route  path='/feed/:id'  element={
-              <Ingredient/>
+              <FeedOrder/> 
+            } />
+            <Route  path='/profile/orders/:id'  element={
+              <FeedOrder/> 
             } />
           </Routes>
 

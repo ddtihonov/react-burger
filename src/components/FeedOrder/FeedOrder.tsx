@@ -1,42 +1,65 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, useMemo, useEffect} from 'react';
 import style from './FeedOrder.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../utils/hooks';
-import { TIngredient } from '../../utils/tupes';
+import { TIngredient,  TFeedOrder} from '../../utils/tupes';
 import { v4 as uuidv4 } from 'uuid';
+import { wsConnectionStart } from '../../services/actions/wsOrders';
 
 
 export const FeedOrder: FC = () => {
-    const order = useSelector((state: any) => state.orderDetals.selectedOrder);
+
+    const { state } = useLocation();
+    const dispatch = useDispatch();
+    const { id } = useParams();
+
+    useEffect(() => {
+        dispatch(wsConnectionStart());
+    }, [dispatch]);
+
+    const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
     const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
-    console.log(order)
+    //const stat  = useSelector((state) => state);
     
-    /*const orderIngredients  = useMemo(
-        () => {
-            let components  = [];
-            for (let i = 0; i < order.ingredients.length; i++) {
-                components.push(
-                    ingredientsList.find((item: TIngredient) => item._id === order.ingredients[i])
-                );
-                }
-            return components;
-            },
-            [order, ingredientsList]
-    );*/
+    useEffect(() => {
+        orders.length === 0  && dispatch(wsConnectionStart());
+    }, [orders, dispatch, state]);
+
+    const orderData:TFeedOrder | undefined = useMemo(() => {
+        if(orders.length > 0){
+            return orders.find((order:TFeedOrder) => order._id === id)}
+        }, [orders, id]
+    )
+
+    const uniqueIngredients = useMemo( () =>{
+        if(orderData){
+        let arr = orderData.ingredients.filter((item: string, index: number) =>{
+            return orderData.ingredients.indexOf(item) === index
+        })
+
+        return arr
+        } else {
+            return ''
+        }
+    }, [orderData]);
+
+
+
 
     const orderIngredients:(TIngredient | undefined)[]  = useMemo(
         () => {
             let components:(TIngredient | undefined)[]  = [];
-            for (let i = 0; i < order.ingredients.length; i++) {
+            for (let i = 0; i < uniqueIngredients.length; i++) {
                 components.push(
-                    ingredientsList.find((item: TIngredient) => item._id === order.ingredients[i])
+                    ingredientsList.find((item: TIngredient) => item._id === uniqueIngredients[i])
                 );
                 }
             return components;
             },
-            [order, ingredientsList]
+            [uniqueIngredients, ingredientsList]
     );
+    
 
     // расчет стоимости заказов
     const orderAmount = useMemo(() =>{
@@ -61,53 +84,50 @@ export const FeedOrder: FC = () => {
             : `${term} дней назад, ${orderTime} i-GMT+3`;
     }
 
+
     return (
         <section className={style.main}>
-            <p className={style.number}>#{order.number}</p>
-            <h3 className={style.title}>{order.name}</h3>
-            {order.status === 'done' ?
-            (<p className={style.condition}>Выполнен</p>) :
-            (<p className={style.cook}>Готовится</p>)}
-            <p className={style.structure}>Состав:</p>
-            <ul className={`${style.list} ${style.scrollbar}`}>
-            { orderIngredients.map((item) => {
-                                    const keyUid = uuidv4()
-                                    if (item !== undefined){
-                                        return (
-                                            <li className={style.cell} key={keyUid}>
-                                                <div className={style.box_prise}>
-                                                    <img className={style.image} src={item.image_mobile} alt={item.name} />
-                                                    <p className={style.text}>{item.name}</p>
-                                                </div>
-                                                <div className={style.box_prise}>
-                                                    <p className={style.price}>{item.price}</p>
-                                                    <CurrencyIcon type="primary"/>
-                                                </div>
-                                            </li>
-                                        )
-                                    } else {return ''}
-                                })
-                        }
-            </ul>
-            <div className={style.box}>
-                <p className={style.date}>{parseDate(order.updatedAt)}</p>
-                <div className={style.box_prise}>
-                    <p className={style.price}>{orderAmount}</p>
-                    <CurrencyIcon type="primary"/>
-                </div>
-            </div>
-            
+                {orderData !== undefined ? (
+                <>
+                    <p className={style.number}>#{orderData.number}</p>
+                    <h3 className={style.title}>{orderData.name}</h3>
+                    {orderData.status === 'done' ?
+                    (<p className={style.condition}>Выполнен</p>) :
+                    (<p className={style.cook}>Готовится</p>)}
+                    <p className={style.structure}>Состав:</p>
+                    <ul className={orderIngredients.length > 3 ? ` ${style.list} ${style.scrollbar}`: style.list_min}>
+                    { orderIngredients.map((item) => {
+                                            const keyUid = uuidv4()
+                                            if (item !== undefined){
+                                                return (
+                                                    <li className={style.cell} key={keyUid}>
+                                                        <div className={style.box_prise}>
+                                                            <div className={style.box_img}>
+                                                                <img className={style.image} src={item.image_mobile} alt={item.name} />
+                                                            </div>
+                                                            <p className={style.text}>{item.name}</p>
+                                                        </div>
+                                                        <div className={style.box_prise}>
+                                                            <p className={style.price}>{item.price}</p>
+                                                            <CurrencyIcon type="primary"/>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            } else {return ''}
+                                        })
+                                }
+                    </ul>
+                    <div className={style.box}>
+                        <p className={style.date}>{parseDate(orderData.updatedAt)}</p>
+                        <div className={style.box_prise}>
+                            <p className={style.price}>{orderAmount}</p>
+                            <CurrencyIcon type="primary"/>
+                        </div>
+                    </div>
+                </>) :
+                (
+                    <></>
+                )}
         </section>
     )
 }
-
-/*{order.ingredients.map(item =>{
-    return (
-        <li className={style.list}>
-            <div>
-                <ing/>
-            </div>
-
-        </li>
-    )
-})}*/

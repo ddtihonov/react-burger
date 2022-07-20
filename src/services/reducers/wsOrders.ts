@@ -80,6 +80,7 @@ export const wsFeedReducer = (
             feed: action.data,
         };
     case WS_GET_USER_ORDERS:
+        console.log(action.data)
         return {
             ...state,
             userFeed: action.data,

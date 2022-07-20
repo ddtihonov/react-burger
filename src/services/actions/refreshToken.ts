@@ -42,6 +42,7 @@ export const onRefreshToken: AppThunk = (refreshToken: string) => {
             dispatch(getLoginSuccessAction());
             localStorage.setItem('refreshToken', data.refreshToken);
             localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('wsAccessToken', data.accessToken.split('Bearer ')[1]);
         })
         .catch(() => {
             dispatch(getLoginErrorAction);

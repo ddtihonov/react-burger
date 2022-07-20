@@ -18,7 +18,7 @@ export const socketMiddleware = (WS_URL: string, wsActions: TWsActions) => {
             const { dispatch } = store;
             const { type } = action;
             const { wsInit, wsSendMessage, wsUserInit } = wsActions;
-            const accessToken = localStorage.getItem('accessToken');
+            const accessToken = localStorage.getItem('wsAccessToken');
             if (type === wsUserInit || type === wsInit) {
             socket = new WebSocket(
                 `${WS_URL}${type === wsInit ? '/all' : ''}${

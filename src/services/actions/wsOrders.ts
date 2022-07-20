@@ -81,6 +81,7 @@ export const wsGetOrder = (data: TFeedOrders): TWsFeedAction => {
 };
 
 export const wsGetUserOrder = (data: TFeedOrders): TWsFeedAction => {
+    console.log(data)
     return {
         type: WS_GET_USER_ORDERS,
         data,
