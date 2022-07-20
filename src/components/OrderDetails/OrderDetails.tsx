@@ -5,7 +5,7 @@ import icon from '../../image/icon.svg';
 
 export const OrderDetails: FC = () => {
 
-    const orderNumber = useSelector((state) => state.orderState.orderNumber);
+    const orderNumber = useSelector((state) => state.orderState.order.order.number);
 
     return(
             <div className={order_detals.box} >

@@ -1,14 +1,14 @@
 import React, { FC, useMemo,  useCallback} from 'react';
 import { useSelector, useDispatch } from '../../utils/hooks';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import style from './OrderInformation.module.css';
+import style from './OrderUserInformation.module.css';
 import { TIngredient } from '../../utils/tupes';
 import { TFeedOrder } from '../../utils/tupes';
 import { v4 as uuidv4 } from 'uuid';
 import { SELECT_ORDER } from '../../services/actions/selectedOrder';
 
 
-export const OrderInformation: FC<{order: TFeedOrder}> = ({order}) => {
+export const OrderUserInformation: FC<{order: TFeedOrder}> = ({order}) => {
 
     const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const OrderInformation: FC<{order: TFeedOrder}> = ({order}) => {
 
 
 
-    // расчет стоимости заказов
+    // расчет стоимости заказов(формат входа заказов разный от разных пользователей бывает по 1 булке что противоречит логике)
     const orderAmount = useMemo(() =>{
         if(orderIngredients !== undefined){}
             const bun = orderIngredients.filter(item => (item !== undefined ? item.type === 'bun' : 0))[0]
@@ -37,7 +37,6 @@ export const OrderInformation: FC<{order: TFeedOrder}> = ({order}) => {
             return  price
         }
     , [orderIngredients]);
-
 
 
     function parseDate(date: string) {
@@ -70,6 +69,9 @@ export const OrderInformation: FC<{order: TFeedOrder}> = ({order}) => {
                     <p className={style.date}>{parseDate(order.createdAt)}</p>
                 </div>
                 <h3 className={style.title}>{order.name}</h3>
+                {order.status === 'done' ?
+                    (<p className={style.condition}>Выполнен</p>) :
+                    (<p className={style.cook}>Готовится</p>)}
                 <div className={style.box_ingredient}>
                     <ul className={style.list}>
                         {orderIngredients.length > 6 &&

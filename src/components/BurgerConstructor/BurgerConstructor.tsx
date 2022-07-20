@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, FC} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {getOrderNumber} from '../../services/actions/order';
+import {createOrder} from '../../services/actions/order';
 import styles from './BurgerConstructor.module.css';
 import {ConstructorList} from '../ConstructorList/ConstructorList';
 import { CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,6 +9,7 @@ import {BURGER_INGREDIENT} from '../../services/actions/burgerConstructor';
 import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
 import {TIngredient} from '../../utils/tupes';
+import {getOpenOrderModalAction} from '../../services/actions/modal';
 
 
 export const BurgerConstructor: FC = () => {
@@ -54,9 +55,11 @@ export const BurgerConstructor: FC = () => {
 
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
+          const accessToken = localStorage.getItem('wsAccessToken');
           if (loggedIn === true && bun !== null) {
             const iDingredients = ingredientsConstructorList.map((item: TIngredient) => item._id).concat([bun._id]);
-            dispatch(getOrderNumber(iDingredients));
+            dispatch(createOrder(iDingredients, accessToken));
+            dispatch(getOpenOrderModalAction());
           } else {
               navigate('/login')
           }

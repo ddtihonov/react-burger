@@ -20,7 +20,7 @@ export const FeedOrder: FC = () => {
 
     const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
     const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
-    //const stat  = useSelector((state) => state);
+
     
     useEffect(() => {
         orders.length === 0  && dispatch(wsConnectionStart());
@@ -61,12 +61,14 @@ export const FeedOrder: FC = () => {
     );
     
 
-    // расчет стоимости заказов
     const orderAmount = useMemo(() =>{
-        const price = orderIngredients.reduce((x, item) => x + (item !== undefined ? item.price : 0), 0)
-        return  price
-    }
-, [orderIngredients]);
+        if(orderIngredients !== undefined){}
+            const bun = orderIngredients.filter(item => (item !== undefined ? item.type === 'bun' : 0))[0]
+            const ingredients = orderIngredients.filter(item => (item !== undefined ? item.type !== 'bun' : 0))
+            const price = ingredients.reduce((x, item) => x + (item !== undefined ? item.price : 0), 0) + (bun !== undefined ? bun.price * 2 : 0)
+            return  price
+        }
+    , [orderIngredients]);
 
 
     function parseDate(date: string) {
@@ -87,7 +89,7 @@ export const FeedOrder: FC = () => {
 
     return (
         <section className={style.main}>
-                {orderData !== undefined ? (
+                {orderData && state && orderData !== undefined ? (
                 <>
                     <p className={style.number}>#{orderData.number}</p>
                     <h3 className={style.title}>{orderData.name}</h3>

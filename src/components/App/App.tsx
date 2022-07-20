@@ -30,15 +30,14 @@ import {
   INGREDIENT_WINDOW_CLOSE,
 } from '../../services/actions/actions';
 
-import {
-  DELETE_ORDER_NUMBER,
-} from '../../services/actions/order';
 import {onGetUserInfo} from '../../services/actions/userInfo';
 import {onRefreshToken} from '../../services/actions/refreshToken';
 import {onGetIngredients} from '../../services/actions/ingredients';
 import {IBackgroundState} from '../../utils/tupes';
 
-import {ORDER_WINDOW_CLOSE} from '../../services/actions/selectedOrder'
+import {ORDER_WINDOW_CLOSE} from '../../services/actions/selectedOrder';
+import {getCloseOrderModalAction} from '../../services/actions/modal';
+import { getDeleteOrderNumberAction } from '../../services/actions/order'
 
 
 // Сделав проверку мы говорим TS что мы программно убедились что у location.state есть background
@@ -60,8 +59,9 @@ export const App: FC = () =>{
     background = location.state.background
   }
 
-  const orderNumber = useSelector((state) => state.orderState.orderNumber);
   const loading  = useSelector((state) => state.authData.loading);
+  const orderSuccess = useSelector((state) => state.orderState.orderSuccess);
+    console.log(orderSuccess)
 
   useEffect(() => {
     dispatch(onGetIngredients());
@@ -77,11 +77,10 @@ useEffect(() => {
 }, [dispatch, navigate]);
 
 const handleOrderClose = useCallback(() => {
-  dispatch({
-    type: DELETE_ORDER_NUMBER,
-  });
+  dispatch(getCloseOrderModalAction());
 
   dispatch({type: CLEAR_INGREDIENT_ORDER});
+  dispatch(getDeleteOrderNumberAction());
 }, [dispatch]);
 
 const handleIngredientClose = useCallback(() => {
@@ -178,9 +177,9 @@ const handleOrdersClose = useCallback(() => {
             } />
           </Routes>
 
-      {orderNumber &&
-      <Modal onClose={handleOrderClose}>
-      <OrderDetails/>
+      {orderSuccess && 
+        <Modal onClose={handleOrderClose}>
+          <OrderDetails/>
       </Modal>
       }
       {loading &&

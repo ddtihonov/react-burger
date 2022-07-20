@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from '../../utils/hooks';
 import { useLocation } from 'react-router';
 import styles from './Orders.module.css';
 import {ProfileMenu} from '../../components/ProfileMnu/ProfileMenu';
-import { OrderInformation } from '../../components/OrderInformation/OrderInformation';
+import { OrderUserInformation } from '../../components/OrderUserInformation/OrderUserInformation';
 import { TFeedOrder } from '../../utils/tupes';
 import { wsConnectionStartForUser, wsConnectionClosed } from '../../services/actions/wsOrders';
 import { ORDER_WINDOW_OPEN } from '../../services/actions/selectedOrder';
@@ -12,11 +12,9 @@ import { ORDER_WINDOW_OPEN } from '../../services/actions/selectedOrder';
 
 export const Orders: FC = () => {
 
-    const orders = useSelector((state) => state.orderHistory.feed.orders) || [];
-    const hi = useSelector((state) => state.orderHistory);
+    const orders = useSelector((state) => state.orderHistory.userFeed.orders) || [];
     const dispatch = useDispatch();
     const location = useLocation();
-    console.log(hi)
 
     useEffect(() => {
         dispatch(wsConnectionStartForUser());
@@ -45,7 +43,7 @@ export const Orders: FC = () => {
                                         to={`${location.pathname}/${item._id}`}
                                         state={{ background: location.pathname }}
                                 >
-                                <OrderInformation
+                                <OrderUserInformation
                                     order={item}
                                 />
                                 </Link>

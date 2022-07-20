@@ -1,53 +1,57 @@
 import {
-    GET_ORDER_NUMBER_REQUEST,
-    GET_ORDER_NUMBER_SUCCESS,
-    GET_ORDER_NUMBER_ERROR,
+    GET_ORDER_REQUEST,
+    GET_ORDER_SUCCESS,
+    GET_ORDER_ERROR,
     DELETE_ORDER_NUMBER,
 } from '../actions/order';
 
-import { TApplicationActions } from '../../utils/tupes';
+//import { TOrderAction } from '../actions/order';
+import { TOrder } from '../../utils/tupes'
 
 type TOrderInitialState = {
-    orderNumber: number | null,
-    orderNumberRequest: boolean,
-    orderNumberError: boolean,
+    order: TOrder,
+    orderRequest: boolean,
+    orderError: boolean,
+    orderSuccess: boolean;
 };
 
 
 // начальное состояние popap заказа
 const orderInitialState: TOrderInitialState = {
-    orderNumber: null,
-    orderNumberRequest: false,
-    orderNumberError: false,
+    order: {} as TOrder,
+    orderRequest: false,
+    orderError: false,
+    orderSuccess: false,
 };
 
-//редюсер popap заказа
 export const orderNumberReducer = (state = orderInitialState, action: any) => {
     switch (action.type) {
-        case GET_ORDER_NUMBER_REQUEST: {
+        case GET_ORDER_REQUEST: {
             return {
                 ...state,
-                orderNumberRequest: true,
+                orderRequest: true,
             };
         }
-        case GET_ORDER_NUMBER_SUCCESS: {
+        case GET_ORDER_SUCCESS: {
             return {
                 ...state,
-                orderNumberRequest: false,
-                orderNumberError: false,
-                orderNumber: action.payload.order,
+                orderSuccess: true,
+                orderRequest: false,
+                orderError: false,
+                order: action.payload.order,
             };
         }
-        case GET_ORDER_NUMBER_ERROR: {
+        case GET_ORDER_ERROR: {
             return {
                 ...orderInitialState,
-                orderNumberError: true,
+                orderError: true,
             };
         }
         case DELETE_ORDER_NUMBER: {
             return {
                 ...state,
-                orderNumber: null,
+                order: {},
+                orderSuccess: false,
             }
         }
         default:

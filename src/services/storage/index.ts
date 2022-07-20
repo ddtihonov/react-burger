@@ -6,6 +6,7 @@ import {orderNumberReducer} from '../reducers/order';
 import {authReducer} from '../reducers/auth';
 import { wsFeedReducer } from '../reducers/wsOrders';
 import { selectedOrderReducer } from '../reducers/selectedOrder';
+import { modalReducer } from '../reducers/modal';
 
 export const rootReducer = combineReducers({
     ingredientsState: ingredientsReducer,
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
     authData: authReducer,
     orderHistory: wsFeedReducer,
     orderDetals: selectedOrderReducer,
+    modalState: modalReducer
 })

@@ -1,60 +1,70 @@
-import {useIngredients} from '../../utils/IngredientsApi';
 import { AppDispatch, AppThunk } from '../../utils';
 import { TOrder } from '../../utils/tupes';
+import { sendOrder } from '../../utils/IngredientsApi';
 
-export const GET_ORDER_NUMBER_REQUEST: 'GET_ORDER_NUMBER_REQUEST' = 'GET_ORDER_NUMBER_REQUEST';
-export const GET_ORDER_NUMBER_SUCCESS: 'GET_ORDER_NUMBER_SUCCESS' = 'GET_ORDER_NUMBER_SUCCESS';
-export const GET_ORDER_NUMBER_ERROR: 'GET_ORDER_NUMBER_ERROR' = 'GET_ORDER_NUMBER_ERROR';
+
+export const GET_ORDER_REQUEST: 'GET_ORDER_REQUEST' = 'GET_ORDER_REQUEST';
+export const GET_ORDER_SUCCESS: 'GET_ORDER_SUCCESS' = 'GET_ORDER_SUCCESS';
+export const GET_ORDER_ERROR: 'GET_ORDER_ERROR' = 'GET_ORDER_ERROR';
 export const DELETE_ORDER_NUMBER: 'DELETE_ORDER_DATA' = 'DELETE_ORDER_DATA';//удалить номер заказа
 
 export interface IDeleteOrderNumberAction {
     readonly type: typeof DELETE_ORDER_NUMBER;
 }
 
-export interface IOrderNumberRequestAction {
-    readonly type: typeof GET_ORDER_NUMBER_REQUEST;
+export interface IOrderRequestAction {
+    readonly type: typeof GET_ORDER_REQUEST;
 }
 
-export interface IOrderNumberSuccessAction {
-    readonly type: typeof GET_ORDER_NUMBER_SUCCESS;
-    readonly payload: { order: number};
+export interface IOrderSuccessAction {
+    readonly type: typeof GET_ORDER_SUCCESS;
+    readonly payload: { order: TOrder};
 }
 
-export interface IOrderNumberErrorAction {
-    readonly type: typeof GET_ORDER_NUMBER_ERROR;
+export interface IOrderErrorAction {
+    readonly type: typeof GET_ORDER_ERROR;
 }
 
-export type TOrderNumberAction =
-    | IOrderNumberRequestAction
-    | IOrderNumberSuccessAction
-    | IOrderNumberErrorAction
+export type TOrderAction =
+    | IOrderRequestAction
+    | IOrderSuccessAction
+    | IOrderErrorAction
     | IDeleteOrderNumberAction;
 
-export const getOrderNumberRequestAction = (): TOrderNumberAction => ({
-    type: GET_ORDER_NUMBER_REQUEST,
+export const getOrderRequestAction = (): TOrderAction => ({
+    type: GET_ORDER_REQUEST,
 });
 
-export const getOrderNumberSuccessAction = (data: TOrder): TOrderNumberAction => ({
-    type: GET_ORDER_NUMBER_SUCCESS,
+export const getOrderSuccessAction = (data: TOrder): TOrderAction => ({
+    type: GET_ORDER_SUCCESS,
     payload: {
-        order: data.order.number,
+        order: data,
     }, 
 });
 
-export const getOrderNumberErrorAction = (): TOrderNumberAction => ({
-    type: GET_ORDER_NUMBER_ERROR,
+export const getOrderErrorAction = (): TOrderAction => ({
+    type: GET_ORDER_ERROR,
 });
 
-export const getOrderNumber: AppThunk = (ingredientsId) => {
-    return (dispatch: AppDispatch) => {
-        dispatch(getOrderNumberRequestAction());
-        useIngredients(ingredientsId)
+
+export const getDeleteOrderNumberAction = (): TOrderAction => ({
+    type: DELETE_ORDER_NUMBER,
+});
+
+
+export const createOrder: AppThunk =
+    (id: string, token: string) => (dispatch: AppDispatch) => {
+        dispatch(getOrderRequestAction());
+        sendOrder(id, token)
         .then((data) => {
-            dispatch(getOrderNumberSuccessAction(data));
+            if (data && data.success) {
+                console.log(data.order.number)
+                dispatch(getOrderSuccessAction(data));
+            } else {
+                dispatch(getOrderErrorAction());
+            }
         })
-        .catch((err) => {
-            console.log(`Внимание! ${err}`);
-                dispatch(getOrderNumberErrorAction());
-            }) 
-    };
-}
+        .catch(() => {
+            dispatch(getOrderErrorAction());
+        });
+};
