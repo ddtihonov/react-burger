@@ -30,8 +30,6 @@ export const UserOrder: FC = () => {
         }, [orders, id]
     )
 
-    console.log(orderData)
-
     const uniqueIngredients = useMemo( () =>{
         if(orderData){
         let arr = orderData.ingredients.filter((item: string, index: number) =>{

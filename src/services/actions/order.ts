@@ -58,7 +58,6 @@ export const createOrder: AppThunk =
         sendOrder(id, token)
         .then((data) => {
             if (data && data.success) {
-                console.log(data.order.number)
                 dispatch(getOrderSuccessAction(data));
             } else {
                 dispatch(getOrderErrorAction());

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../utils/hooks';
 import { TIngredient,  TFeedOrder} from '../../utils/tupes';
 import { v4 as uuidv4 } from 'uuid';
-import { wsConnectionStart } from '../../services/actions/wsOrders';
+import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/wsOrders';
 
 
 export const FeedOrder: FC = () => {
@@ -18,8 +18,11 @@ export const FeedOrder: FC = () => {
 
     
     useEffect(() => {
-        orders.length === 0  && dispatch(wsConnectionStart());
-    }, [orders, dispatch]);
+        dispatch(wsConnectionStart());
+        return () => {
+            dispatch(wsConnectionClosed())
+        }
+    }, [dispatch]);
 
     const orderData:TFeedOrder | undefined = useMemo(() => {
         if(orders.length > 0){
@@ -52,7 +55,6 @@ export const FeedOrder: FC = () => {
         [uniqueIngredients, orderData]
 );
 
-
     const orderIngredients:(TIngredient | undefined)[]  = useMemo(
         () => {
             let components:(TIngredient | undefined)[]  = [];
@@ -65,7 +67,6 @@ export const FeedOrder: FC = () => {
             },
             [uniqueIngredients, ingredientsList]
     );
-    
 
     const orderAmount = useMemo(() =>{
         if(orderIngredients !== undefined){}
