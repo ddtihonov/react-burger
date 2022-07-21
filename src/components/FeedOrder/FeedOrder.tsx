@@ -1,7 +1,7 @@
 import React, {FC, useMemo, useEffect} from 'react';
 import style from './FeedOrder.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../utils/hooks';
 import { TIngredient,  TFeedOrder} from '../../utils/tupes';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,13 +10,8 @@ import { wsConnectionStart } from '../../services/actions/wsOrders';
 
 export const FeedOrder: FC = () => {
 
-    const { state } = useLocation();
     const dispatch = useDispatch();
     const { id } = useParams();
-
-    useEffect(() => {
-        dispatch(wsConnectionStart());
-    }, [dispatch]);
 
     const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
     const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
@@ -24,7 +19,7 @@ export const FeedOrder: FC = () => {
     
     useEffect(() => {
         orders.length === 0  && dispatch(wsConnectionStart());
-    }, [orders, dispatch, state]);
+    }, [orders, dispatch]);
 
     const orderData:TFeedOrder | undefined = useMemo(() => {
         if(orders.length > 0){
@@ -44,7 +39,18 @@ export const FeedOrder: FC = () => {
         }
     }, [orderData]);
 
-
+    const counts  = useMemo(() => {
+        let counts: (number | undefined)[] = [];
+        for (let i = 0; i < uniqueIngredients.length; i++) {
+            let count = orderData?.ingredients.filter(item => item === uniqueIngredients[i]).reduce((x: number) => x + 1, 0);
+            counts.push(
+                count
+            );
+        }
+        return counts;
+        },
+        [uniqueIngredients, orderData]
+);
 
 
     const orderIngredients:(TIngredient | undefined)[]  = useMemo(
@@ -88,9 +94,8 @@ export const FeedOrder: FC = () => {
 
 
     return (
-        <section className={style.main}>
-                {orderData && state && orderData !== undefined ? (
-                <>
+        orderIngredients && orderData && orderData !== undefined ?
+        (<section className={style.main}>
                     <p className={style.number}>#{orderData.number}</p>
                     <h3 className={style.title}>{orderData.name}</h3>
                     {orderData.status === 'done' ?
@@ -98,7 +103,7 @@ export const FeedOrder: FC = () => {
                     (<p className={style.cook}>Готовится</p>)}
                     <p className={style.structure}>Состав:</p>
                     <ul className={orderIngredients.length > 3 ? ` ${style.list} ${style.scrollbar}`: style.list_min}>
-                    { orderIngredients.map((item) => {
+                    { orderIngredients.map((item, index) => {
                                             const keyUid = uuidv4()
                                             if (item !== undefined){
                                                 return (
@@ -110,6 +115,10 @@ export const FeedOrder: FC = () => {
                                                             <p className={style.text}>{item.name}</p>
                                                         </div>
                                                         <div className={style.box_prise}>
+                                                            {item.type === 'bun' ?
+                                                            (<p className={style.price}>2 х </p>) :
+                                                            (<p className={style.price}>{counts[index] + ' х '}</p>)
+                                                            }
                                                             <p className={style.price}>{item.price}</p>
                                                             <CurrencyIcon type="primary"/>
                                                         </div>
@@ -126,10 +135,6 @@ export const FeedOrder: FC = () => {
                             <CurrencyIcon type="primary"/>
                         </div>
                     </div>
-                </>) :
-                (
-                    <></>
-                )}
-        </section>
+        </section>) : null
     )
 }

@@ -9,6 +9,7 @@ import {Modal} from '../Modal/Modal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {Preloader} from '../Preloader/Preolader';
 import { FeedOrder } from '../FeedOrder/FeedOrder';
+import { UserOrder } from '../UserOrder/UserOrder';
 import {
   Login,
   Register,
@@ -61,7 +62,6 @@ export const App: FC = () =>{
 
   const loading  = useSelector((state) => state.authData.loading);
   const orderSuccess = useSelector((state) => state.orderState.orderSuccess);
-    console.log(orderSuccess)
 
   useEffect(() => {
     dispatch(onGetIngredients());
@@ -163,7 +163,7 @@ const handleOrdersClose = useCallback(() => {
                 <Modal
                   onClose={handleOrdersClose}
                 >
-                <FeedOrder/>  
+                  <UserOrder/> 
               </Modal>
               }/> }  
             <Route  path='/ingredients/:id'  element={
@@ -173,7 +173,7 @@ const handleOrdersClose = useCallback(() => {
               <FeedOrder/> 
             } />
             <Route  path='/profile/orders/:id'  element={
-              <FeedOrder/> 
+              <UserOrder/> 
             } />
           </Routes>
 

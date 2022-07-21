@@ -38,6 +38,7 @@ export type TIngredient = {
     image_mobile: string
     image_large: string
     keyUid?: string 
+    count?: number
 }
 
 export type TIngredientsList = {
