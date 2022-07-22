@@ -8,6 +8,7 @@ import {IngredientDetails} from '../IngredientDetails/IngredientDetails';
 import {Modal} from '../Modal/Modal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {Preloader} from '../Preloader/Preolader';
+import { PreloaderOrder } from '../PreloaderOrder/PreoladerOrder';
 import { FeedOrder } from '../FeedOrder/FeedOrder';
 import { UserOrder } from '../UserOrder/UserOrder';
 import {
@@ -62,10 +63,18 @@ export const App: FC = () =>{
 
   const loading  = useSelector((state) => state.authData.loading);
   const orderSuccess = useSelector((state) => state.orderState.orderSuccess);
+  const loadingOrderNumber = useSelector((state) => state.modalState.isModalOpen);
+  const loadingOrder = useSelector((state) => state.orderDetals.orderWindowOpen);
 
   useEffect(() => {
     dispatch(onGetIngredients());
   }, [dispatch]);
+
+  useEffect(() => {
+    if(orderSuccess){
+      dispatch(getCloseOrderModalAction())
+    }
+  }, [dispatch, orderSuccess]);
 
 useEffect(() => {
   const accessToken = localStorage.getItem('accessToken');
@@ -77,8 +86,6 @@ useEffect(() => {
 }, [dispatch, navigate]);
 
 const handleOrderClose = useCallback(() => {
-  dispatch(getCloseOrderModalAction());
-
   dispatch({type: CLEAR_INGREDIENT_ORDER});
   dispatch(getDeleteOrderNumberAction());
 }, [dispatch]);
@@ -152,7 +159,7 @@ const handleOrdersClose = useCallback(() => {
               }/>}
             {background  &&
               <Route  path='/feed/:id'  element={
-                <Modal
+                loadingOrder && <Modal
                 onClose={handleFeedClose}
                 >
                 <FeedOrder/>  
@@ -164,7 +171,7 @@ const handleOrdersClose = useCallback(() => {
                   onClose={handleOrdersClose}
                 >
                   <UserOrder/> 
-              </Modal>
+                </Modal>
               }/> }  
             <Route  path='/ingredients/:id'  element={
               <Ingredient/>
@@ -182,8 +189,11 @@ const handleOrdersClose = useCallback(() => {
           <OrderDetails/>
       </Modal>
       }
-      {loading &&
+      {loading  &&
         <Preloader/>
+      }
+      {loadingOrderNumber &&
+        <PreloaderOrder/>
       }
     </div>
   );

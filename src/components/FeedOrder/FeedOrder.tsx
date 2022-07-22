@@ -68,6 +68,7 @@ export const FeedOrder: FC = () => {
             [uniqueIngredients, ingredientsList]
     );
 
+
     const orderAmount = useMemo(() =>{
         if(orderIngredients !== undefined){}
             const bun = orderIngredients.filter(item => (item !== undefined ? item.type === 'bun' : 0))[0]
@@ -76,7 +77,6 @@ export const FeedOrder: FC = () => {
             return  price
         }
     , [orderIngredients]);
-
 
     function parseDate(date: string) {
         const currentDate = new Date();

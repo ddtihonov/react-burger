@@ -67,8 +67,6 @@ export const UserOrder: FC = () => {
             [uniqueIngredients, ingredientsList]
     );
 
-    console.log(orderIngredients)
-
     const orderAmount = useMemo(() =>{
         if(orderIngredients !== undefined){}
             const bun = orderIngredients.filter(item => (item !== undefined ? item.type === 'bun' : 0))[0]

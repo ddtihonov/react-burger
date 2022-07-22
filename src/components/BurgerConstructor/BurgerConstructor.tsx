@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, FC} from 'react';
+import React, { useCallback, useMemo, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {createOrder} from '../../services/actions/order';
 import styles from './BurgerConstructor.module.css';
@@ -55,11 +55,11 @@ export const BurgerConstructor: FC = () => {
 
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
+          dispatch(getOpenOrderModalAction());
           const accessToken = localStorage.getItem('wsAccessToken');
           if (loggedIn === true && bun !== null) {
             const iDingredients = ingredientsConstructorList.map((item: TIngredient) => item._id).concat([bun._id]);
             dispatch(createOrder(iDingredients, accessToken));
-            dispatch(getOpenOrderModalAction());
           } else {
               navigate('/login')
           }
@@ -67,6 +67,7 @@ export const BurgerConstructor: FC = () => {
         }, [ingredientsConstructorList, bun, dispatch, loggedIn, navigate]);
 
     return (
+      <>
       <section className={styles.container}>
         <div className={styles.list} ref={dropTarget}>
           { bun === null
@@ -93,5 +94,6 @@ export const BurgerConstructor: FC = () => {
           </button>
         </div>)}
       </section>
+    </>   
     );
   };

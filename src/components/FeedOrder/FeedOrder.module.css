@@ -13,6 +13,7 @@
 }
 
 .title{
+    font-family:'JetBrainsMono';
     font-weight: 700;
 	font-size: 24px;
 	line-height: 30px;
@@ -37,6 +38,7 @@
 }
 
 .structure{
+    font-family:'JetBrainsMono';
     font-weight: 700;
 	font-size: 24px;
 	line-height: 30px;
