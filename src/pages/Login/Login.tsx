@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback} from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import styles from './Login.module.css';
 import {
     EmailInput,
@@ -12,13 +12,13 @@ import {onLogin} from '../../services/actions/login';
 export const Login = () => {
 
     const navigate = useNavigate();
-    const dispatch: any = useDispatch();
+    const dispatch = useDispatch();
     const {state}: any = useLocation();
         
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const loggedIn = useSelector((state: any) => state.authData.loggedIn);
+    const loggedIn = useSelector((state) => state.authData.loggedIn);
 
     useEffect(() => {
         if(loggedIn === true) {

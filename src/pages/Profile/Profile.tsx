@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, FC, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import styles from './Profile.module.css';
 import {ProfileMenu} from '../../components/ProfileMnu/ProfileMenu';
 import {onEditProfile} from '../../services/actions/updateUserInfo';
@@ -13,9 +13,9 @@ import {
 
 export const Profile: FC = () => {
 
-const dispatch: any = useDispatch(); 
+const dispatch = useDispatch(); 
 
-const {name, email} = useSelector((store: any) => store.authData);
+const {name, email} = useSelector((store) => store.authData);
     
 const [userEmail, setUserEmail] = useState<string>(email);
 const [userPassword, setUserPassword] = useState<string>('');

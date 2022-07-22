@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { createPortal } from "react-dom";
 import modal from './Modal.module.css';
 import {ModalOverlay} from '../ModalOverlay/ModalOverlay';
@@ -7,7 +7,9 @@ import {TModal} from '../../utils/tupes';
 
 export const Modal = ({children, onClose, title}: TModal) => {
 
+    const [interval, setInterval] = useState<boolean>(false)
     const modalRoot = document.getElementById("modals") as HTMLElement;
+    
 
     useEffect(() => {
         const handleEscClose = (evt: KeyboardEvent) =>{
@@ -17,14 +19,26 @@ export const Modal = ({children, onClose, title}: TModal) => {
         return () => document.removeEventListener('keydown', handleEscClose);
     }, [onClose]);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setInterval(true)
+    },
+        500)
+    }, []);
+
+    
+
+    
+
     return createPortal (
         <ModalOverlay onClick={onClose}>
-            <div className={modal.box} onClick={evt => evt.stopPropagation()}>
+            {children?
+            (<div className={modal.box} onClick={evt => evt.stopPropagation()}>
                 {title && (<h2 className={modal.title}>{title}</h2>)}
-                <button className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
-                    <CloseIcon type="primary"/></button>
+                {interval && <button className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
+                    <CloseIcon type="primary"/></button>}
                 {children}
-            </div>
+            </div>) : null}
         </ModalOverlay>
         ,modalRoot
     );

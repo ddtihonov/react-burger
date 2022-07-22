@@ -1,12 +1,12 @@
 import React, { useCallback, FC} from 'react';
 import { NavLink} from 'react-router-dom';
 import styles from './ProfileMenu.module.css';
-import { useDispatch} from 'react-redux';
+import { useDispatch} from '../../utils/hooks';
 import {onSignOut} from '../../services/actions/singnOut';
 
 export const ProfileMenu: FC = () => {
 
-    const dispatch: any = useDispatch(); 
+    const dispatch = useDispatch(); 
 
     const signOut = useCallback(() => {
         const refreshToken = localStorage.getItem('refreshToken');
@@ -14,7 +14,7 @@ export const ProfileMenu: FC = () => {
     }, [dispatch]);
     
 
-    const setActive =({isActive}: any) => isActive ? styles.link_active : styles.link 
+    const setActive =({isActive}: any) => isActive ? styles.link_active : styles.link
 
     return (
             <div className={styles.container}>

@@ -1,9 +1,9 @@
 import React, {FC, ReactElement } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks';
 import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute: FC<{ children: ReactElement}> = ({children}) => {
-    const loggedIn = useSelector((store: any) => store.authData.loggedIn);
+    const loggedIn = useSelector((store) => store.authData.loggedIn);
     const location: any = useLocation();
     const from = location.state?.from || '/';
     let anonymous = false

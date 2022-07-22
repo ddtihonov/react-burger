@@ -1,7 +1,7 @@
 import React, { useState, useCallback, FC, FormEvent} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { useDispatch} from 'react-redux';
+import { useDispatch} from '../../utils/hooks';
 import styles from './ForgotPassword.module.css';
 import {onRecoveryPassword} from '../../services/actions/recoveryPassword'
 import {
@@ -11,7 +11,7 @@ import {
 export const ForgotPassword: FC = () => {
 
 const navigate = useNavigate();
-const dispatch: any = useDispatch();    
+const dispatch = useDispatch();    
     
 const [userEmail, setUserEmail] = useState<string>('');
 

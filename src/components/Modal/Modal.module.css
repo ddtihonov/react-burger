@@ -1,4 +1,5 @@
 .box{
+    font-family:'JetBrainsMono';
     max-width: 720px;
     width: 100%;
     display: flex;

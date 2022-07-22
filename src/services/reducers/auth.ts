@@ -50,11 +50,55 @@ import {
     LOADING_START,
     LOADING_FINISH,
 }
-from '../actions/loading'
+from '../actions/loading';
 
+import { TApplicationActions } from '../../utils/tupes'
 
+type TAuthState = {
+    email: string,
+    name: string,
+    loggedIn: boolean,
+    loading: boolean,
+    //регистрация
+    registerRequest: boolean,
+    regiterError: boolean,
+    registerSuccess: boolean,
+    //вход
+    loginRequest: boolean,
+    loginError: boolean,
+    loginSuccess: boolean,
+    //запросить данные пользователя
+    userInfoRequest: boolean,
+    userInfoError: boolean,
+    userInfoSuccess: boolean,
 
-const initialState = {
+    //refreshToken
+    refreshTokenRequest: boolean,
+    refreshTokenError: boolean,
+    refreshTokenSuccess: boolean,
+
+    //обновить данные пользователя
+    editProfileRequest: boolean,
+    editProfileError: boolean,
+    editProfileSuccess: boolean,
+
+    //выход из аккаунта
+    signOutSuccess: boolean,
+    signOutRequest: boolean,
+    signOutError: boolean,
+
+    //восстановление пароля
+    recoveryPasswordSuccess: boolean,
+    recoveryPasswordRequest: boolean,
+    recoveryPasswordError: boolean,
+
+    //новый пароль
+    resetPasswordSuccess: boolean,
+    resetPasswordRequest: boolean,
+    resetPasswordError: boolean,
+}
+
+const initialState: TAuthState = {
     email: '',
     name: '',
     loggedIn: false,
@@ -96,10 +140,9 @@ const initialState = {
     resetPasswordSuccess: false,
     resetPasswordRequest: false,
     resetPasswordError: false,
-    
 }
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TApplicationActions) => {
     switch (action.type) {
 
         case LOADING_START: {

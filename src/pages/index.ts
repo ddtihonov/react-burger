@@ -7,5 +7,6 @@ import {ForgotPassword} from "./ForgotPassword/ForgotPassword";
 import {ResetPassword} from "./ResetPassvord/ResetPassword";
 import {Ingredient} from "./Ingredient/Ingredient";
 import {Orders} from "./Orders/Orders";
+import { Feed } from "./Feed/Feed";
 
-export { Login, Register, PageNotFound, Main, Profile, ForgotPassword, ResetPassword, Ingredient, Orders};
+export { Login, Register, PageNotFound, Main, Profile, ForgotPassword, ResetPassword, Ingredient, Orders, Feed};

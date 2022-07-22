@@ -1,5 +1,5 @@
 import React, { useCallback, FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import { useDrag } from "react-dnd";
 import styles from './IngredientsCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -10,8 +10,8 @@ import {TIngredient} from '../../utils/tupes';
 export const IngredientsCard: FC<{card: TIngredient}> = ({card}) => {
 
     let counter = 0
-    const bun = useSelector((state: any) => state.burgerConstructorIngredients.burgerBun);
-    const ingredientsConstructorList = useSelector((state: any) => state.burgerConstructorIngredients.burgerIngredients);
+    const bun = useSelector((state) => state.burgerConstructorIngredients.burgerBun);
+    const ingredientsConstructorList = useSelector((state) => state.burgerConstructorIngredients.burgerIngredients);
 
     if(bun !== null) {
     const ingredientsTotal = ingredientsConstructorList.concat(bun);
