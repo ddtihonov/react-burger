@@ -18,14 +18,12 @@ export const AppHeader: FC = () => {
                 Конструктор
               </span>
             </NavLink>
-            <button className={header.link}>
-              <ListIcon type="secondary"/>
-              <span
-                className={`${header.text} ${header.color}`}
-              >
+            <NavLink className={setActive}  to={'/feed'}>
+            <ListIcon type='secondary'/>
+              <span className={header.text}>
                 Лента заказов
               </span>
-            </button>
+            </NavLink>
           </nav>
           <Link className={header.link_logo}  to={'/'}><Logo /></Link>
           <NavLink className={setActive}  to={'/profile'}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, FC, FormEvent } from 'react';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import styles from './Register.module.css';
 import {
     EmailInput,
@@ -13,13 +13,13 @@ import {onRegister} from '../../services/actions/register';
 export const Register: FC = () => {
 
 const navigate = useNavigate();
-const dispatch: any = useDispatch(); 
+const dispatch = useDispatch(); 
     
 const [email, setEmail] = useState<string>('');
 const [password, setPassword] = useState<string>('');
 const [name, setName] = useState<string>('');
 
-const loggedIn = useSelector((state: any) => state.authData.loggedIn);
+const loggedIn = useSelector((state) => state.authData.loggedIn);
 
 useEffect(() => {
     if(loggedIn) {

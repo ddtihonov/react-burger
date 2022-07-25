@@ -1,6 +1,6 @@
 import React, { useState, useCallback, FC, ChangeEvent, FormEvent} from 'react';
 import { useNavigate } from 'react-router';
-import { useDispatch} from 'react-redux';
+import { useDispatch} from '../../utils/hooks';
 import {onResetPassword} from '../../services/actions/resetPassword'
 import { Link } from 'react-router-dom';
 import styles from './ResetPassword.module.css'
@@ -10,7 +10,7 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 export const ResetPassword: FC = () => {
 
     const navigate = useNavigate();
-    const dispatch: any = useDispatch(); 
+    const dispatch = useDispatch(); 
 
     const [password, setPassword] = useState<string>('');
     const [token, setToken] = useState<string>('');

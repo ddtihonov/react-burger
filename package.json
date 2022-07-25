@@ -4,11 +4,13 @@
   "private": true,
   "homepage": "https://ddtihonov.github.io/react-burger/",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.27",
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
+    "dayjs": "^1.11.3",
     "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-dnd": "^15.0.1",

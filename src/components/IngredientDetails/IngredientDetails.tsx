@@ -1,6 +1,6 @@
 import React, {useMemo, FC} from 'react';
 import ingredient_detals from './IngredientDetails.module.css'
-import { useSelector} from 'react-redux';
+import { useSelector} from '../../utils/hooks';
 import { useLocation, useParams } from 'react-router-dom';
 import {TIngredient} from '../../utils/tupes'
 
@@ -9,9 +9,9 @@ export const IngredientDetails: FC = () => {
 
     const { state } = useLocation();
 
-    const ingredientModal = useSelector((state:any) => state.ingredientState.selectedIngredient);
+    const ingredientModal = useSelector((state) => state.ingredientState.selectedIngredient);
 
-    const ingredients = useSelector((state:any) => state.ingredientsState.ingredients);
+    const ingredients = useSelector((state) => state.ingredientsState.ingredients);
     
     const { id } = useParams()
     const ingredient = useMemo(() => {
@@ -25,7 +25,7 @@ export const IngredientDetails: FC = () => {
 
     return(
             <div className={ingredient_detals.box} >
-                {state ? (
+                {state && ingredientItem !== undefined ? (
                 <>
                     <img className={ingredient_detals.image} src={ingredientItem.image} alt={ingredientItem.name}></img>
                     <h3 className={ingredient_detals.subtitle}>{ingredientItem.name}</h3>
