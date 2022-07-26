@@ -1,6 +1,6 @@
 import {ingredientsReducer} from './ingredients';
 import * as ingredientsTypes from '../actions/ingredients';
-import { TIngredient, TApplicationActions } from '../../utils/tupes';
+import { TIngredient } from '../../utils/tupes';
 
 type TIngredientsInitialState = {
     ingredients: ReadonlyArray<TIngredient>,
@@ -14,7 +14,7 @@ const ingredientsInitialState: TIngredientsInitialState = {
     ingredientsError: false,
 };
 
-describe('orderNumber reducer', () => {
+describe('ingredientsReducer reducer', () => {
     it('should return the initinal state', () => {
         expect(ingredientsReducer(ingredientsInitialState, {} as any)).toEqual(ingredientsInitialState);
     });
@@ -35,13 +35,11 @@ describe('orderNumber reducer', () => {
             type: ingredientsTypes.GET_INGREDIENTS_SUCCESS,
             data: [],
         })
-        ).toEqual(
-        expect.objectContaining({
+        ).toEqual({
             orderRequest: false,
             orderError: false,
             ingredients: [],
-        })
-        );
+        });
     });*/
     it('handler ingredientsError should run', () => {
         expect(

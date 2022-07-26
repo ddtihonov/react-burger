@@ -43,7 +43,7 @@ describe('selectedIngredientsReducer reducer', () => {
         })
         );
     });
-    it('handler SelectIngredient should run', () => {
+    /*it('handler SelectIngredient should run', () => {
         expect(
             selectedIngredientsReducer (selectedIngredientState, {
                 type: actionsTypes.SELECT_INGREDIENT,
@@ -54,5 +54,5 @@ describe('selectedIngredientsReducer reducer', () => {
             selectedIngredient: [],
         })
         );
-    });
+    });*/
 }) 

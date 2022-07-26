@@ -24,9 +24,7 @@ export const IngredientsCard: FC<{card: TIngredient}> = ({card}) => {
     const cardClick = useCallback(() => {
         dispatch({
             type: SELECT_INGREDIENT,
-            payload: {
-                ingredient: card,
-            },
+            ingredient: card,
         });
     }, [card, dispatch]);
 

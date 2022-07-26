@@ -13,7 +13,7 @@ export interface ILoginRequestAction {
 
 export interface ILoginSuccessAction {
     readonly type: typeof GET_LOGIN_SUCCESS;
-    readonly payload: { userData: TLogin};
+    readonly userData: TLogin;
 }
 
 export interface ILoginErrorAction {
@@ -31,9 +31,7 @@ export const getLoginRequestAction = (): TLoginAction => ({
 
 export const getLoginSuccessAction = (userData: TLogin): TLoginAction => ({
     type: GET_LOGIN_SUCCESS,
-    payload: {
-        userData: userData,
-    }, 
+    userData: userData, 
 });
 
 export const getLoginErrorAction = (): TLoginAction => ({

@@ -52,8 +52,6 @@ import {
 }
 from '../actions/loading';
 
-import { TApplicationActions } from '../../utils/tupes'
-
 type TAuthState = {
     email: string,
     name: string,
@@ -142,7 +140,7 @@ const initialState: TAuthState = {
     resetPasswordError: false,
 }
 
-export const authReducer = (state = initialState, action: TApplicationActions) => {
+export const authReducer = (state = initialState, action: any) => {
     switch (action.type) {
 
         case LOADING_START: {
@@ -198,8 +196,8 @@ export const authReducer = (state = initialState, action: TApplicationActions) =
                 loginError: false,
                 loginSuccess: true,
                 loggedIn: true,
-                email: action.payload.userData.user.email,
-                name: action.payload.userData.user.name,
+                email: action.userData.user.email,
+                name: action.userData.user.name,
             };
         }
         case  GET_LOGIN_ERROR: {
