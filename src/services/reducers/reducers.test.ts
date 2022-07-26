@@ -43,16 +43,16 @@ describe('selectedIngredientsReducer reducer', () => {
         })
         );
     });
-    /*it('handler SelectIngredient should run', () => {
+    it('handler SelectIngredient should run', () => {
         expect(
             selectedIngredientsReducer (selectedIngredientState, {
                 type: actionsTypes.SELECT_INGREDIENT,
-                data: []
+                ingredient: {}
             })
         ).toEqual(
         expect.objectContaining({
-            selectedIngredient: [],
+            selectedIngredient: {},
         })
         );
-    });*/
+    });
 }) 

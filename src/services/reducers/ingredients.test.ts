@@ -1,14 +1,7 @@
 import {ingredientsReducer} from './ingredients';
 import * as ingredientsTypes from '../actions/ingredients';
-import { TIngredient } from '../../utils/tupes';
 
-type TIngredientsInitialState = {
-    ingredients: ReadonlyArray<TIngredient>,
-    ingredientsRequest: boolean,
-    ingredientsError: boolean,
-}
-
-const ingredientsInitialState: TIngredientsInitialState = {
+const ingredientsInitialState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsError: false,
@@ -33,13 +26,15 @@ describe('ingredientsReducer reducer', () => {
         expect(
             ingredientsReducer(ingredientsInitialState, {
             type: ingredientsTypes.GET_INGREDIENTS_SUCCESS,
-            data: [],
+            data: []
         })
-        ).toEqual({
-            orderRequest: false,
-            orderError: false,
-            ingredients: [],
-        });
+        ).toEqual(
+            expect.objectContaining({
+                orderRequest: false,
+                orderError: false,
+                ingredients: [],
+            })
+        );
     });*/
     it('handler ingredientsError should run', () => {
         expect(

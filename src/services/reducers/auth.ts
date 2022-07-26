@@ -196,8 +196,8 @@ export const authReducer = (state = initialState, action: any) => {
                 loginError: false,
                 loginSuccess: true,
                 loggedIn: true,
-                email: action.userData.user.email,
-                name: action.userData.user.name,
+                email: action.payload.userData.user.email,
+                name: action.payload.userData.user.name,
             };
         }
         case  GET_LOGIN_ERROR: {

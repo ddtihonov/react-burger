@@ -5,6 +5,9 @@ import * as singOutTypes from '../actions/singnOut';
 import * as refreshTokenTypes from '../actions/refreshToken';
 import * as recoveryPasswordTypes from '../actions/recoveryPassword';
 import * as resetPasswordTypes from '../actions/resetPassword';
+import * as registerTypes from '../actions/register';
+import * as userInfoTypes from '../actions/userInfo';
+import * as updateUserInfoTypes from '../actions/updateUserInfo';
 
 type TAuthState = {
     email: string,
@@ -279,4 +282,144 @@ describe('authReducer reducer', () => {
             })
         );
     });
-}) 
+    it('handler registerSucces should run', () => {
+
+        const userData = {
+            success: true,
+            user: {
+            email: "vatt@mail.ru",
+            name: "вася"}
+            }
+
+        expect(
+            authReducer(initialState, { 
+                type: registerTypes.GET_REGISTER_SUCCESS,
+                payload: {userData}
+            })
+        ).toEqual(
+            expect.objectContaining({
+                registerRequest: false,
+                regiterError: false,
+                loggedIn: true,
+                registerSuccess: true,
+                email: userData.user.email,
+                name: userData.user.name,
+            })
+        );
+    });
+    it('handler registerRequest should run', () => {
+        expect(
+        
+            authReducer(initialState, { type: registerTypes.GET_REGISTER_REQUEST })
+        ).toEqual(
+            expect.objectContaining({
+                registerRequest: true,
+                regiterError: false,
+            })
+        );
+    });
+    it('handler regiterError should run', () => {
+        expect(
+        
+            authReducer(initialState, { type: registerTypes.GET_REGISTER_ERROR })
+        ).toEqual(
+            expect.objectContaining({
+                registerRequest: false,
+                regiterError: true,
+            })
+        );
+    });
+    it('handler userInfoRequest should run', () => {
+        expect(
+        
+            authReducer(initialState, { type: userInfoTypes.GET_USER_INFO_REQUEST })
+        ).toEqual(
+            expect.objectContaining({
+                userInfoRequest: true,
+                userInfoError: false,
+            })
+        );
+    });
+    it('handler userInfoSuccess should run', () => {
+        const userData = {
+            success: true,
+            user: {
+            email: "vatt@mail.ru",
+            name: "вася"}
+            }
+
+        expect(
+            authReducer(initialState, { 
+                type: userInfoTypes.GET_USER_INFO_SUCCESS,
+                payload: {userData}
+            })
+        ).toEqual(
+            expect.objectContaining({
+                userInfoRequest: false,
+                userInfoError: false,
+                userInfoSuccess: true,
+                loggedIn: true,
+                email: userData.user.email,
+                name: userData.user.name,
+            })
+        );
+    });
+    it('handler userInfoError should run', () => {
+        expect(
+        
+            authReducer(initialState, { type: userInfoTypes.GET_USER_INFO_ERROR })
+        ).toEqual(
+            expect.objectContaining({
+                userInfoRequest: false,
+                userInfoError: true,
+            })
+        );
+    });
+    it('handler updateUserInfoRequest should run', () => {
+        expect(
+        
+            authReducer(initialState, { type: updateUserInfoTypes.EDITPROFILE_REQUEST })
+        ).toEqual(
+            expect.objectContaining({
+                editProfileRequest: true,
+                editProfileError: false,
+            })
+        );
+    });
+    it('handler updateUserInfoSucces should run', () => {
+
+        const userData = {
+            success: true,
+            user: {
+            email: "vatt@mail.ru",
+            name: "вася"}
+            }
+
+        expect(
+            authReducer(initialState, { 
+                type: updateUserInfoTypes.EDITPROFILE_SUCCESS,
+                payload: {userData}
+            
+            })
+        ).toEqual(
+            expect.objectContaining({
+                editProfileRequest: false,
+                editProfileError: false,
+                editProfileSuccess: true,
+                email: userData.user.email,
+                name: userData.user.name,
+            })
+        );
+    });
+    it('handler updateUserInfoError should run', () => {
+        expect(
+        
+            authReducer(initialState, { type: updateUserInfoTypes.EDITPROFILE_ERROR })
+        ).toEqual(
+            expect.objectContaining({
+                editProfileRequest: false,
+                editProfileError: true,
+            })
+        );
+    });
+})

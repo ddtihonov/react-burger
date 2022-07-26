@@ -17,19 +17,19 @@ describe('selectedOrderReducer reducer', () => {
     it('should return the initinal state', () => {
         expect(selectedOrderReducer(selectedIngredientState, {} as any)).toEqual(selectedIngredientState);
     });
-    /*it('handler orderRequest should run', () => {
+    it('handler orderRequest should run', () => {
         expect(
         
             selectedOrderReducer(selectedIngredientState, { 
                 type: selectedOrderTypes.SELECT_ORDER, 
-                data: [],
+                payload: {order: []},
             })
         ).toEqual(
             expect.objectContaining({
                 selectedOrder: [],
             })
         );
-    });*/
+    });
     it('handler DeleteSelectedorderData should run', () => {
         expect(
             selectedOrderReducer(selectedIngredientState, {

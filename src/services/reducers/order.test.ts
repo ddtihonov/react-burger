@@ -2,14 +2,6 @@ import {orderNumberReducer} from './order';
 import * as orderTypes from '../actions/order';
 import { TOrder } from '../../utils/tupes';
 
-type TOrderInitialState = {
-    order: TOrder,
-    orderRequest: boolean,
-    orderError: boolean,
-    orderSuccess: boolean;
-};
-
-
 const orderInitialState: any = {
     order: {} as TOrder,
     orderRequest: false,
@@ -31,21 +23,22 @@ describe('orderNumber reducer', () => {
             })
         );
     });
-    /*it('handler orderSuccess should run', () => {
+    it('handler orderSuccess should run', () => {
+
         expect(
             orderNumberReducer(orderInitialState, {
             type: orderTypes.GET_ORDER_SUCCESS,
-            order: {},
+            payload: {order: []},
         })
         ).toEqual(
         expect.objectContaining({
             orderSuccess: true,
             orderRequest: false,
             orderError: false,
-            order: {},
+            order: [],
         })
         );
-    });*/
+    });
     it('handler orderError should run', () => {
         expect(
         
