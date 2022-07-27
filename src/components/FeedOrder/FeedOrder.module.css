@@ -97,7 +97,8 @@
 }
 
 .image {
-    width: 100%;
+    height: 56px;
+    width: 110px;
     object-fit: cover;
 }
 

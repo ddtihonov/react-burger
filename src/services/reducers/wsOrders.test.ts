@@ -29,7 +29,7 @@ describe('wsFeedReducer reducer', () => {
             })
         );
     });
-    it('handler wsConnecyionSuccess should run', () => {
+    it('handler wsConnectionSuccess should run', () => {
         expect(
             wsFeedReducer(initialState, { type: wsOrdersTypes.WS_CONNECTION_SUCCESS })
         ).toEqual(
@@ -41,9 +41,8 @@ describe('wsFeedReducer reducer', () => {
             })
         );
     });
-    it('handler wsConnecyionError should run', () => {
+    it('handler wsConnectionError should run', () => {
         expect(
-        
             wsFeedReducer(initialState, { type: wsOrdersTypes.WS_CONNECTION_ERROR })
         ).toEqual(
             expect.objectContaining({
@@ -51,6 +50,45 @@ describe('wsFeedReducer reducer', () => {
                 feedSuccess: false,
                 feedRequest: false,
                 wsConnected: false,
+            })
+        );
+    });
+    it('handler wsConnectionClosed should run', () => {
+        expect(
+        
+            wsFeedReducer(initialState, { type: wsOrdersTypes.WS_CONNECTION_CLOSED })
+        ).toEqual(
+            expect.objectContaining({
+                feedLoading: false,
+                feedSuccess: false,
+                feedRequest: false,
+                wsConnected: false,
+                feed: {},
+                userFeed: {},
+            })
+        );
+    });
+    it('handler wsGetOrders should run', () => {
+        expect(
+            wsFeedReducer(initialState, { 
+                type: wsOrdersTypes.WS_GET_ORDERS,
+                data: {} as TFeedOrders
+            })
+        ).toEqual(
+            expect.objectContaining({
+                feed: {}
+            })
+        );
+    });
+    it('handler wsGetUserOrders should run', () => {
+        expect(
+            wsFeedReducer(initialState, { 
+                type: wsOrdersTypes.WS_GET_USER_ORDERS,
+                data: {} as TFeedOrders
+            })
+        ).toEqual(
+            expect.objectContaining({
+                userFeed: {}
             })
         );
     });

@@ -260,6 +260,30 @@ describe('authReducer reducer', () => {
             })
         );
     });
+    it('handler loginSucces should run', () => {
+        const userData = {
+            success: true,
+            user: {
+            email: "vatt@mail.ru",
+            name: "вася"}
+            }
+
+        expect(
+            authReducer(initialState, { 
+                type: loginTypes.GET_LOGIN_SUCCESS,
+                payload: {userData}
+            })
+        ).toEqual(
+            expect.objectContaining({
+                loginRequest: false,
+                loginError: false,
+                loginSuccess: true,
+                loggedIn: true,
+                email: userData.user.email,
+                name: userData.user.name,
+            })
+        );
+    });
     it('handler loginRequest should run', () => {
         expect(
         

@@ -46,8 +46,7 @@ export const onGetIngredients: AppThunk = () => {
     .then((res) => {
             dispatch(getIngredientsSuccessAction(res.data));
         })
-        .catch((err) => {
-            console.log(`Внимание! ${err}`);
+        .catch(() => {
             dispatch(getIngredientsErrorAction());
         }) 
     };

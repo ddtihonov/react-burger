@@ -22,20 +22,6 @@ describe('ingredientsReducer reducer', () => {
             })
         );
     });
-    /*it('handler ingredientsSuccess should run', () => {
-        expect(
-            ingredientsReducer(ingredientsInitialState, {
-            type: ingredientsTypes.GET_INGREDIENTS_SUCCESS,
-            data: []
-        })
-        ).toEqual(
-            expect.objectContaining({
-                orderRequest: false,
-                orderError: false,
-                ingredients: [],
-            })
-        );
-    });*/
     it('handler ingredientsError should run', () => {
         expect(
         
