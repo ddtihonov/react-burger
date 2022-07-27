@@ -41,6 +41,7 @@ export const IngredientsCard: FC<{card: TIngredient}> = ({card}) => {
             onClick={cardClick}
             ref={dragRef}
             style={{ opacity }}
+            data-test="burger-ingredient"
             >   
             {counter > 0 && <Counter count={counter} size="default" />}
             <img className={styles.image} src={card.image} alt={card.name}/>

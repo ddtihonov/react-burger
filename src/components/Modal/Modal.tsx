@@ -35,7 +35,7 @@ export const Modal = ({children, onClose, title}: TModal) => {
             {children?
             (<div className={modal.box} onClick={evt => evt.stopPropagation()}>
                 {title && (<h2 className={modal.title}>{title}</h2>)}
-                {interval && <button className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
+                {interval && <button data-test="close-button" className={modal.close_icon} type="button" aria-label="закрыть" onClick={onClose}>
                     <CloseIcon type="primary"/></button>}
                 {children}
             </div>) : null}

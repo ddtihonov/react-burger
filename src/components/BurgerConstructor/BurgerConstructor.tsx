@@ -88,8 +88,9 @@ export const BurgerConstructor: FC = () => {
           </div>
           <button
             className={styles.button}
+            data-test="send-order" 
             type='submit' 
-            onClick={handleOrder}>
+            onClick={handleOrder}> 
               Оформить заказ
           </button>
         </div>)}
