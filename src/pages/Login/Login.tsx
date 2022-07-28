@@ -63,7 +63,7 @@ export const Login = () => {
                         size={'default'}
                     />
                 </div>
-                <button className={styles.button} type='submit'>Войти</button>
+                <button className={styles.button} type='submit' data-test="login-button">Войти</button>
             </form>
             <div className={styles.box}>
             <p className={styles.caption}>
