@@ -2,7 +2,8 @@ const servUrl = 'http://localhost:3000/react-burger/';
 
 describe('BurgerConstructor', () => {
     it('Сервер запускается на localhost:3000/react-burger', function() {
-        cy.visit(servUrl);   
+        cy.visit(servUrl);
+        cy.wait(1000);   
     });
 
     it('открытие модального окна с описанием ингредиента', () => {
@@ -25,11 +26,12 @@ describe('BurgerConstructor', () => {
         cy.get('[data-test="burger-ingredient"]').eq(3).trigger('dragstart');
         cy.get('[data-test="burger-constructor"]').trigger('drop');
         cy.get('[ data-test="send-order"]').click('center');
-        cy.get('input[name=email]', { timeout: 20000 }).type('ddtihonov@yandex.ru');
-        cy.get('input[name=password]', { timeout: 20000 }).type('123456');
+        cy.get('input[name=email]').type('ddtihonov@yandex.ru');//заполняется по клику на импут
+        cy.get('input[name=password]').type('123456');
         cy.get('[data-test="login-button"]').click('center');
+        cy.wait(1000);
         cy.get('[data-test="send-order"]').click('center');
-        //cy.get('[data-test="modal"]', { timeout: 30000 }).should('exist');
-        //cy.get('[data-test="close-button"]').click();
+        cy.get('[data-test="modal"]', { timeout: 30000 }).should('exist');
+        cy.get('[data-test="close-button"]').click();
     });
 });

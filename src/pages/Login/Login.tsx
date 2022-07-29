@@ -53,6 +53,7 @@ export const Login = () => {
                         onChange={(evt) => handleChangeEmail(evt.target.value)} 
                         value={email}
                         size={'default'}
+                        data-test="email"
                     />
                 </div>
                 <div className={styles.input}>
