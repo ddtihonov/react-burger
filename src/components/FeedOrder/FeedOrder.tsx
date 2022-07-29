@@ -21,7 +21,6 @@ export const FeedOrder: FC = () => {
     console.log(ingredientsList)
 
     useEffect(() => {
-        console.log('нету связи')
         dispatch(wsConnectionStart());
         return () => {
             dispatch(wsConnectionClosed())
@@ -98,7 +97,7 @@ export const FeedOrder: FC = () => {
     }
 
     return (
-        state && orderIngredients && orderData && orderData !== undefined ?
+        orderIngredients && orderData && orderData !== undefined ?
         (<section className={style.main}>
                     <p className={style.number}>#{orderData.number}</p>
                     <h3 className={style.title}>{orderData.name}</h3>
@@ -139,6 +138,6 @@ export const FeedOrder: FC = () => {
                             <CurrencyIcon type="primary"/>
                         </div>
                     </div>
-        </section>) : (<h3>Я тут был</h3>)
+        </section>) : null
     )
 }

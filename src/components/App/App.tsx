@@ -160,7 +160,7 @@ const handleOrdersClose = useCallback(() => {
               }/>}
             {background  &&
               <Route  path='/feed/:id'  element={
-                loadingOrder && <Modal
+                <Modal
                 onClose={handleFeedClose}
                 >
                 <FeedOrder/>  
