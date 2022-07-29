@@ -26,8 +26,8 @@ describe('BurgerConstructor', () => {
         cy.get('[data-test="burger-ingredient"]').eq(3).trigger('dragstart');
         cy.get('[data-test="burger-constructor"]').trigger('drop');
         cy.get('[ data-test="send-order"]').click('center');
-        cy.get('input[name=email]').type('ddtihonov@yandex.ru');//заполняется по клику на импут
-        cy.get('input[name=password]').type('123456');
+        cy.get('input[name=email]').type('ddtihonov@yandex.ru', {force: true});
+        cy.get('input[name=password]').type('123456', {force: true});
         cy.get('[data-test="login-button"]').click('center');
         cy.wait(1000);
         cy.get('[data-test="send-order"]').click('center');

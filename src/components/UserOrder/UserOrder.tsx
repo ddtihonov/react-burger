@@ -92,6 +92,8 @@ export const UserOrder: FC = () => {
             : `${term} дней назад, ${orderTime} i-GMT+3`;
     }
 
+    console.log(orderIngredients)
+    console.log(orderData)
 
     return (
         orderIngredients && orderData && orderData !== undefined ?

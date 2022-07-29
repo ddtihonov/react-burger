@@ -199,7 +199,3 @@ const handleOrdersClose = useCallback(() => {
     </div>
   );
 };
-
-/*{loggedIn && loadingOrderNumber &&
-  <PreloaderOrder/>
-}*/
