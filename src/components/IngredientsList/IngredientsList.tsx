@@ -32,7 +32,7 @@ const IngredientsList = forwardRef(({ ingredients, title }: TIngredientsList, re
                     className={ingredients_list.link}
                     to={`/ingredients/${item._id}`}
                     state={{ background: location.pathname }}
-                    key={item._id} 
+                    key={item._id}
                     >
                         
                     <IngredientsCard 

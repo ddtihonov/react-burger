@@ -53,6 +53,7 @@ export const Login = () => {
                         onChange={(evt) => handleChangeEmail(evt.target.value)} 
                         value={email}
                         size={'default'}
+                        data-test="email"
                     />
                 </div>
                 <div className={styles.input}>
@@ -63,7 +64,7 @@ export const Login = () => {
                         size={'default'}
                     />
                 </div>
-                <button className={styles.button} type='submit'>Войти</button>
+                <button className={styles.button} type='submit' data-test="login-button">Войти</button>
             </form>
             <div className={styles.box}>
             <p className={styles.caption}>

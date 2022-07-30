@@ -65,6 +65,7 @@ export const App: FC = () =>{
   const orderSuccess = useSelector((state) => state.orderState.orderSuccess);
   const loadingOrderNumber = useSelector((state) => state.modalState.isModalOpen);
   const loadingOrder = useSelector((state) => state.orderDetals.orderWindowOpen);
+  const loggedIn = useSelector((state) => state.authData.loggedIn); 
 
   useEffect(() => {
     dispatch(onGetIngredients());
@@ -159,7 +160,7 @@ const handleOrdersClose = useCallback(() => {
               }/>}
             {background  &&
               <Route  path='/feed/:id'  element={
-                loadingOrder && <Modal
+                <Modal
                 onClose={handleFeedClose}
                 >
                 <FeedOrder/>  
@@ -192,7 +193,7 @@ const handleOrdersClose = useCallback(() => {
       {loading  &&
         <Preloader/>
       }
-      {loadingOrderNumber &&
+      {loggedIn && loadingOrderNumber &&
         <PreloaderOrder/>
       }
     </div>

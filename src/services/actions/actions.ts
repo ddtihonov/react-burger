@@ -10,7 +10,7 @@ export const INGREDIENT_WINDOW_CLOSE: 'INGREDIENT_WINDOW_CLOSE' = 'INGREDIENT_WI
 
 export interface ISelectIngredientAction {
     readonly type: typeof SELECT_INGREDIENT;
-    readonly payload: { ingredient: TIngredient};
+    readonly ingredient: TIngredient;
     }
     export interface IDeleteSelectIngredientAction {
         readonly type: typeof DELETE_SELECTED_INGREDIENT;

@@ -33,7 +33,7 @@ export const getLoginSuccessAction = (userData: TLogin): TLoginAction => ({
     type: GET_LOGIN_SUCCESS,
     payload: {
         userData: userData,
-    }, 
+    },  
 });
 
 export const getLoginErrorAction = (): TLoginAction => ({

@@ -55,9 +55,9 @@ export const BurgerConstructor: FC = () => {
 
         // id ингредиентов для получения номера заказа
         const handleOrder = useCallback(() =>{
-          dispatch(getOpenOrderModalAction());
           const accessToken = localStorage.getItem('wsAccessToken');
           if (loggedIn === true && bun !== null) {
+            dispatch(getOpenOrderModalAction());
             const iDingredients = ingredientsConstructorList.map((item: TIngredient) => item._id).concat([bun._id]);
             dispatch(createOrder(iDingredients, accessToken));
           } else {
@@ -68,7 +68,7 @@ export const BurgerConstructor: FC = () => {
 
     return (
       <>
-      <section className={styles.container}>
+      <section className={styles.container} data-test="burger-constructor">
         <div className={styles.list} ref={dropTarget}>
           { bun === null
           ? (
@@ -88,8 +88,9 @@ export const BurgerConstructor: FC = () => {
           </div>
           <button
             className={styles.button}
+            data-test="send-order" 
             type='submit' 
-            onClick={handleOrder}>
+            onClick={handleOrder}> 
               Оформить заказ
           </button>
         </div>)}

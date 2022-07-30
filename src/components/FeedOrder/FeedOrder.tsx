@@ -1,7 +1,7 @@
 import React, {FC, useMemo, useEffect} from 'react';
 import style from './FeedOrder.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../utils/hooks';
 import { TIngredient,  TFeedOrder} from '../../utils/tupes';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,11 +12,14 @@ export const FeedOrder: FC = () => {
 
     const dispatch = useDispatch();
     const { id } = useParams();
+    const { state } = useLocation();
 
     const orders  = useSelector((state) => state.orderHistory.feed.orders) || [];
     const ingredientsList = useSelector((state) => state.ingredientsState.ingredients);
 
-    
+    console.log(orders)
+    console.log(ingredientsList)
+
     useEffect(() => {
         dispatch(wsConnectionStart());
         return () => {
@@ -92,7 +95,6 @@ export const FeedOrder: FC = () => {
             ? `${term} дня назад, ${orderTime} i-GMT+3`
             : `${term} дней назад, ${orderTime} i-GMT+3`;
     }
-
 
     return (
         orderIngredients && orderData && orderData !== undefined ?

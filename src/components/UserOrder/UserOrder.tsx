@@ -59,7 +59,7 @@ export const UserOrder: FC = () => {
             let components = [];
             for (let i = 0; i < uniqueIngredients.length; i++) {
                 components.push(
-                    ingredientsList.find((item) => item._id === uniqueIngredients[i]),
+                    ingredientsList.find((item: TIngredient) => item._id === uniqueIngredients[i]),
                 );
                 }
             return components;
@@ -92,6 +92,8 @@ export const UserOrder: FC = () => {
             : `${term} дней назад, ${orderTime} i-GMT+3`;
     }
 
+    console.log(orderIngredients)
+    console.log(orderData)
 
     return (
         orderIngredients && orderData && orderData !== undefined ?

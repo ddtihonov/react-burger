@@ -5,7 +5,7 @@ import {
 } from '../actions/ingredients';
 
 
-import { TApplicationActions, TIngredient } from '../../utils/tupes';
+import { TIngredient } from '../../utils/tupes';
 
 type TIngredientsInitialState = {
     ingredients: ReadonlyArray<TIngredient>,
@@ -21,7 +21,7 @@ const ingredientsInitialState: TIngredientsInitialState = {
 };
 
 //редюсер загрузки ингредиентов
-export const ingredientsReducer = (state = ingredientsInitialState, action: TApplicationActions) => {
+export const ingredientsReducer = (state = ingredientsInitialState, action: any) => {
     switch(action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -36,7 +36,7 @@ export const ingredientsReducer = (state = ingredientsInitialState, action: TApp
                 ...state,
                 ingredientsError: false,
                 ingredientsRequest: false,
-                ingredients: action.payload.ingredients,
+                ingredients: action.ingredients,
             };
         }
 

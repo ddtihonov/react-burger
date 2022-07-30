@@ -27,7 +27,7 @@ export const selectedIngredientsReducer: Reducer<TSelectedIngredientState
         case SELECT_INGREDIENT: {
             return {
                 ...state,
-                selectedIngredient: action.payload.ingredient,
+                selectedIngredient: action.ingredient,
             };
         }
 
